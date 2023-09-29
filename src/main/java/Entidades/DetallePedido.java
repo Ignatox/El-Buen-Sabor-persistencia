@@ -7,13 +7,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="pedido")
+@Table(name="detallepedido")
 
-public class Pedido extends BaseEntidad {
+public class DetallePedido extends BaseEntidad{
 }
