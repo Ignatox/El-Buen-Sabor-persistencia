@@ -12,6 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class BaseEntidad implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 }

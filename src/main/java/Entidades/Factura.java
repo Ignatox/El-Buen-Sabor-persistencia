@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class Factura extends BaseEntidad {
+
     @Column (name = "nroFactura")
     private int numero;
 
