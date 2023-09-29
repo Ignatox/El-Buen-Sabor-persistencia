@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="pedido")
+@Table(name="producto")
 
 public class Producto extends BaseEntidad {
     @Column(name = "tiempoestimadococina")
