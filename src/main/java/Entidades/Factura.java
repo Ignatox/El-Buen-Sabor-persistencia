@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+                            // Como @Audited forma parte de Envers omitir este paso, después le pregunto al profe - Nico
 public class Factura extends BaseEntidad {
 
     @Column (name = "nroFactura")
