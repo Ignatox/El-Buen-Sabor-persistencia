@@ -1,5 +1,6 @@
 package Entidades;
 
+import Enumeraciones.TipoProducto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -34,5 +35,7 @@ public class Producto extends BaseEntidad {
     private String foto;
     @Column(name = "receta")
     private String receta;
+    @Column(name = "tipo")
+    private TipoProducto tipoProducto;
 
 }

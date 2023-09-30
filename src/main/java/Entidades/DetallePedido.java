@@ -1,13 +1,13 @@
 package Entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,4 +21,9 @@ public class DetallePedido extends BaseEntidad{
     private int cantidad;
     @Column(name = "subtotal")
     private double subtotal;
+
+    /* RELACIÓN CON PRODUCTO*/
+    @ManyToOne()
+    @JoinColumn(name = "producto-id")
+    private Producto producto;
 }
