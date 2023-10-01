@@ -101,7 +101,7 @@ public class EbsApplication {
 				.tipoProducto(TipoProducto.INSUMO)
 				.build();
 		rubro02.agregarProducto(producto5);
-		
+
 
 
 
