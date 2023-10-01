@@ -25,6 +25,18 @@ public class Usuario extends  BaseEntidad {
     private Rol rol;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JoinColumn(name="usuario_id")
     private List<Pedido> Pedidos = new ArrayList<Pedido>();
+
+    public void agregarPedido(Pedido pedido){
+        Pedidos.add(pedido);
+    }
+    public void mostrarPedidos(){
+        System.out.println("Pedidos de " + Usuario.this);
+        for(Pedido p:Pedidos){
+            System.out.println("");
+        }
+
+    }
 
 }
