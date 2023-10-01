@@ -136,12 +136,8 @@ public class EbsApplication {
 				System.out.println("Denominación: " + rubrorecu4.getDenominacion());
 				rubrorecu4.mostrarProductos();
 			}
-		};
-		Rubro rubrorecu4=  rubroRepository.findById(rubro04.getId()).orElse(null);
-		if (rubrorecu4!= null) {
-			System.out.println("Denominación: " + rubrorecu4.getDenominacion());
-			rubrorecu4.mostrarProductos();
-		}
+
+
 		//ALTA USUARIOS
 		Usuario usuario1 = Usuario.builder()
 				.nombre("Juan Perez")
@@ -165,6 +161,7 @@ public class EbsApplication {
 				.password("MEduardo65")
 				.rol(Rol.Administrador)
 				.build();
+		};
 	}
 }
 
