@@ -1,27 +1,30 @@
 package Entidades;
 
 import Enumeraciones.Rol;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="Usuario")
+@Table(name="usuario")
 public class Usuario extends  BaseEntidad {
     @Column(name="nombre")
     private String nombre;
     @Column(name="contraseña")
     private String password;
-    @Column(name="Rol")
+    @Column(name="rol")
     private Rol rol;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Pedido> Pedidos = new ArrayList<Pedido>();
 
 }
