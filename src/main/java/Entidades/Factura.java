@@ -3,6 +3,7 @@ package Entidades;
 import Enumeraciones.FormaPago;
 import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
 
@@ -12,20 +13,25 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-                            // Como @Audited forma parte de Envers omitir este paso, después le pregunto al profe - Nico
+
 public class Factura extends BaseEntidad {
+
 
     @Column (name = "nroFactura")
     private int numero;
 
+
     @Column (name = "fechaFactura")
     private Date fecha;
+
 
     @Column (name = "dtoFactura")
     private double descuento;
 
+
     @Column (name = "formaPago")
     private FormaPago formaPago;
+
 
     @Column (name = "total")
     private int total;
