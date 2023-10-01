@@ -2,6 +2,8 @@ package com.utn.EBS;
 
 import Entidades.Producto;
 import Entidades.Rubro;
+import Entidades.Usuario;
+import Enumeraciones.Rol;
 import Enumeraciones.TipoProducto;
 import Repositorios.RubroRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -130,6 +132,29 @@ public class EbsApplication {
 			System.out.println("Denominación: " + rubrorecu4.getDenominacion());
 			rubrorecu4.mostrarProductos();
 		}
+		//ALTA USUARIOS
+		Usuario usuario1 = Usuario.builder()
+				.nombre("Juan Perez")
+				.password("Jp1999")
+				.rol(Rol.Cliente)
+				.build();
+		Usuario usuario2 = Usuario.builder()
+				.nombre("Alicia García")
+				.password("Alicia123")
+				.rol(Rol.Cajero)
+				.build();
+
+		Usuario usuario3 = Usuario.builder()
+				.nombre("Tomas Venegas")
+				.password("tomas1765")
+				.rol(Rol.Delivery)
+				.build();
+
+		Usuario usuario4 = Usuario.builder()
+				.nombre("Eduardo Martini")
+				.password("MEduardo65")
+				.rol(Rol.Administrador)
+				.build();
 	}
 }
 
