@@ -1,8 +1,10 @@
 package com.utn.EBS;
 
+import Entidades.Pedido;
 import Entidades.Producto;
 import Entidades.Rubro;
 import Entidades.Usuario;
+import Enumeraciones.EstadoPedido;
 import Enumeraciones.Rol;
 import Enumeraciones.TipoProducto;
 import Repositorios.*;
@@ -12,19 +14,26 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @SpringBootApplication
 public class EbsApplication {
 	//Creo autowirde de los datos que voy a cargar, super importante
 	@Autowired
 	RubroRepository rubroRepository;
+	@Autowired
+	UsuarioRepository usuarioRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(EbsApplication.class, args);
 	}
+
 	@Bean
-	CommandLineRunner init( RubroRepository rubroRepository) {
+	CommandLineRunner init(RubroRepository rubroRepository) {
 		return args -> {
 			/* ACÁ SE TIENEN QUE CARGAR TODOS LOS DATOS */
-	System.out.println("Estoy funcionando");
+			System.out.println("Estoy funcionando");
 			/*ALTA RUBROS*/
 			/*TOMAMOS COMO RUBROS PARA ESTE SISTEMA: ENTRADA, BEBIDA, PLATOPRINCIPAL Y POSTRE*/
 			Rubro rubro01 = Rubro.builder()
@@ -136,43 +145,40 @@ public class EbsApplication {
 				System.out.println("Denominación: " + rubrorecu4.getDenominacion());
 				rubrorecu4.mostrarProductos();
 			}
+
+			//ALTA USUARIOS
+			Usuario usuario1 = Usuario.builder()
+					.nombre("Juan Perez")
+					.password("Jp1999")
+					.rol(Rol.Cliente)
+					.build();
+			Usuario usuario2 = Usuario.builder()
+					.nombre("Alicia García")
+					.password("Alicia123")
+					.rol(Rol.Cajero)
+					.build();
+
+			Usuario usuario3 = Usuario.builder()
+					.nombre("Tomas Venegas")
+					.password("tomas1765")
+					.rol(Rol.Delivery)
+					.build();
+
+			Usuario usuario4 = Usuario.builder()
+					.nombre("Eduardo Martini")
+					.password("MEduardo65")
+					.rol(Rol.Administrador)
+					.build();
+
+			//faltaria crear los pedidos. Cuando los carguen, sacar los comentarios a las líneas de abajo
+
+			//ASOCIAR USUARIO-PEDIDO
+			//usuario1.agregarPedido(pedido1);
+			//usuario1.agregarPedido(pedido2);
+
+			//GUARDAR
+			//usuarioRepository.save(pedido1);
 		};
-		Rubro rubrorecu4=  rubroRepository.findById(rubro04.getId()).orElse(null);
-		if (rubrorecu4!= null) {
-			System.out.println("Denominación: " + rubrorecu4.getDenominacion());
-			rubrorecu4.mostrarProductos();
-		}
-		//ALTA USUARIOS
-		Usuario usuario1 = Usuario.builder()
-				.nombre("Juan Perez")
-				.password("Jp1999")
-				.rol(Rol.Cliente)
-				.build();
-		Usuario usuario2 = Usuario.builder()
-				.nombre("Alicia García")
-				.password("Alicia123")
-				.rol(Rol.Cajero)
-				.build();
-
-		Usuario usuario3 = Usuario.builder()
-				.nombre("Tomas Venegas")
-				.password("tomas1765")
-				.rol(Rol.Delivery)
-				.build();
-
-		Usuario usuario4 = Usuario.builder()
-				.nombre("Eduardo Martini")
-				.password("MEduardo65")
-				.rol(Rol.Administrador)
-				.build();
-		//faltaria crear los pedidos. Cuando los carguen, sacar los comentarios a las líneas de abajo
-
-		//ASOCIAR USUARIO-PEDIDO
-		//usuario1.agregarPedido(pedido1);
-		//usuario1.agregarPedido(pedido2);
-
-		//GUARDAR
-		//usuarioRepository.save(pedido1);
 	}
 }
 
