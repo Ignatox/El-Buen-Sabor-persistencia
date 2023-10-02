@@ -165,6 +165,14 @@ public class EbsApplication {
 				.password("MEduardo65")
 				.rol(Rol.Administrador)
 				.build();
+		//faltaria crear los pedidos. Cuando los carguen, sacar los comentarios a las líneas de abajo
+
+		//ASOCIAR USUARIO-PEDIDO
+		//usuario1.agregarPedido(pedido1);
+		//usuario1.agregarPedido(pedido2);
+
+		//GUARDAR
+		//usuarioRepository.save(pedido1);
 	}
 }
 
