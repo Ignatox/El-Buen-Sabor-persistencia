@@ -4,5 +4,5 @@ import Entidades.Rubro;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RubroRepository  extends BaseRepository <Rubro, Long>{
+public interface RubroRepository extends BaseRepository <Rubro, Long>{
 }
