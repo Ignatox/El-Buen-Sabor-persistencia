@@ -3,6 +3,9 @@ package Entidades;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="cliente")
 @Getter
@@ -10,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente extends BaseEntidad{
+
     @Column(name = "nombre")
     private String nombre;
 
@@ -22,10 +26,11 @@ public class Cliente extends BaseEntidad{
     @Column(name = "email")
     private String email;
 
-    // A agregar cuando creen las otras clases
-    //@OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
-    //private List<Domicilio> domicilios = new ArrayList<Domicilio>();
 
-    //@OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
-    //private List<Pedido> pedidos = new ArrayList<Pedido>();
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
+    private List<Domicilio> domicilios = new ArrayList<Domicilio>();
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
+
 }

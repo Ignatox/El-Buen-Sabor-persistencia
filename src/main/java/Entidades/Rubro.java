@@ -16,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="rubro")
 public class Rubro extends  BaseEntidad{
-    @Column(name = "denominacionrubro")
+
+    @Column(name = "denominacionRubro")
     private String denominacion;
 
     /* RELACIÓN CON PRODUCTO*/

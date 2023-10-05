@@ -20,19 +20,24 @@ import java.util.Date;
 @Table(name="pedido")
 
 public class Pedido extends BaseEntidad {
-    @Column(name = "fechapedido")
+
+    @Column(name = "fechaPedido")
     private String fecha;
+
     @Column(name = "horaestimadaentrega")
     @Temporal(TemporalType.TIMESTAMP)
     private String horaEstimadaEntrega;
+
     @Column(name = "total")
     private double total;
+
     @NotNull
-    @Column(name = "estadopedido")
+    @Column(name = "estado_pedido")
     @Enumerated(EnumType.STRING)
     private EstadoPedido estado;
+
     @NotNull
-    @Column(name = "tipoenviopedido")
+    @Column(name = "tipoenvio_pedido")
     @Enumerated(EnumType.STRING)
     private TipoEnvio tipoEnvio;
 }

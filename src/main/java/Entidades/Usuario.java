@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 @Table(name="usuario")
 public class Usuario extends  BaseEntidad {
+
     @Column(name="nombre")
     private String nombre;
     @Column(name="contraseña")

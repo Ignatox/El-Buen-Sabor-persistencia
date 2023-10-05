@@ -32,7 +32,7 @@ public class Domicilio extends BaseEntidad{
     private String localidad;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)  //Relación con cliente
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 }

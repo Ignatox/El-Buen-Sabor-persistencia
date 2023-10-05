@@ -14,9 +14,10 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="detallepedido")
+@Table(name="detalle_pedido")
 
 public class DetallePedido extends BaseEntidad{
+
     @Column(name = "cantidad")
     private int cantidad;
     @Column(name = "subtotal")
@@ -24,6 +25,6 @@ public class DetallePedido extends BaseEntidad{
 
     /* RELACIÓN CON PRODUCTO*/
     @ManyToOne()
-    @JoinColumn(name = "producto-id")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 }

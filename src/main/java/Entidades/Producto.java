@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name="producto")
 
 public class Producto extends BaseEntidad {
+
     @Column(name = "tiempoestimadococina")
     private int tiempoEstimadoCocina;
     @Column(name = "denominacion")
