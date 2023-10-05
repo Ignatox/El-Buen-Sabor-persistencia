@@ -1,4 +1,6 @@
 package Servicios;
 
-public interface DomicilioService {
+import Entidades.Domicilio;
+
+public interface DomicilioService extends BaseService<Domicilio, Long>{
 }
