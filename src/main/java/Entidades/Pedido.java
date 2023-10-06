@@ -43,7 +43,7 @@ public class Pedido extends BaseEntidad {
     @Enumerated(EnumType.STRING)
     private TipoEnvio tipoEnvio;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)            //Relacion con DetallePedido
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)            //Relacion con DetallePedidoController
     @JoinTable(
             name = "pedido_detalle",
             joinColumns = @JoinColumn(name = "pedido_id"),
