@@ -27,14 +27,14 @@ public class Usuario extends  BaseEntidad {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JoinColumn(name="usuario_id")
-    private List<Pedido> Pedidos = new ArrayList<Pedido>();
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
 
     public void agregarPedido(Pedido pedido){
-        Pedidos.add(pedido);
+        pedidos.add(pedido);
     }
     public void mostrarPedidos(){
         System.out.println("Pedidos de " + Usuario.this);
-        for(Pedido p:Pedidos){
+        for(Pedido p: pedidos){
             System.out.println("");
         }
 

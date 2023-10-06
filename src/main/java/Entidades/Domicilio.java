@@ -12,6 +12,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -32,8 +35,9 @@ public class Domicilio extends BaseEntidad{
     private String localidad;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)  //Relación con cliente
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @OneToMany(orphanRemoval = true)                            //Relacion con Pedido
+    @JoinColumn(name = "domicilio_id")
+    private List<Pedido> pedidos = new ArrayList<>();
+
 }
 

@@ -28,9 +28,9 @@ public class Cliente extends BaseEntidad{
 
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
-    private List<Domicilio> domicilios = new ArrayList<Domicilio>();
+    private List<Domicilio> domicilios = new ArrayList<Domicilio>();  //Fijate gonza la navegabilidad, si desde cliente o desde domicilio, como te pinta hacerla
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)         //Relacion con Pedido
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
 }
