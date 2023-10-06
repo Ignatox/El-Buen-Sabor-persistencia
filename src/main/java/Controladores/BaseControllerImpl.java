@@ -35,7 +35,7 @@ public abstract class BaseControllerImpl<E extends BaseEntidad, S extends BaseSe
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entidad));
         } catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Intente despues. No pudo subir el estudiante.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Intente despues.\"}");
         }
     }
 
