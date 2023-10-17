@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseServiceImpl<E extends BaseEntidad, ID extends Serializable> implements BaseService<E, ID> {// Esta clase puede que no sea abstracta
+public abstract class BaseServiceImpl<E extends BaseEntidad, ID extends Serializable> implements BaseService<E, ID> {
 
     @Autowired                                                                                                 // Inyeccion de Dependencias (Esta en el Power)
     protected BaseRepository<E,ID> baseRepository;
