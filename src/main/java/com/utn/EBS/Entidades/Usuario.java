@@ -10,16 +10,17 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table(name="usuario")
-public class Usuario extends  BaseEntidad {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Usuario extends  BaseEntidad {
 
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
+    private String apellido;
+    @Column(name="email")
+    private String email;
     @Column(name="contraseña")
     private String password;
     @Column(name="rol")
