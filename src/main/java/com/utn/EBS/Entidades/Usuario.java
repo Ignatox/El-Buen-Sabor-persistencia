@@ -23,6 +23,7 @@ public abstract class Usuario extends  BaseEntidad {
     private String email;
     @Column(name="contraseña")
     private String password;
+    @Enumerated(EnumType.STRING)
     @Column(name="rol")
     private Rol rol;
 

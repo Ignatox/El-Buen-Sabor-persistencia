@@ -22,10 +22,10 @@ import java.util.List;
 
 public class Pedido extends BaseEntidad {
 
-    @Column(name = "fechaPedido")
+    @Column(name = "fecha_pedido")
     private String fecha;
 
-    @Column(name = "horaestimadaentrega")
+    @Column(name = "hora_estimada_entrega")
     @Temporal(TemporalType.TIMESTAMP)
     private String horaEstimadaEntrega;
 
@@ -38,7 +38,7 @@ public class Pedido extends BaseEntidad {
     private EstadoPedido estado;
 
     @NotNull
-    @Column(name = "tipoenvio_pedido")
+    @Column(name = "tipo_envio_pedido")
     @Enumerated(EnumType.STRING)
     private TipoEnvio tipoEnvio;
 

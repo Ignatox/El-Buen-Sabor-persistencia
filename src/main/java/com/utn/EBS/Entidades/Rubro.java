@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name="rubro")
 public class Rubro extends  BaseEntidad{
 
-    @Column(name = "denominacionRubro")
+    @Column(name = "denominacion_rubro")
     private String denominacion;
 
     /* RELACIÓN CON PRODUCTO*/
@@ -37,6 +37,5 @@ public class Rubro extends  BaseEntidad{
             System.out.println("Stock Actual: "+ producto.getStockAtual()+", Stock Mínimo: "+ producto.getStockMinimo());
             System.out.println("Unidad de Medida: "+ producto.getUnidadmedida()+", Receta: "+producto.getReceta());
         }
-
     }
 }

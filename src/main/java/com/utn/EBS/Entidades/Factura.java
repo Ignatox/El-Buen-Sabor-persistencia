@@ -14,16 +14,17 @@ import java.util.Date;
 
 public class Factura extends BaseEntidad {
 
-    @Column (name = "nroFactura")
+    @Column (name = "nro_factura")
     private int numero;
 
-    @Column (name = "fechaFactura")
+    @Column (name = "fecha_factura")
     private Date fecha;
 
-    @Column (name = "dtoFactura")
+    @Column (name = "dto_factura")
     private double descuento;
 
-    @Column (name = "formaPago")
+    @Enumerated(EnumType.STRING)
+    @Column (name = "forma_pago")
     private FormaPago formaPago;
 
     @Column (name = "total")
