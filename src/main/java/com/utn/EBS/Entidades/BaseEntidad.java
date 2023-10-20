@@ -1,6 +1,8 @@
 package com.utn.EBS.Entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,6 +25,8 @@ public class BaseEntidad implements Serializable {
     // Columna para la fecha de alta
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
+    @NotNull
+    @NotEmpty
     private Date fecha_alta;
 
     // Columna para la fecha de modificación

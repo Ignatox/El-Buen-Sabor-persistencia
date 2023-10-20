@@ -3,11 +3,12 @@ package com.utn.EBS.Entidades;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
 import com.utn.EBS.Enumeraciones.TipoEnvio;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -28,23 +29,33 @@ import java.util.List;
 public class Pedido extends BaseEntidad {
 
     @Column(name = "fecha_pedido")
+    @NotNull
+    @NotEmpty
     private String fecha;
 
     @Column(name = "hora_estimada_entrega")
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
+    @NotEmpty
     private String horaEstimadaEntrega;
 
     @Column(name = "total")
+    @NotNull
+    @NotEmpty
     private double total;
 
     @NotNull
     @Column(name = "estado_pedido")
     @Enumerated(EnumType.STRING)
+    @NotNull
+    @NotEmpty
     private EstadoPedido estado;
 
     @NotNull
     @Column(name = "tipo_envio_pedido")
     @Enumerated(EnumType.STRING)
+    @NotNull
+    @NotEmpty
     private TipoEnvio tipoEnvio;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,6 +1,8 @@
 package com.utn.EBS.Entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -21,15 +23,21 @@ import java.util.List;
 public class Cliente extends BaseEntidad{
 
     @Column(name = "nombre")
+    @NotNull
+    @NotEmpty
     private String nombre;
 
     @Column(name = "apellido")
+    @NotNull
+    @NotEmpty
     private String apellido;
 
     @Column(name = "telefono")
     private String telefono;
 
     @Column(name = "email")
+    @NotNull
+    @NotEmpty
     private String email;
 
 

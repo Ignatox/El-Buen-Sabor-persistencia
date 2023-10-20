@@ -6,6 +6,8 @@ import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,12 +32,16 @@ import java.util.List;
 public class Domicilio extends BaseEntidad{
 
     @Column(name = "calle")
+    @NotNull
+    @NotEmpty
     private String calle;
 
     @Column(name = "numero")
     private String numero;
 
     @Column(name = "localidad")
+    @NotNull
+    @NotEmpty
     private String localidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
