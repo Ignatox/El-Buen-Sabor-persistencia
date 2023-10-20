@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="pedido")
-
+//Usamos la siguiente etiqueta para hacer un update de sql al atributo "DELETED" a TRUE
+@SQLDelete(sql = "UPDATE pedido SET deleted = true WHERE id=?")
+//Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
+@Where(clause = "deleted=false")
 public class Pedido extends BaseEntidad {
 
     @Column(name = "fecha_pedido")

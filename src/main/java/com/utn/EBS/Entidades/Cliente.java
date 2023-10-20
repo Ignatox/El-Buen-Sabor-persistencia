@@ -2,6 +2,8 @@ package com.utn.EBS.Entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//Usamos la siguiente etiqueta para hacer un update de sql al atributo "DELETED" a TRUE
+@SQLDelete(sql = "UPDATE cliente SET deleted = true WHERE id=?")
+//Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
+@Where(clause = "deleted=false")
 public class Cliente extends BaseEntidad{
 
     @Column(name = "nombre")

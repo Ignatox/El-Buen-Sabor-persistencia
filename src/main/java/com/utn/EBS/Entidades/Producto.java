@@ -2,10 +2,12 @@ package com.utn.EBS.Entidades;
 
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.*;
 
 @Entity
 @Data
@@ -13,6 +15,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="producto")
+//Usamos la siguiente etiqueta para hacer un update de sql al atributo "DELETED" a TRUE
+@SQLDelete(sql = "UPDATE producto SET deleted = true WHERE id=?")
+//Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
+@Where(clause = "deleted=false")
+
 
 public class Producto extends BaseEntidad {
 

@@ -19,12 +19,12 @@ public abstract class BaseServiceImpl<E extends BaseEntidad, ID extends Serializ
 
     @Override
     @Transactional
-    public List<E> findAll() throws Exception {
-        try {
-            List<E> entities = baseRepository.findAll();
-            return entities;
+   public List<E> findAll() throws Exception {
+       try {
+          List<E> entities = baseRepository.findAll();
+          return entities;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+           throw new Exception(e.getMessage());
         }
     }
 
