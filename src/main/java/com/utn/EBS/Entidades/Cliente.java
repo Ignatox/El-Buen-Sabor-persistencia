@@ -47,4 +47,9 @@ public class Cliente extends BaseEntidad{
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)         //Relacion con Pedido
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
+    //Relacion one to one con usuario (foreign key usuario)
+    @OneToOne(cascade = CascadeType.ALL)                                                            //Relacion con Factura
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
 }
