@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDTO {
-    private String email;
-    private String contrasena;
+public class AuthResponse {
+    String token;
 }

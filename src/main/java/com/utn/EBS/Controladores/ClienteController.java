@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/clientes")
+@RequestMapping(path = "auth/api/v1/clientes")
 
 public class ClienteController extends BaseControllerImpl<Cliente, ClienteServiceImpl>{
     @Autowired
