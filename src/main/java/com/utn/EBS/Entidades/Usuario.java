@@ -20,7 +20,11 @@ public class Usuario extends  BaseEntidad {
 
     @Column(name="nombre")
     private String nombre;
-    @Column(name="contraseña")
+    @Column(name = "apellido")
+    private String apellido;
+    @Column(name = "email")
+    private String email;
+    @Column(name="contrasena")
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name="rol")
