@@ -25,12 +25,13 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServic
         try {
             return ResponseEntity.status(HttpStatus.OK).body(usuarioService.registrarUsuario(nuevoUsuario));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new AuthResponse());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new AuthResponse(e.getMessage()));
         }
     }
 
-    @RequestMapping("/auth/login")
+    @PostMapping(path = "/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
+        System.out.println("loginnnn");
         try {
             return ResponseEntity.status(HttpStatus.OK).body(usuarioService.login(loginDTO));
         } catch (Exception e){

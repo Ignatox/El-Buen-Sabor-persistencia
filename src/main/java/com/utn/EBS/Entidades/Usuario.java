@@ -28,7 +28,7 @@ public class Usuario extends BaseEntidad implements UserDetails {
     private String apellido;
     @Column(name = "email")
     private String email;
-    @Column(name="contrasena")
+    @Column(name="contrasena", length = 1024)
     private String contrasena;
     @Enumerated(EnumType.STRING)
     @Column(name="rol")
