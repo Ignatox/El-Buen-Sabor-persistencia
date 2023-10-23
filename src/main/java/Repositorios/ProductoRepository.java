@@ -11,8 +11,8 @@ import java.util.List;
 public interface ProductoRepository  extends BaseRepository <Producto, Long>{
 
     List<Producto> findAllByStock(int stockactual, int stockminimo);
-    @Query(value = "SELECT p FROM producto p WHERE p.stockactual <= p.stockminimo")
-    List<Producto> productosAreponer();
+    @Query(value = "SELECT p FROM Producto p WHERE p.stockactual <= p.stockminimo + :unidades")
+    List<Producto> findProductosCercanosAReponer(@Param("unidades") int unidades);
 
 
 }
