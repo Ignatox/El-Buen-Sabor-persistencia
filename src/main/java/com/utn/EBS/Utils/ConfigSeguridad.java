@@ -3,13 +3,18 @@ package com.utn.EBS.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
@@ -31,26 +36,21 @@ public class ConfigSeguridad {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                                .requestMatchers(new MvcRequestMatcher(new HandlerMappingIntrospector(), "/auth/**"))
-                                .permitAll()
-                                .and()
-                                .authorizeHttpRequests()
-                                .requestMatchers(new MvcRequestMatcher(new HandlerMappingIntrospector(), "/h2-console/**"))
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated()
-                .and()
+                .csrf(config -> config.disable())
+                .authorizeHttpRequests( auth -> {
+                    auth.requestMatchers(new MvcRequestMatcher(new HandlerMappingIntrospector(), "/auth/**")).permitAll();
+                    auth.requestMatchers(new MvcRequestMatcher(new HandlerMappingIntrospector(), "/api/v1/pedidos/**")).hasRole("Cliente");
+                    auth.anyRequest().authenticated();
+                })
                 .sessionManagement(sessionManager ->
                         sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authProvider)
-                .addFilterBefore(jwtFiltroAutenticacion, UsernamePasswordAuthenticationFilter.class)
-                .headers()
-                .frameOptions()
-                .disable();
+                .addFilterBefore(jwtFiltroAutenticacion, UsernamePasswordAuthenticationFilter.class);
+                //.headers()
+                //.frameOptions()
+                //.disable();
         return http.build();
     }
+
 }
