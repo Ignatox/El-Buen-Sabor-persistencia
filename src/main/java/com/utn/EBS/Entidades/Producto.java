@@ -52,7 +52,7 @@ public class Producto extends BaseEntidad {
     @Column(name = "unidad_medida")
     @NotNull
     @NotEmpty
-    private String unidadmedida;
+    private String unidadMedida;
     @Column(name = "foto")
     private String foto;
     @Column(name = "receta")
@@ -66,7 +66,9 @@ public class Producto extends BaseEntidad {
     private TipoProducto tipoProducto;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rubro_id", nullable = false)
+    @JoinColumn(name = "rubro_id")
+    @NotNull
+    @NotEmpty
     private Rubro rubro;
 
 }
