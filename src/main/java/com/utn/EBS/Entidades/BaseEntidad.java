@@ -25,8 +25,6 @@ public class BaseEntidad implements Serializable {
     // Columna para la fecha de alta
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    @NotNull
-    @NotEmpty
     private Date fecha_alta;
 
     // Columna para la fecha de modificación

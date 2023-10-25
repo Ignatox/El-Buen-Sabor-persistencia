@@ -21,29 +21,20 @@ import java.util.Date;
 @Where(clause = "deleted=false")
 public class Factura extends BaseEntidad {
 
-    @Column (name = "nro_factura")
-    @NotNull
-    @NotEmpty
+    @Column (name = "nro_factura", nullable = false)
     private int numero;
 
-    @Column (name = "fecha_factura")
-    @NotNull
-    @NotEmpty
+    @Column (name = "fecha_factura", nullable = false)
     private Date fecha;
 
     @Column (name = "dto_factura")
-    @NotNull
-    @NotEmpty
     private double descuento;
 
     @Enumerated(EnumType.STRING)
-    @Column (name = "forma_pago")
-    @NotNull
-    @NotEmpty
+    @Column (name = "forma_pago", nullable = false)
+
     private FormaPago formaPago;
 
-    @Column (name = "total")
-    @NotNull
-    @NotEmpty
+    @Column (name = "total", nullable = false)
     private int total;
 }
