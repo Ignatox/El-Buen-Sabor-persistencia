@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long>
-        implements ProductoService{
+public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
@@ -36,6 +35,12 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long>
             List<Producto> productos = productoRepository.buscarPorTipoProducto(tipoProducto);
             return productos;
         }catch (Exception e){
+  @Override
+    public List<Producto> ProductosAReponer() throws Exception {
+        try {
+            List<Producto> productosRep = productoRepository.reponerProducto();
+            return productosRep;
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
@@ -58,4 +63,12 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long>
             throw new Exception(e.getMessage());
         }
     }
+    public Page<Producto> ProductosAReponer(Pageable pageable) throws Exception {
+        try {
+            Page<Producto> productosRepPage = productoRepository.reponerProducto(pageable);
+            return productosRepPage;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }    }
+
 }

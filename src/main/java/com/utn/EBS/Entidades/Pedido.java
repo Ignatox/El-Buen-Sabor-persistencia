@@ -3,12 +3,10 @@ package com.utn.EBS.Entidades;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
 import com.utn.EBS.Enumeraciones.TipoEnvio;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 

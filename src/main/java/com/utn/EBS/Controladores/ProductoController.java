@@ -45,6 +45,20 @@ public ResponseEntity<?> buscarPorDenominacio(@RequestParam String denominacion)
             return  ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorTipoProducto(tipoProducto, pageable));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+    @GetMapping("/aReponer")
+    public ResponseEntity<?> ProductosAReponer() throws Exception{
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body((servicio.ProductosAReponer()));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
+        }
+    }
+    @GetMapping("/aReponerPaged")
+    public ResponseEntity<?> productosAReponerPaged(Pageable pageable) throws Exception{
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body((servicio.ProductosAReponer(pageable)));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
         }
     }
 }

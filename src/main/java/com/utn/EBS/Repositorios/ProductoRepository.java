@@ -23,4 +23,11 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
 
     @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
     Page<Producto> buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto, Pageable pageable);
+
+
+    @Query("SELECT p FROM Producto p WHERE p.stockActual <= p.stockMinimo")
+    List<Producto> reponerProducto();
+
+    @Query("SELECT p FROM Producto p WHERE p.stockActual <= p.stockMinimo")
+    Page<Producto> reponerProducto(Pageable pageable);
 }

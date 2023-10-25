@@ -15,4 +15,7 @@ List<Producto> buscarPorDenominacion( String denominacion)throws Exception;
 
     Page<Producto> buscarPorTipoProducto(TipoProducto tipoProducto, Pageable pageable) throws Exception;
 
+
+    List<Producto> ProductosAReponer() throws Exception;
+    Page<Producto> ProductosAReponer( Pageable pageable) throws Exception;
 }

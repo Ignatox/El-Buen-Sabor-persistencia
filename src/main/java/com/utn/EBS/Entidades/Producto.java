@@ -3,8 +3,6 @@ package com.utn.EBS.Entidades;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,13 +38,13 @@ public class Producto extends BaseEntidad {
     private double precioCompra;
     @Column(name = "stock_actual", nullable = false)
 
-    private int stockAtual;
+    private int stockActual;
     @Column(name = "stock_minimo", nullable = false)
 
     private int stockMinimo;
     @Column(name = "unidad_medida", nullable = false)
 
-    private String unidadmedida;
+    private String unidadMedida;
     @Column(name = "foto")
     private String foto;
     @Column(name = "receta", nullable = false)
@@ -58,7 +56,7 @@ public class Producto extends BaseEntidad {
     private TipoProducto tipoProducto;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rubro_id", nullable = false)
+    @JoinColumn(name = "rubro_id")
     private Rubro rubro;
 
 

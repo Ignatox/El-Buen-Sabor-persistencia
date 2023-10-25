@@ -1,9 +1,10 @@
 package com.utn.EBS.Controladores;
+import com.utn.EBS.Entidades.Factura;
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Repositorios.IngredienteRepository;
+import com.utn.EBS.Servicios.FacturaServiceImpl;
 import com.utn.EBS.Servicios.IngredienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
