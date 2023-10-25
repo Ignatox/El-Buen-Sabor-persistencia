@@ -58,7 +58,7 @@ public class Producto extends BaseEntidad {
     private TipoProducto tipoProducto;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rubro_id", nullable = false)
+    @JoinColumn(name = "rubro_id")
     private Rubro rubro;
 
 }
