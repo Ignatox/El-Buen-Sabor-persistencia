@@ -31,17 +31,13 @@ import java.util.List;
 
 public class Domicilio extends BaseEntidad{
 
-    @Column(name = "calle")
-    @NotNull
-    @NotEmpty
+    @Column(name = "calle",nullable = false)
     private String calle;
 
-    @Column(name = "numero")
+    @Column(name = "numero",nullable = false)
     private String numero;
 
-    @Column(name = "localidad")
-    @NotNull
-    @NotEmpty
+    @Column(name = "localidad",nullable = false)
     private String localidad;
 
     @ManyToOne(fetch = FetchType.LAZY)

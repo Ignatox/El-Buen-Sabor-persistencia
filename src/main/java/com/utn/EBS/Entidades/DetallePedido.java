@@ -20,9 +20,9 @@ import org.hibernate.annotations.Where;
 @Where(clause = "deleted=false")
 public class DetallePedido extends BaseEntidad{
 
-    @Column(name = "cantidad")
+    @Column(name = "cantidad", nullable = false)
     private int cantidad;
-    @Column(name = "subtotal")
+    @Column(name = "subtotal", nullable = false)
     private double subtotal;
 
     /* RELACIÓN CON PRODUCTO*/

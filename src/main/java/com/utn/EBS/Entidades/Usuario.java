@@ -26,18 +26,15 @@ import java.util.List;
 @Where(clause = "deleted=false")
 public class Usuario extends  BaseEntidad {
 
-    @Column(name="nombre")
-    @NotNull
-    @NotEmpty
+    @Column(name="nombre", nullable = false)
+
     private String nombre;
-    @Column(name="contraseña")
-    @NotNull
-    @NotEmpty
+    @Column(name="contraseña", nullable = false)
+
     private String password;
     @Enumerated(EnumType.STRING)
-    @Column(name="rol")
-    @NotNull
-    @NotEmpty
+    @Column(name="rol", nullable = false)
+
     private Rol rol;
 
 }
