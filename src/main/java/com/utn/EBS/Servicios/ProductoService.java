@@ -1,5 +1,6 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.AgregarProductoDTO;
 import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import org.springframework.data.domain.Page;
@@ -18,4 +19,6 @@ List<Producto> buscarPorDenominacion( String denominacion)throws Exception;
 
     List<Producto> ProductosAReponer() throws Exception;
     Page<Producto> ProductosAReponer( Pageable pageable) throws Exception;
+
+    public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;

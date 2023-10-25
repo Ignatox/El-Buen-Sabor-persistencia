@@ -24,6 +24,9 @@ public class DetallePedido extends BaseEntidad{
     private int cantidad;
     @Column(name = "subtotal", nullable = false)
     private double subtotal;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
     /* RELACIÓN CON PRODUCTO*/
     @ManyToOne()
