@@ -13,13 +13,13 @@ import java.util.List;
 @Repository
 public interface ProductoRepository  extends BaseRepository <Producto, Long>{
     @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
-    List<Producto> buscarPorDenominacion(@Param("denominacion") int denominacion);
+    List<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion);
 
     @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
     List<Producto>  buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto);
 
     @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
-    Page<Producto> buscarPorDenominacion(@Param("denominacion") int denominacion, Pageable pageable);
+    Page<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion, Pageable pageable);
 
     @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
     Page<Producto> buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto, Pageable pageable);
