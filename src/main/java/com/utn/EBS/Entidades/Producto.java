@@ -61,4 +61,5 @@ public class Producto extends BaseEntidad {
     @JoinColumn(name = "rubro_id", nullable = false)
     private Rubro rubro;
 
+
 }
