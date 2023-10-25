@@ -1,10 +1,9 @@
 package com.utn.EBS.Controladores;
-import com.utn.EBS.Entidades.Factura;
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Repositorios.IngredienteRepository;
-import com.utn.EBS.Servicios.FacturaServiceImpl;
 import com.utn.EBS.Servicios.IngredienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ import java.io.Serializable;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "api/v1/ingredientes")
-public class IngredienteController extends BaseControllerImpl<Factura, FacturaServiceImpl>{
+public class IngredienteController extends BaseControllerImpl<Ingrediente, IngredienteServiceImpl>{
 
 
     @Autowired
@@ -37,5 +36,28 @@ public class IngredienteController extends BaseControllerImpl<Factura, FacturaSe
 
         }
     }
-
+    @GetMapping("/buscarPorStockOK")
+    public ResponseEntity<?> buscarPorStockOK(){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorStockOK());
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\""+e.getMessage()+"\"}");
+        }
+    }
+    @GetMapping("/buscarPorStocNoOK")
+    public ResponseEntity<?> buscarPorStockNoOK() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorStockNoOK());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
+    @GetMapping("/buscarPorDenominacion")
+    public ResponseEntity<?> buscarPorDenominacion(@RequestParam String filtroDenom){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorDenominacion(filtroDenom));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"" + e.getMessage() + "\"}");
+        }
+    }
 }
