@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService{
+public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
@@ -19,17 +19,23 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
         super(baseRepository);
     }
 
-    @Override
-    public List<Producto> ProductosAReponer(int unidades) throws Exception {
-        try{
-            List<Producto> productosRep= productoRepository.reponerProducto(unidades);
+  @Override
+    public List<Producto> ProductosAReponer() throws Exception {
+        try {
+            List<Producto> productosRep = productoRepository.reponerProducto();
             return productosRep;
-        }catch (Exception e){
-        throw new Exception(e.getMessage());
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
-    }
+
     @Override
-    public Page<Producto> ProductosAReponer(int unidades, Pageable pageable) throws Exception {
-        return null;
-    }
+    public Page<Producto> ProductosAReponer(Pageable pageable) throws Exception {
+        try {
+            Page<Producto> productosRepPage = productoRepository.reponerProducto(pageable);
+            return productosRepPage;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }    }
+
 }

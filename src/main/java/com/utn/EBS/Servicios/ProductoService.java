@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ProductoService extends BaseService<Producto, Long>{
 
-    List<Producto> ProductosAReponer(int unidades) throws Exception;
-    Page<Producto> ProductosAReponer(int unidades, Pageable pageable) throws Exception;
+    List<Producto> ProductosAReponer() throws Exception;
+    Page<Producto> ProductosAReponer( Pageable pageable) throws Exception;
 }

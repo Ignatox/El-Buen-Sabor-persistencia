@@ -25,8 +25,9 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
     Page<Producto> buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto, Pageable pageable);
 
 
-    @Query("SELECT p FROM Producto p WHERE p.stockactual<=p.stockminimo+:unidades")
-    List<Producto> reponerProducto(@Param("unidades") int unidades);
-    @Query("SELECT p FROM Producto p WHERE p.stockactual<=p.stockminimo+:unidades")
-    Page<Producto> reponerProducto(@Param("unidades") int unidades, Pageable pageable);
+    @Query("SELECT p FROM Producto p WHERE p.stockActual <= p.stockMinimo")
+    List<Producto> reponerProducto();
+
+    @Query("SELECT p FROM Producto p WHERE p.stockActual <= p.stockMinimo")
+    Page<Producto> reponerProducto(Pageable pageable);
 }

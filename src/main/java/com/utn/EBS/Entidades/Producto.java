@@ -38,13 +38,13 @@ public class Producto extends BaseEntidad {
     private double precioCompra;
     @Column(name = "stock_actual", nullable = false)
 
-    private int stockAtual;
+    private int stockActual;
     @Column(name = "stock_minimo", nullable = false)
 
     private int stockMinimo;
     @Column(name = "unidad_medida", nullable = false)
 
-    private String unidadmedida;
+    private String unidadMedida;
     @Column(name = "foto")
     private String foto;
     @Column(name = "receta", nullable = false)

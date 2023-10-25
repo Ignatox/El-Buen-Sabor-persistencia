@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.*;
 
 public class ProductoController extends BaseControllerImpl<Producto, ProductoServiceImpl>{
     @GetMapping("/aReponer")
-    public ResponseEntity<?> ProductosAReponer(@RequestParam int unidades){
+    public ResponseEntity<?> ProductosAReponer() throws Exception{
         try{
-            return ResponseEntity.status(HttpStatus.OK).body((servicio.ProductosAReponer(unidades)));
+            return ResponseEntity.status(HttpStatus.OK).body((servicio.ProductosAReponer()));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
         }
     }
     @GetMapping("/aReponerPaged")
-    public ResponseEntity<?> search(@RequestParam int unidades, Pageable pageable){
+    public ResponseEntity<?> productosAReponerPaged(Pageable pageable) throws Exception{
         try {
-            return ResponseEntity.status(HttpStatus.OK).body((servicio.ProductosAReponer(unidades,pageable)));
+            return ResponseEntity.status(HttpStatus.OK).body((servicio.ProductosAReponer(pageable)));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
         }

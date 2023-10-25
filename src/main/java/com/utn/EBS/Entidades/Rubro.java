@@ -41,8 +41,8 @@ public class Rubro extends  BaseEntidad{
         for (Producto producto : productos) {
             System.out.println("Tipo: " + producto.getTipoProducto() +", Tiempo Estimado de Cosina: " + producto.getTiempoEstimadoCocina());
             System.out.println("Denominación: "+ producto.getDenominacion()+ ", Precio de Venta: "+producto.getPrecioVenta()+", Precio de Compra: "+producto.getPrecioCompra());
-            System.out.println("Stock Actual: "+ producto.getStockAtual()+", Stock Mínimo: "+ producto.getStockMinimo());
-            System.out.println("Unidad de Medida: "+ producto.getUnidadmedida()+", Receta: "+producto.getReceta());
+            System.out.println("Stock Actual: "+ producto.getStockActual()+", Stock Mínimo: "+ producto.getStockMinimo());
+            System.out.println("Unidad de Medida: "+ producto.getUnidadMedida()+", Receta: "+producto.getReceta());
         }
     }
 }
