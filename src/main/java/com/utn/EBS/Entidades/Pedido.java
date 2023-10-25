@@ -49,7 +49,7 @@ public class Pedido extends BaseEntidad {
     @Enumerated(EnumType.STRING)
     @NotNull
     @NotEmpty
-    private EstadoPedido estado;
+    private EstadoPedido estado= EstadoPedido.A_CONFIRMAR; //define el estado inicial del pedido
 
     @NotNull
     @Column(name = "tipo_envio_pedido")
