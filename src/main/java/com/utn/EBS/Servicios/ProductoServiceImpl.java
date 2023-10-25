@@ -40,7 +40,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
                     .precioVenta(agregarProductoDTO.getPrecioVenta())
                     .receta(agregarProductoDTO.getReceta())
                     .stockMinimo(agregarProductoDTO.getStockMinimo())
-                    .stockAtual(agregarProductoDTO.getStockActual())
+                    .stockActual(agregarProductoDTO.getStockActual())
                     .unidadMedida(agregarProductoDTO.getUnidadMedida())
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
                     .rubro(rubro)
@@ -69,7 +69,10 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
         try {
             List<Producto> productos = productoRepository.buscarPorTipoProducto(tipoProducto);
             return productos;
-        }catch (Exception e){
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+            }
+        }
   @Override
     public List<Producto> ProductosAReponer() throws Exception {
         try {

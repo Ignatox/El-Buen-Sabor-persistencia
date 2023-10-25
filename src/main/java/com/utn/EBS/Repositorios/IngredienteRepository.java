@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface IngredienteRepository extends BaseRepository <Ingrediente, Long>{
 
-    @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual>StockMinimo")
+    @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual > stockMinimo")
     List<Ingrediente> buscarPorStockOK();
 
-    @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual<StockMinimo")
+    @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual < stockMinimo")
     List<Ingrediente> buscarPorStockNoOK();
 
     @Query(value = "SELECT i FROM Ingrediente i WHERE i.denominacion LIKE '%?filtroDenom%' ")

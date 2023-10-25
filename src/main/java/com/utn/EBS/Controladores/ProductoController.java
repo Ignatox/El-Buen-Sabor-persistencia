@@ -41,11 +41,14 @@ public ResponseEntity<?> buscarPorDenominacio(@RequestParam String denominacion)
     }
 
     @GetMapping("/buscarPorTipoProductoPage")
-    public ResponseEntity<?> buscarPorTipoProducto(@RequestParam TipoProducto tipoProducto, Pageable pageable){
+    public ResponseEntity<?> buscarPorTipoProducto(@RequestParam TipoProducto tipoProducto, Pageable pageable) {
         try {
-            return  ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorTipoProducto(tipoProducto, pageable));
-        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorTipoProducto(tipoProducto, pageable));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+        }
+    }
+
     @GetMapping("/aReponer")
     public ResponseEntity<?> ProductosAReponer() throws Exception{
         try{

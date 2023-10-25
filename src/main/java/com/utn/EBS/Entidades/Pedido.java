@@ -39,13 +39,11 @@ public class Pedido extends BaseEntidad {
 
     private double total;
 
-    @NotNull
     @Column(name = "estado_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
 
     private EstadoPedido estado;
 
-    @NotNull
     @Column(name = "tipo_envio_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoEnvio tipoEnvio;
