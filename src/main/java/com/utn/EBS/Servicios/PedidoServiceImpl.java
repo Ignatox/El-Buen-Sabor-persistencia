@@ -67,8 +67,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
                     .total(totalPedido)
                     .build();
             // guardamos el pedido
-            pedidoRepository.save(pedido);
-            return pedido;
+            return pedidoRepository.save(pedido);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

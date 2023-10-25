@@ -27,7 +27,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long>
         try {
             // Buscamos el rubro
             Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
-                    .orElseThrow(() -> new EntityNotFoundException("Entidad relacionada no encontrada con ID: " + agregarProductoDTO.getIdRubro()));
+                    .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
 
             Producto producto = Producto.builder()
                     .tipoProducto(agregarProductoDTO.getTipoProducto())
@@ -42,8 +42,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long>
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
                     .rubro(rubro)
                     .build();
-            productoRepository.save(producto);
-            return producto;
+            return productoRepository.save(producto);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

@@ -62,12 +62,7 @@ public class Pedido extends BaseEntidad {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)            //Relacion con DetallePedido
-    @JoinTable(
-            name = "pedido_detalle",
-            joinColumns = @JoinColumn(name = "pedido_id"),
-            inverseJoinColumns = @JoinColumn(name = "detallePedido_id")
-    )
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)            //Relacion con DetallePedido
     private List<DetallePedido> detallePedidos = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)                                                            //Relacion con Factura

@@ -15,7 +15,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
     @Autowired
     ProductoServiceImpl productoService;
 
-    @PostMapping("/")
+    @PostMapping("/agregarProducto")
     public ResponseEntity<?> agregarProducto(@RequestBody AgregarProductoDTO agregarProductoDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));

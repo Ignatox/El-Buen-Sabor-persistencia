@@ -16,7 +16,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     @Autowired
     PedidoServiceImpl pedidoService;
 
-    @PostMapping("/")
+    @PostMapping("/crearPedido")
     public ResponseEntity<?> registrarPedido(@RequestBody RegistrarPedidoDTO pedidoDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.registrarPedido(pedidoDTO));
