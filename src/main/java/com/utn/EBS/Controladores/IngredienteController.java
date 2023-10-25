@@ -20,7 +20,7 @@ public class IngredienteController extends BaseControllerImpl<Factura, FacturaSe
     @Autowired
     IngredienteServiceImpl ingredienteService;
     @PostMapping("/{id}/registrarCompra")
-    public ResponseEntity registrarCompraIngrediente(@PathVariable Long id, @RequestParam double costoCompra) {
+    public ResponseEntity<?> registrarCompraIngrediente(@PathVariable Long id, @RequestParam double costoCompra) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ingredienteService.registrarCompraIngrediente(id,costoCompra));
         } catch (Exception e) {
@@ -28,10 +28,10 @@ public class IngredienteController extends BaseControllerImpl<Factura, FacturaSe
         }
     }
 
-    @PostMapping("/{id}/registrarCompra")
-    public ResponseEntity actualizarStockCompraIngrediente(@PathVariable Long id, @RequestParam int cantComprada) {
+    @PostMapping("/{id}/actualizarStockIngrediente")
+    public ResponseEntity<?> actualizarStockIngrediente(@PathVariable Long id, @RequestParam int cantComprada) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(ingredienteService.actualizarStockCompraIngrediente(id,cantComprada));
+            return ResponseEntity.status(HttpStatus.OK).body(ingredienteService.actualizarStockIngrediente(id,cantComprada));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error, intente denuevo");
 

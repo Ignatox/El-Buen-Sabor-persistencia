@@ -4,12 +4,14 @@ import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.IngredienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
+@Service
 public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> implements IngredienteService {
     @Autowired
     private IngredienteRepository ingredienteRepository;
@@ -31,7 +33,7 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
             throw new Exception(e.getMessage());
         }
     }
-    public Ingrediente actualizarStockCompraIngrediente(Long id, int cantComprada) throws Exception {
+    public Ingrediente actualizarStockIngrediente(Long id, int cantComprada) throws Exception {
         try {
             Optional<Ingrediente> ingrediente= ingredienteRepository.findById(id);
             if (ingrediente.isPresent()){
