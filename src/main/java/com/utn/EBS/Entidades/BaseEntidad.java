@@ -25,11 +25,15 @@ public class BaseEntidad implements Serializable {
     // Columna para la fecha de alta
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
+    @CreationTimestamp
+    @Column(name= "fecha_alta", updatable = false)
     private Date fecha_alta;
 
     // Columna para la fecha de modificación
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
+    @UpdateTimestamp
+    @Column(name = "fecha_modificacion")
     private Date fecha_modificacion;
     // Boolean para baja logica
     private boolean deleted = Boolean.FALSE;
