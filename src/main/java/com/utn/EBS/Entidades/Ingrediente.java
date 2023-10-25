@@ -26,25 +26,15 @@ import java.util.Date;
 @Where(clause = "deleted=false")
 
 public class Ingrediente extends BaseEntidad{
-    @Column(name = "denominacion")
-    @NotNull
-    @NotEmpty
+    @Column(name = "denominacion", nullable = false)
+
     private String denominacion;
-    @Column(name = "fecha-modificacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date fecha_modificacion;
-    @Column(name = "precio-compra")
-    @NotNull
-    @NotEmpty
+
+    @Column(name = "precio-compra", nullable = false)
     private float costo;
-    @Column(name = "stok-actual")
-    @NotNull
-    @NotEmpty
+    @Column(name = "stok-actual", nullable = false)
     private int stockActual;
-    @Column(name = "stock-minimo")
-    @NotNull
-    @NotEmpty
+    @Column(name = "stock-minimo", nullable = false)
     private int stockMinimo;
     @Column(name = "url-imagen")
     private String urlImagen;

@@ -25,9 +25,8 @@ import java.util.List;
 @Where(clause = "deleted=false")
 public class Rubro extends  BaseEntidad{
 
-    @Column(name = "denominacion_rubro")
-    @NotNull
-    @NotEmpty
+    @Column(name = "denominacion_rubro", nullable = false)
+
     private String denominacion;
 
     /* RELACIÓN CON PRODUCTO*/

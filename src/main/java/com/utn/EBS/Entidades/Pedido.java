@@ -28,34 +28,28 @@ import java.util.List;
 @Where(clause = "deleted=false")
 public class Pedido extends BaseEntidad {
 
-    @Column(name = "fecha_pedido")
-    @NotNull
-    @NotEmpty
+    @Column(name = "fecha_pedido", nullable = false)
+
     private String fecha;
 
-    @Column(name = "hora_estimada_entrega")
+    @Column(name = "hora_estimada_entrega", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
-    @NotEmpty
+
     private String horaEstimadaEntrega;
 
-    @Column(name = "total")
-    @NotNull
-    @NotEmpty
+    @Column(name = "total", nullable = false)
+
     private double total;
 
     @NotNull
-    @Column(name = "estado_pedido")
+    @Column(name = "estado_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
-    @NotNull
-    @NotEmpty
+
     private EstadoPedido estado;
 
     @NotNull
-    @Column(name = "tipo_envio_pedido")
+    @Column(name = "tipo_envio_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
-    @NotNull
-    @NotEmpty
     private TipoEnvio tipoEnvio;
 
     @ManyToOne(fetch = FetchType.LAZY)

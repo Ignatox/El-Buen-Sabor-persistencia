@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +23,16 @@ import java.util.List;
 @Where(clause = "deleted=false")
 public class Cliente extends BaseEntidad{
 
-    @Column(name = "nombre")
-    @NotNull
-    @NotEmpty
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "apellido")
-    @NotNull
-    @NotEmpty
+    @Column(name = "apellido", nullable = false)
     private String apellido;
 
     @Column(name = "telefono")
     private String telefono;
 
-    @Column(name = "email")
-    @NotNull
-    @NotEmpty
+    @Column(name = "email",nullable = false)
     private String email;
 
 
