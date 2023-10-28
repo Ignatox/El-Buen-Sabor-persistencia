@@ -25,35 +25,25 @@ import org.hibernate.annotations.*;
 public class Producto extends BaseEntidad {
 
     @Column(name = "tiempo_estimado_cocina", nullable = false)
-
     private int tiempoEstimadoCocina;
+
     @Column(name = "denominacion", nullable = false)
-
-
     private String denominacion;
+
     @Column(name = "precio_venta", nullable = false)
-
     private double precioVenta;
+
     @Column(name = "precio_compra", nullable = false)
-
     private double precioCompra;
-    @Column(name = "stock_actual", nullable = false)
 
-    private int stockActual;
-    @Column(name = "stock_minimo", nullable = false)
-
-    private int stockMinimo;
-    @Column(name = "unidad_medida", nullable = false)
-
-    private String unidadMedida;
     @Column(name = "foto")
     private String foto;
-    @Column(name = "receta", nullable = false)
 
+    @Column(name = "receta", nullable = false)
     private String receta;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-
     private TipoProducto tipoProducto;
 
     @ManyToOne(fetch = FetchType.EAGER)

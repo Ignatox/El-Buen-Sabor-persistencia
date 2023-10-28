@@ -27,15 +27,17 @@ import java.util.Date;
 
 public class Ingrediente extends BaseEntidad{
     @Column(name = "denominacion", nullable = false)
-
     private String denominacion;
 
-    @Column(name = "precio-compra", nullable = false)
+    @Column(name = "precio_compra", nullable = false)
     private float costo;
-    @Column(name = "stok-actual", nullable = false)
+
+    @Column(name = "stock_actual", nullable = false)
     private int stockActual;
-    @Column(name = "stock-minimo", nullable = false)
+
+    @Column(name = "stock_minimo", nullable = false)
     private int stockMinimo;
-    @Column(name = "url-imagen")
+
+    @Column(name = "url_imagen")
     private String urlImagen;
 }
