@@ -33,7 +33,9 @@ public class BaseEntidad implements Serializable {
     @UpdateTimestamp
     @Column(name = "fecha_modificacion")
     private Date fecha_modificacion;
+
     // Boolean para baja logica
+    @Column(columnDefinition = "boolean default false")
     private boolean deleted = Boolean.FALSE;
 
 

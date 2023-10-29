@@ -53,28 +53,32 @@ public ResponseEntity<?> buscarPorDenominacion(@RequestParam String denominacion
         }
     }
 
-    @GetMapping("/aReponer")
-    public ResponseEntity<?> ProductosAReponer() throws Exception{
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body((productoService.ProductosAReponer()));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
-        }
-    }
-    @GetMapping("/aReponerPaged")
-    public ResponseEntity<?> productosAReponerPaged(Pageable pageable) throws Exception{
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body((productoService.ProductosAReponer(pageable)));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
-        }
-    }
+
+// Estos metodos son de ingrediente, no de producto
+    //@GetMapping("/aReponer")
+    //public ResponseEntity<?> ProductosAReponer() throws Exception{
+    //    try{
+    //        return ResponseEntity.status(HttpStatus.OK).body((productoService.ProductosAReponer()));
+    //    }catch (Exception e){
+    //        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
+    //    }
+    //}
+    //@GetMapping("/aReponerPaged")
+    //public ResponseEntity<?> productosAReponerPaged(Pageable pageable) throws Exception{
+    //    try {
+    //        return ResponseEntity.status(HttpStatus.OK).body((productoService.ProductosAReponer(pageable)));
+    //    }catch (Exception e){
+    //        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
+    //    }
+    //}
 
     @PostMapping("/agregarProducto")
     public ResponseEntity<?> agregarProducto(@RequestBody AgregarProductoDTO agregarProductoDTO) {
         try {
+            System.out.println(agregarProductoDTO);
             return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));
         } catch (Exception e) {
+            System.out.println("Error algo malo paso: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }

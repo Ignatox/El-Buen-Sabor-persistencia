@@ -16,9 +16,9 @@ List<Producto> buscarPorDenominacion( String denominacion)throws Exception;
 
     Page<Producto> buscarPorTipoProducto(TipoProducto tipoProducto, Pageable pageable) throws Exception;
 
-
-    List<Producto> ProductosAReponer() throws Exception;
-    Page<Producto> ProductosAReponer( Pageable pageable) throws Exception;
+    // Estos metodos son de ingrediente, no de producto
+    //List<Producto> ProductosAReponer() throws Exception;
+    //Page<Producto> ProductosAReponer( Pageable pageable) throws Exception;
 
     public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception;
 }

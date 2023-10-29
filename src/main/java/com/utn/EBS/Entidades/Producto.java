@@ -3,12 +3,16 @@ package com.utn.EBS.Entidades;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
+
+import java.awt.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -49,6 +53,9 @@ public class Producto extends BaseEntidad {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
+
+    @OneToMany(mappedBy = "producto")
+    private List<ProductoIngrediente> ingredientes;
 
 
 }

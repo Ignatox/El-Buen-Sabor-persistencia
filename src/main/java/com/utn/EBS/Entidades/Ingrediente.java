@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 
+import com.utn.EBS.Enumeraciones.UnidadMedida;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,7 +31,7 @@ public class Ingrediente extends BaseEntidad{
     @Column(name = "denominacion", nullable = false)
     private String denominacion;
 
-    @Column(name = "precio_compra", nullable = false)
+    @Column(name = "costo", nullable = false)
     private float costo;
 
     @Column(name = "stock_actual", nullable = false)
@@ -40,4 +42,11 @@ public class Ingrediente extends BaseEntidad{
 
     @Column(name = "url_imagen")
     private String urlImagen;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "unidad_medida")
+    private UnidadMedida unidadMedida;
+
+    @OneToMany(mappedBy = "ingrediente")
+    private List<ProductoIngrediente> productos;
 }
