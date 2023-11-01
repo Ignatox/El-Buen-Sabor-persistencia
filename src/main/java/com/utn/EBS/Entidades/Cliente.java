@@ -1,5 +1,6 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -32,6 +33,9 @@ public class Cliente extends BaseEntidad{
 
     @Column(name = "email",nullable = false)
     private String email;
+
+    //@JsonManagedReference
+    // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
     private List<Domicilio> domicilios = new ArrayList<Domicilio>();  //Fijate gonza la navegabilidad, si desde cliente o desde domicilio, como te pinta hacerla

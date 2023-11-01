@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -39,6 +40,8 @@ public class Domicilio extends BaseEntidad{
     private String localidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
+    // @JsonBackReference
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 @JsonAppend
 public enum UnidadMedida {
-    KILO("Kilo"),
+    GRAMO("Gramo"),
     LITROS("Litros"),
     UNIDADES("Unidades");
 
