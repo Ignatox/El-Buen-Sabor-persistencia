@@ -92,20 +92,5 @@ public abstract class BaseServiceImpl<E extends BaseEntidad, ID extends Serializ
         }
     }
 
-    @Transactional
-    public E guardarDatos(E entidad) throws Exception{
-        try{
-            entidad = baseRepository.buscarPorId(entidad.getId());
 
-            if(entidad == null){
-                save(entidad);
-            }else{
-                update((ID) entidad.getId(), entidad);
-            }
-
-            return entidad;
-        }catch(Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
 }

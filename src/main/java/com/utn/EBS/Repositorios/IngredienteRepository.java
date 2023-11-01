@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Ingrediente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +11,9 @@ import java.util.List;
 
 @Repository
 public interface IngredienteRepository extends BaseRepository <Ingrediente, Long>{
+
+    @Query("SELECT i FROM Ingrediente i WHERE i.id = :id")
+    Ingrediente buscarPorId(@Param("id") Long id);
 
     @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual > stockMinimo")
     List<Ingrediente> buscarPorStockOK();

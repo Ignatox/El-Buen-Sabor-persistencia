@@ -11,7 +11,5 @@ import java.io.Serializable;
 @NoRepositoryBean
 public interface BaseRepository <E extends BaseEntidad, Id extends Serializable> extends JpaRepository<E,Id> {
 
-    @Query("SELECT e FROM E e WHERE e.id = :id")
-    E buscarPorId(@Param("id") Long id);
 
 }

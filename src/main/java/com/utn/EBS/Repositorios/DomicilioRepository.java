@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Domicilio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Repository
 public interface DomicilioRepository extends BaseRepository <Domicilio, Long> {
+
+    @Query("SELECT d FROM Domicilio d WHERE d.id = :id")
+    Domicilio buscarPorId(@Param("id") Long id);
     @Query("SELECT d FROM Domicilio d WHERE d.calle = :calle")
     List<Domicilio> buscarPorCalle(@Param("calle") String calle);
 

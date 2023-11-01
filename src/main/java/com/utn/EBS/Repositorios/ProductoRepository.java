@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,10 @@ import java.util.List;
 
 @Repository
 public interface ProductoRepository  extends BaseRepository <Producto, Long>{
+
+    @Query("SELECT p FROM Producto p WHERE p.id = :id")
+    Producto buscarPorId(@Param("id") Long id);
+
     @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
     List<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion);
 

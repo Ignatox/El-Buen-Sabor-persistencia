@@ -11,6 +11,10 @@ import java.util.List;
 
 @Repository
 public interface ClienteRepository extends BaseRepository<Cliente, Long>{
+
+    @Query("SELECT c FROM Cliente c WHERE c.id = :id")
+    Cliente buscarPorId(@Param("id") Long id);
+
     @Query ("SELECT c FROM Cliente c WHERE c.nombre = :nombre")
     List<Cliente> buscarPornombre(@Param("nombre") String nombre);
 

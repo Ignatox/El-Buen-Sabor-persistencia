@@ -47,16 +47,6 @@ public abstract class BaseControllerImpl<E extends BaseEntidad, S extends BaseSe
         }
     }
 
-    @PostMapping("/guardarDatos")
-    public ResponseEntity<?> guardarDatos(@RequestBody E entidad){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.guardarDatos(entidad));
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entidad) {
         try {
