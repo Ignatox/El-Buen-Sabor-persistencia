@@ -33,7 +33,6 @@ public class Cliente extends BaseEntidad{
     @Column(name = "email",nullable = false)
     private String email;
 
-
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
     private List<Domicilio> domicilios = new ArrayList<Domicilio>();  //Fijate gonza la navegabilidad, si desde cliente o desde domicilio, como te pinta hacerla
 

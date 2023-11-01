@@ -13,6 +13,8 @@ import com.utn.EBS.Repositorios.PedidoRepository;
 import com.utn.EBS.Repositorios.ProductoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +32,11 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     private ClienteRepository clienteRepository;
     @Autowired
     private ProductoRepository productoRepository;
+
+    public PedidoServiceImpl(BaseRepository<Pedido, Long> baseRepository) {
+        super(baseRepository);
+    }
+
 
     @Override
     @Transactional
@@ -73,8 +80,39 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         }
     }
 
-    public PedidoServiceImpl(BaseRepository<Pedido, Long> baseRepository) {
-        super(baseRepository);
+
+    @Override
+    @Transactional
+    public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception{
+        try{
+            Page<Pedido> pedidosEncontrados = pedidoRepository.buscarPedidosAPreparar(pageable);
+            if(pedidosEncontrados == null){
+                throw new Exception("No hay pedidos para preparar");
+            }else{
+                return pedidosEncontrados;
+            }
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Boolean cambiarEstadoPedido(Long id) throws Exception{
+        try{
+            Pedido pedido=pedidoRepository.buscarPorId(id);
+
+            if(pedido == null) {
+                throw new Exception("el pedido que intenta editar no existe");
+            }
+
+            pedido.setEstado(EstadoPedido.INICIADO);
+
+            return true;
+
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
 

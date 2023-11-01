@@ -10,7 +10,8 @@ public enum EstadoPedido {  //seguramente hay que agregar mas estados apra tener
 
     A_PREPARAR("A preparar"),
     INICIADO("iniciado"),
-    EN_PREPARACION("En preparacion"),
+
+    //había un estado "en preparación" pero lo borre pq es lo mismo que iniciado
     ENTREGADO("Entregado");
 
     private String texto;
