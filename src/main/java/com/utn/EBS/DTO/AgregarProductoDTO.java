@@ -15,4 +15,6 @@ public class AgregarProductoDTO {
     TipoProducto tipoProducto;
     Long idRubro;
     List<ProductoIngredienteDTO> ingredienteDTOS;
+    boolean estado;     //Se lo agregué pq lo requiere el formulario
+
 }
