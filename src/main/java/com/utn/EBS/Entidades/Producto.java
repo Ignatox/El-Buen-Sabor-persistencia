@@ -37,7 +37,7 @@ public class Producto extends BaseEntidad {
     private String descripcion;
 
     @Column(name = "precio", nullable = false)
-    private double precioVenta;
+    private double precio;
 
     @Column(name = "foto")
     private String foto;

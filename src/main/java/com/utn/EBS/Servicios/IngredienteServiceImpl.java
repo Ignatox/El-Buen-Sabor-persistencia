@@ -71,9 +71,9 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
     }
 
     @Override
-    public List<Ingrediente> buscarPorDenominacion(String filtroDenom) throws Exception {
+    public List<Ingrediente> buscarPorNombre(String filtroNombre) throws Exception {
         try {
-            List<Ingrediente> ingredientes = ingredienteRepository.buscarPorDenominacion(filtroDenom);
+            List<Ingrediente> ingredientes = ingredienteRepository.buscarPorNombre(filtroNombre);
             return ingredientes;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

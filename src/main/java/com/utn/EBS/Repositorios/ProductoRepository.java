@@ -16,16 +16,10 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
     @Query("SELECT p FROM Producto p WHERE p.id = :id")
     Producto buscarPorId(@Param("id") Long id);
 
-    @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
-    List<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion);
+    @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
+    List<Producto> buscarPorNombre(@Param("nombre") String nombre);
 
-    @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
-    List<Producto>  buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto);
 
-    @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
-    Page<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion, Pageable pageable);
-
-    @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
-    Page<Producto> buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto, Pageable pageable);
-
+    @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
+    Page<Producto> buscarPorNombre(@Param("nombre") String nombre, Pageable pageable);
 }

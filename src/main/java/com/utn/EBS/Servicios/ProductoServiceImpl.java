@@ -26,55 +26,21 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     IngredienteRepository ingredienteRepository;
     @Autowired
     ProductoIngredienteRepository productoIngredienteRepository;
+    public ProductoServiceImpl(BaseRepository<Producto, Long> baseRepository) {
+        super(baseRepository);
+    }
 
     @Override
     @Transactional
     public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {
         try {
-            /* Bueno va a ser horrible este metodo pero q funcione al menos
-            // Buscamos el rubro
             Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
                     .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
 
             Producto producto = Producto.builder()
-                    .tipoProducto(agregarProductoDTO.getTipoProducto())
                     .foto("foto")
-                    .denominacion(agregarProductoDTO.getDenominacion())
-                    .precioCompra(agregarProductoDTO.getPrecioCompra())
-                    .precioVenta(agregarProductoDTO.getPrecioVenta())
-                    .receta(agregarProductoDTO.getReceta())
-                    .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
-                    .rubro(rubro)
-                    .build();
-
-            // Buscamos los ingredientes y creamos las relaciones
-            List<ProductoIngredienteDTO> ingredientes = agregarProductoDTO.getIngredienteDTOS();
-            List<ProductoIngrediente> productoIngredientes = new ArrayList<>();
-
-            for (ProductoIngredienteDTO productoIngredienteDTO: ingredientes) {
-                Ingrediente ingredienteRequerido = ingredienteRepository.findById(productoIngredienteDTO.getIngredienteId())
-                        .orElseThrow(() -> new EntityNotFoundException("No se encontro uno de los ingredientes."));
-                ProductoIngrediente productoIngrediente = ProductoIngrediente.builder()
-                        .ingrediente(ingredienteRequerido)
-                        .producto(producto)
-                        .cantidad(productoIngredienteDTO.getCantidad())
-                        .build();
-                productoIngredientes.add(productoIngrediente);
-            }
-            //productoIngredienteRepository.saveAll(productoIngredientes);
-            producto.setIngredientes(productoIngredientes);
-
-            return productoRepository.save(producto);
-            */
-            Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
-                    .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
-
-            Producto producto = Producto.builder()
-                    .tipoProducto(agregarProductoDTO.getTipoProducto())
-                    .foto("foto")
-                    .denominacion(agregarProductoDTO.getDenominacion())
-                    .precioCompra(agregarProductoDTO.getPrecioCompra())
-                    .precioVenta(agregarProductoDTO.getPrecioVenta())
+                    .nombre(agregarProductoDTO.getNombre())
+                    .precio(agregarProductoDTO.getPrecioVenta())
                     .receta(agregarProductoDTO.getReceta())
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
                     .rubro(rubro)
@@ -98,53 +64,21 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
         }
     }
 
-    public ProductoServiceImpl(BaseRepository<Producto, Long> baseRepository) {
-        super(baseRepository);
-    }
 
 @Override
-    public List<Producto> buscarPorDenominacion( String denominacion)throws Exception{
+    public List<Producto> buscarPorNombre(String nombre)throws Exception{
     try {
-        List<Producto> productos = productoRepository.buscarPorDenominacion(denominacion);
+        List<Producto> productos = productoRepository.buscarPorNombre(nombre);
         return productos;
     }catch (Exception e){
         throw new Exception(e.getMessage());
     }
 }
-    @Override
-    public List<Producto> buscarPorTipoProducto(TipoProducto tipoProducto)throws Exception{
-        try {
-            List<Producto> productos = productoRepository.buscarPorTipoProducto(tipoProducto);
-            return productos;
-        }catch (Exception e) {
-            throw new Exception(e.getMessage());
-            }
-        }
-
-    // Estos metodos son de ingrediente, no de producto
-  //@Override
-  //  public List<Producto> ProductosAReponer() throws Exception {
-   //     try {
-   //         List<Producto> productosRep = productoRepository.reponerProducto();
-   //         return productosRep;
-   //     } catch (Exception e) {
-    //        throw new Exception(e.getMessage());
-    //    }
-   // }
 
     @Override
-    public Page<Producto> buscarPorDenominacion(String denominacion, Pageable pageable)throws Exception{
+    public Page<Producto> buscarPorNombre(String nombre, Pageable pageable)throws Exception{
         try {
-            Page<Producto> productos = productoRepository.buscarPorDenominacion(denominacion, pageable);
-            return productos;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-    @Override
-    public Page<Producto> buscarPorTipoProducto(TipoProducto tipoProducto, Pageable pageable)throws Exception{
-        try {
-            Page<Producto> productos = productoRepository.buscarPorTipoProducto(tipoProducto, pageable);
+            Page<Producto> productos = productoRepository.buscarPorNombre(nombre, pageable);
             return productos;
         }catch (Exception e){
             throw new Exception(e.getMessage());

@@ -16,40 +16,53 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
 
     @Autowired
     ProductoServiceImpl productoService;
+
+    @PostMapping("/agregarProducto")
+    public ResponseEntity<?> agregarProducto(@RequestBody AgregarProductoDTO agregarProductoDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));
+        } catch (Exception e) {
+            System.out.println("Error algo malo paso: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 @GetMapping("/buscarPorDenominacion")
-public ResponseEntity<?> buscarPorDenominacion(@RequestParam String denominacion){
+public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre){
     try {
-        return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorDenominacion(denominacion));
+        return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorNombre(nombre));
     }catch (Exception e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
     }
 }
-    @GetMapping("/buscarPorTipoProducto")
-    public ResponseEntity<?> buscarPorTipoProducto(@RequestParam TipoProducto tipoProducto){
-        try {
-            return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorTipoProducto(tipoProducto));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
-        }
-    }
+
 
     @GetMapping("/buscarPorDenominacionPage")
-    public ResponseEntity<?> buscarPorDenominacion(@RequestParam String denominacion, Pageable pageable){
+    public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre, Pageable pageable){
         try {
-            return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorDenominacion(denominacion, pageable));
+            return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorNombre(nombre, pageable));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
         }
     }
 
-    @GetMapping("/buscarPorTipoProductoPage")
-    public ResponseEntity<?> buscarPorTipoProducto(@RequestParam TipoProducto tipoProducto, Pageable pageable) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorTipoProducto(tipoProducto, pageable));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
-        }
-    }
+    // queda comentado porque la busqueda deberia ser por rubro, y no por tipoProducto
+
+//    @GetMapping("/buscarPorTipoProducto")
+//    public ResponseEntity<?> buscarPorTipoProducto(@RequestParam TipoProducto tipoProducto){
+//        try {
+//            return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorTipoProducto(tipoProducto));
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+//        }
+//    }
+//    @GetMapping("/buscarPorTipoProductoPage")
+//    public ResponseEntity<?> buscarPorTipoProducto(@RequestParam TipoProducto tipoProducto, Pageable pageable) {
+//        try {
+//            return ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorTipoProducto(tipoProducto, pageable));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+//        }
+//    }
 
 
 // Estos metodos son de ingrediente, no de producto
@@ -70,14 +83,6 @@ public ResponseEntity<?> buscarPorDenominacion(@RequestParam String denominacion
     //    }
     //}
 
-    @PostMapping("/agregarProducto")
-    public ResponseEntity<?> agregarProducto(@RequestBody AgregarProductoDTO agregarProductoDTO) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));
-        } catch (Exception e) {
-            System.out.println("Error algo malo paso: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
+
 
 }

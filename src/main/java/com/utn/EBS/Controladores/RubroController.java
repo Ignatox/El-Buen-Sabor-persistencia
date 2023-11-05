@@ -19,11 +19,11 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
 
     @Autowired
     private RubroServiceImpl rubroServiceImpl;
-    @GetMapping("/Denominacion")
-    public ResponseEntity<?> buscarRubrosPorDenominacion(String denominacion) throws Exception{
+    @GetMapping("/Nombre")
+    public ResponseEntity<?> buscarRubrosPorNombre(String nombre) throws Exception{
         try {
-            List<Rubro> rubrosPorDenominacion = rubroServiceImpl.buscarPorDenominacion(denominacion);
-            return ResponseEntity.status(HttpStatus.OK).body(rubrosPorDenominacion);
+            List<Rubro> rubrosPorNombre = rubroServiceImpl.buscarPorNombre(nombre);
+            return ResponseEntity.status(HttpStatus.OK).body(rubrosPorNombre);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Intente despues.\"}");
         }
