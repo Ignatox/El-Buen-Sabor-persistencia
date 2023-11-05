@@ -29,8 +29,8 @@ import java.util.List;
 @Where(clause = "deleted=false")
 
 public class Ingrediente extends BaseEntidad{
-    @Column(name = "denominacion", nullable = false)
-    private String denominacion;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
     @Column(name = "costo", nullable = false)
     private float costo;

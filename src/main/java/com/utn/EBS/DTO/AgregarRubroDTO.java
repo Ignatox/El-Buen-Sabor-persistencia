@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AgregarRubroDTO {
-    String denominiacion;
+    String nombre;
     boolean estado;
 }

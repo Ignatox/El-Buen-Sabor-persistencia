@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class AgregarProductoDTO {
     int tiempoEstimadoCocina;
-    String denominacion;
+    String nombre;
     double precioVenta;
     double precioCompra;
     String receta;

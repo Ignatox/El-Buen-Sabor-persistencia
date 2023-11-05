@@ -24,9 +24,8 @@ import java.util.List;
 @Where(clause = "deleted=false")
 public class Rubro extends  BaseEntidad{
 
-    @Column(name = "denominacion_rubro", nullable = false)
-
-    private String denominacion;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
     @JsonManagedReference(value = "rubro-producto")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubro" , orphanRemoval = true, fetch = FetchType.LAZY)
