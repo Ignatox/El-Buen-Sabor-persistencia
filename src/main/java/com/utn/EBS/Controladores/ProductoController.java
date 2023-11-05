@@ -2,8 +2,6 @@ package com.utn.EBS.Controladores;
 
 import com.utn.EBS.DTO.AgregarProductoDTO;
 import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Enumeraciones.TipoProducto;
-import com.utn.EBS.Servicios.ProductoService;
 import com.utn.EBS.Servicios.ProductoServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +73,6 @@ public ResponseEntity<?> buscarPorDenominacion(@RequestParam String denominacion
     @PostMapping("/agregarProducto")
     public ResponseEntity<?> agregarProducto(@RequestBody AgregarProductoDTO agregarProductoDTO) {
         try {
-            System.out.println(agregarProductoDTO);
             return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));
         } catch (Exception e) {
             System.out.println("Error algo malo paso: " + e.getMessage());

@@ -34,17 +34,16 @@ public class Cliente extends BaseEntidad{
     @Column(name = "email",nullable = false)
     private String email;
 
-    //  @JsonManagedReference
-    // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
-
+    @JsonManagedReference(value = "cliente-domicilio")
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
-    private List<Domicilio> domicilios = new ArrayList<Domicilio>();  //Fijate gonza la navegabilidad, si desde cliente o desde domicilio, como te pinta hacerla
+    private List<Domicilio> domicilios = new ArrayList<Domicilio>();
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)         //Relacion con Pedido
+    @JsonManagedReference(value = "pedido-cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     private List<Pedido> pedidos = new ArrayList<Pedido>();
 
     //Relacion one to one con usuario (foreign key usuario)
-    @OneToOne(cascade = CascadeType.ALL)                                                            //Relacion con Factura
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utn.EBS.Enumeraciones.UnidadMedida;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -28,8 +29,8 @@ import java.util.List;
 @Where(clause = "deleted=false")
 
 public class Ingrediente extends BaseEntidad{
-    @Column(name = "denominacion", nullable = false)
-    private String denominacion;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
     @Column(name = "costo", nullable = false)
     private float costo;
@@ -47,6 +48,7 @@ public class Ingrediente extends BaseEntidad{
     @Column(name = "unidad_medida")
     private UnidadMedida unidadMedida;
 
+    @JsonManagedReference(value = "ingrediente-producto-ingrediente")
     @OneToMany(mappedBy = "ingrediente")
     private List<ProductoIngrediente> productos;
 }

@@ -1,7 +1,7 @@
 package com.utn.EBS.Entidades;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.utn.EBS.Enumeraciones.TipoProducto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
@@ -11,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
 
-import java.awt.*;
 import java.util.List;
 
 @Entity
@@ -30,18 +29,15 @@ public class Producto extends BaseEntidad {
 
     @Column(name = "tiempo_estimado_cocina", nullable = false)
     private int tiempoEstimadoCocina;
-    
+
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name = "precio_venta", nullable = false)
+    @Column(name = "precio", nullable = false)
     private double precioVenta;
-
-    @Column(name = "precio_compra", nullable = false)
-    private double precioCompra;
 
     @Column(name = "foto")
     private String foto;
@@ -49,15 +45,13 @@ public class Producto extends BaseEntidad {
     @Column(name = "receta", nullable = false)
     private String receta;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo", nullable = false)
-    private TipoProducto tipoProducto;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference(value = "rubro-producto")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
 
-    @OneToMany(mappedBy = "producto")
+    @JsonManagedReference(value = "producto-producto-ingrediente")
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductoIngrediente> ingredientes;
 
 

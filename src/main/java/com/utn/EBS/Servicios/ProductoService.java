@@ -2,7 +2,6 @@ package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.AgregarProductoDTO;
 import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Enumeraciones.TipoProducto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

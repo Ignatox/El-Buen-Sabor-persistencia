@@ -2,7 +2,6 @@ package com.utn.EBS.Repositorios;
 
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Enumeraciones.TipoProducto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

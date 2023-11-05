@@ -5,7 +5,6 @@ import com.utn.EBS.DTO.ProductoIngredienteDTO;
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Entidades.ProductoIngrediente;
-import com.utn.EBS.Enumeraciones.TipoProducto;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,9 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService {
