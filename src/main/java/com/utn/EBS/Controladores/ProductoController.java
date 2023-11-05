@@ -75,7 +75,6 @@ public ResponseEntity<?> buscarPorDenominacion(@RequestParam String denominacion
     @PostMapping("/agregarProducto")
     public ResponseEntity<?> agregarProducto(@RequestBody AgregarProductoDTO agregarProductoDTO) {
         try {
-            System.out.println(agregarProductoDTO);
             return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));
         } catch (Exception e) {
             System.out.println("Error algo malo paso: " + e.getMessage());
