@@ -30,9 +30,12 @@ public class Producto extends BaseEntidad {
 
     @Column(name = "tiempo_estimado_cocina", nullable = false)
     private int tiempoEstimadoCocina;
+    
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
-    @Column(name = "denominacion", nullable = false)
-    private String denominacion;
+    @Column(name = "descripcion", nullable = false)
+    private String descripcion;
 
     @Column(name = "precio_venta", nullable = false)
     private double precioVenta;
@@ -56,6 +59,8 @@ public class Producto extends BaseEntidad {
 
     @OneToMany(mappedBy = "producto")
     private List<ProductoIngrediente> ingredientes;
+
+
 
 
 }
