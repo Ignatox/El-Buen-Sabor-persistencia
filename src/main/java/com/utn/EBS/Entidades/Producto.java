@@ -33,6 +33,9 @@ public class Producto extends BaseEntidad {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
+    @Column(name = "descripcion", nullable = false)
+    private String descripcion;
+
     @Column(name = "precio", nullable = false)
     private double precioVenta;
 
@@ -50,6 +53,8 @@ public class Producto extends BaseEntidad {
     @JsonManagedReference(value = "producto-producto-ingrediente")
     @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductoIngrediente> ingredientes;
+
+
 
 
 }

@@ -41,6 +41,8 @@ public class Domicilio extends BaseEntidad{
 
     @JsonBackReference(value = "cliente-domicilio")
     @ManyToOne(fetch = FetchType.LAZY)
+    // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
+    // @JsonBackReference
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
