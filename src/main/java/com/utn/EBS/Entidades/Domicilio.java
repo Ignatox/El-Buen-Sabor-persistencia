@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -38,6 +39,7 @@ public class Domicilio extends BaseEntidad{
     @Column(name = "localidad",nullable = false)
     private String localidad;
 
+    @JsonBackReference(value = "cliente-domicilio")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

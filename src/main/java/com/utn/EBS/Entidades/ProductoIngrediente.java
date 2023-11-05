@@ -1,5 +1,6 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
@@ -27,11 +28,14 @@ import java.util.List;
 
 
 public class ProductoIngrediente extends BaseEntidad{
-    @ManyToOne
+
+    @JsonBackReference(value = "producto-producto-ingrediente")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
-    @ManyToOne
+    @JsonBackReference(value = "ingrediente-producto-ingrediente")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
     private Ingrediente ingrediente;
 

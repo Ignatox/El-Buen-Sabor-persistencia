@@ -1,6 +1,8 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
@@ -50,11 +52,13 @@ public class Producto extends BaseEntidad {
     @Column(name = "tipo", nullable = false)
     private TipoProducto tipoProducto;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference(value = "rubro-producto")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
 
-    @OneToMany(mappedBy = "producto")
+    @JsonManagedReference(value = "producto-producto-ingrediente")
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductoIngrediente> ingredientes;
 
 
