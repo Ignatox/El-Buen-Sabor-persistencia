@@ -2,8 +2,6 @@ package com.utn.EBS.Controladores;
 
 import com.utn.EBS.DTO.AgregarProductoDTO;
 import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Enumeraciones.TipoProducto;
-import com.utn.EBS.Servicios.ProductoService;
 import com.utn.EBS.Servicios.ProductoServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
