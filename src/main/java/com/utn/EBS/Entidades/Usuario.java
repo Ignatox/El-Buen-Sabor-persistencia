@@ -25,14 +25,13 @@ import java.util.List;
 public class Usuario extends  BaseEntidad {
 
     @Column(name="nombre", nullable = false)
-
     private String nombre;
-    @Column(name="contraseña", nullable = false)
 
+    @Column(name="contraseña", nullable = false)
     private String password;
+
     @Enumerated(EnumType.STRING)
     @Column(name="rol", nullable = false)
-
     private Rol rol;
 
 }

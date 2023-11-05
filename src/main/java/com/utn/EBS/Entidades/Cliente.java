@@ -34,7 +34,7 @@ public class Cliente extends BaseEntidad{
     @Column(name = "email",nullable = false)
     private String email;
 
-    //@JsonManagedReference
+    //  @JsonManagedReference
     // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.PERSIST)
