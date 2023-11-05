@@ -58,7 +58,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
                 DetallePedido detallePedido = DetallePedido.builder()
                         .producto(productoSolicitado.get())
                         .cantidad(detalleDTO.getCantidad())
-                        .subtotal(productoSolicitado.get().getPrecioCompra() * detalleDTO.getCantidad())
+                        .subtotal(productoSolicitado.get().getPrecio() * detalleDTO.getCantidad())
                         .build();
                 detallesPedido.add(detallePedido);
                 totalPedido += detallePedido.getSubtotal();

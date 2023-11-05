@@ -13,7 +13,7 @@ public interface RubroRepository extends BaseRepository <Rubro, Long>{
 
     @Query("SELECT r FROM Rubro r WHERE r.id = :id")
     Rubro buscarPorId(@Param("id") Long id);
-    @Query("SELECT r FROM Rubro r WHERE r.denominacion = :denominacion")
-    List<Rubro> buscarPorDenominacion(@Param("denominacion") String denominacion);
+    @Query("SELECT r FROM Rubro r WHERE r.nombre = :nombre")
+    List<Rubro> buscarPorNombre(@Param("nombre") String nombre);
 
 }

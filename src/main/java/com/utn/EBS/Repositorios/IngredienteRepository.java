@@ -21,6 +21,6 @@ public interface IngredienteRepository extends BaseRepository <Ingrediente, Long
     @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual < stockMinimo")
     List<Ingrediente> buscarPorStockNoOK();
 
-    @Query(value = "SELECT i FROM Ingrediente i WHERE i.denominacion LIKE '%?filtroDenom%' ")
-    List<Ingrediente> buscarPorDenominacion(@Param("filtroDenom") String filtroDenom);
+    @Query(value = "SELECT i FROM Ingrediente i WHERE i.nombre LIKE '%?filtroNombre%' ")
+    List<Ingrediente> buscarPorNombre(@Param("filtroNombre") String filtroNombre);
 }
