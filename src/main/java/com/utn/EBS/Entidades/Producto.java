@@ -2,6 +2,7 @@ package com.utn.EBS.Entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utn.EBS.Enumeraciones.EstadoProducto;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
@@ -44,6 +45,10 @@ public class Producto extends BaseEntidad {
 
     @Column(name = "receta", nullable = false)
     private String receta;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false)
+    private EstadoProducto estadoProducto;
 
     @JsonBackReference(value = "rubro-producto")
     @ManyToOne(fetch = FetchType.LAZY)

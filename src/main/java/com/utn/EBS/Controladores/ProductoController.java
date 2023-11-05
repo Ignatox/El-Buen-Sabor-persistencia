@@ -22,10 +22,21 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         try {
             return ResponseEntity.status(HttpStatus.OK).body(productoService.agregarProducto(agregarProductoDTO));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "paginaPrincipal")
+    public ResponseEntity<?> traerProductosPaginaPrincipal() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productoService.traerProductosPaginaPrincipal());
+        } catch (Exception e) {
             System.out.println("Error algo malo paso: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 @GetMapping("/buscarPorDenominacion")
 public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre){
     try {

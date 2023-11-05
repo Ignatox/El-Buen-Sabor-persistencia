@@ -41,8 +41,8 @@ public class Ingrediente extends BaseEntidad{
     @Column(name = "stock_minimo", nullable = false)
     private int stockMinimo;
 
-    @Column(name = "url_imagen")
-    private String urlImagen;
+    @Column(name = "foto")
+    private String foto;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "unidad_medida")

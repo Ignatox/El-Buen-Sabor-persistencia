@@ -1,5 +1,6 @@
 package com.utn.EBS.DTO;
 
+import com.utn.EBS.Enumeraciones.EstadoProducto;
 import lombok.Data;
 
 import java.util.List;
@@ -8,11 +9,12 @@ import java.util.List;
 public class AgregarProductoDTO {
     int tiempoEstimadoCocina;
     String nombre;
-    double precioVenta;
-    double precioCompra;
+    String descripcion;
+    double precio;
     String receta;
     Long idRubro;
+    String foto;
     List<ProductoIngredienteDTO> ingredienteDTOS;
-    boolean estado;     //Se lo agregué pq lo requiere el formulario
+    EstadoProducto estado;     //Se lo agregué pq lo requiere el formulario
 
 }
