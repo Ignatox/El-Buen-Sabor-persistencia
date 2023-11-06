@@ -1,5 +1,7 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.DTO.ModificarClienteDTO;
+import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Usuario;
 import org.springframework.data.domain.Page;
@@ -27,4 +29,10 @@ public interface UsuarioRepository extends BaseRepository<Usuario,Long> {
 
     @Query("SELECT u FROM Usuario u WHERE u.rol = :rol")
     Page<Usuario> buscarPorRol(@Param("rol") String rol, Pageable pageable);
+
+    @Query("SELECT cliente FROM Cliente cliente")
+    List<Cliente> mostrarClientes();
+
+    @Query("SELECT C FROM ModificarClienteDTO c WHERE c.nombre= : nombre")
+     Cliente modificarCliente(ModificarClienteDTO clienteDTO);
 }

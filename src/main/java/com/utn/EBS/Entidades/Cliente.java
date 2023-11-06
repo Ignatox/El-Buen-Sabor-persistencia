@@ -44,4 +44,6 @@ public class Cliente extends BaseEntidad{
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+
+
 }
