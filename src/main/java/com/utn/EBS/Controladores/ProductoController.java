@@ -1,6 +1,7 @@
 package com.utn.EBS.Controladores;
 
 import com.utn.EBS.DTO.AgregarProductoDTO;
+import com.utn.EBS.DTO.BuscarRankingProductosDTO;
 import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Servicios.ProductoServiceImpl;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-    @GetMapping(path = "paginaPrincipal")
+    @GetMapping(path = "/paginaPrincipal")
     public ResponseEntity<?> traerProductosPaginaPrincipal() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(productoService.traerProductosPaginaPrincipal());
@@ -37,7 +38,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
-@GetMapping("/buscarPorDenominacion")
+@GetMapping("/buscarPorNombre")
 public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre){
     try {
         return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorNombre(nombre));
@@ -47,10 +48,19 @@ public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre){
 }
 
 
-    @GetMapping("/buscarPorDenominacionPage")
+    @GetMapping("/buscarPorNombrePage")
     public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre, Pageable pageable){
         try {
             return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarPorNombre(nombre, pageable));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+        }
+    }
+
+    @GetMapping(path = "/rankingProductos")
+    public ResponseEntity<?> traerRankingProductos(@RequestBody BuscarRankingProductosDTO buscarRankingProductosDTO){
+        try {
+            return  ResponseEntity.status(HttpStatus.OK).body(productoService.traerRankingProductos(buscarRankingProductosDTO));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
         }
@@ -74,26 +84,4 @@ public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre){
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
 //        }
 //    }
-
-
-// Estos metodos son de ingrediente, no de producto
-    //@GetMapping("/aReponer")
-    //public ResponseEntity<?> ProductosAReponer() throws Exception{
-    //    try{
-    //        return ResponseEntity.status(HttpStatus.OK).body((productoService.ProductosAReponer()));
-    //    }catch (Exception e){
-    //        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
-    //    }
-    //}
-    //@GetMapping("/aReponerPaged")
-    //public ResponseEntity<?> productosAReponerPaged(Pageable pageable) throws Exception{
-    //    try {
-    //        return ResponseEntity.status(HttpStatus.OK).body((productoService.ProductosAReponer(pageable)));
-    //    }catch (Exception e){
-    //        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""+e.getMessage()+"\"}"));
-    //    }
-    //}
-
-
-
 }

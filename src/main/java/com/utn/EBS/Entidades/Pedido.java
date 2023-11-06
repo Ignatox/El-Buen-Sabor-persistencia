@@ -13,6 +13,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,7 +30,7 @@ import java.util.List;
 public class Pedido extends BaseEntidad {
 
     @Column(name = "fecha_pedido", nullable = false)
-    private String fecha;
+    private Date fecha;
 
     @Column(name = "hora_estimada_entrega", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

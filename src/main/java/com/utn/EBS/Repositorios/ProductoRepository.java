@@ -22,4 +22,7 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
 
     @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
     Page<Producto> buscarPorNombre(@Param("nombre") String nombre, Pageable pageable);
+
+    @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
+    List<Producto> buscarPorFechaOrdenadosPorCantidad(@Param("nombre") String nombre, Pageable pageable);
 }
