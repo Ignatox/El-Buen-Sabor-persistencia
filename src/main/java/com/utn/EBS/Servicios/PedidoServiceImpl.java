@@ -1,6 +1,6 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.DetallePedidoDto;
+import com.utn.EBS.DTO.DetallePedidoDTO;
 import com.utn.EBS.DTO.RegistrarPedidoDTO;
 import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.DetallePedido;
@@ -51,7 +51,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
             // y calculamos el total tambien
             double totalPedido = 0;
 
-            for (DetallePedidoDto detalleDTO : pedidoDTO.getDetallesPedido()) {
+            for (DetallePedidoDTO detalleDTO : pedidoDTO.getDetallesPedido()) {
                 Optional<Producto> productoSolicitado = productoRepository.findById(detalleDTO.getIdProducto());
                 if (productoSolicitado.isEmpty()) throw new Exception("Producto no encontrado");
 
@@ -83,7 +83,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
     @Override
     @Transactional
-    public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception{
+    public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception{          //Si pinta corregir el nombre del metodo
         try{
             Page<Pedido> pedidosEncontrados = pedidoRepository.buscarPedidosAPreparar(pageable);
             if(pedidosEncontrados == null){
