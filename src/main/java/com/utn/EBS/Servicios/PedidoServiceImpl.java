@@ -1,20 +1,18 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.BuscarPedidoEntreFechaDTO;
 import com.utn.EBS.DTO.DetallePedidoDto;
+import com.utn.EBS.DTO.MovimientoMonetarioDTO;
 import com.utn.EBS.DTO.RegistrarPedidoDTO;
-import com.utn.EBS.Entidades.Cliente;
-import com.utn.EBS.Entidades.DetallePedido;
-import com.utn.EBS.Entidades.Pedido;
-import com.utn.EBS.Entidades.Producto;
+import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
-import com.utn.EBS.Repositorios.BaseRepository;
-import com.utn.EBS.Repositorios.ClienteRepository;
-import com.utn.EBS.Repositorios.PedidoRepository;
-import com.utn.EBS.Repositorios.ProductoRepository;
+import com.utn.EBS.Repositorios.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +30,8 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     private ClienteRepository clienteRepository;
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private IngredienteRepository ingredienteRepository;
 
     public PedidoServiceImpl(BaseRepository<Pedido, Long> baseRepository) {
         super(baseRepository);
@@ -70,7 +70,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
                     .cliente(cliente.get())
                     .tipoEnvio(pedidoDTO.getTipoEnvio())
                     .horaEstimadaEntrega("08:00")
-                    .detallePedidos(detallesPedido)
+                    .detallePedido(detallesPedido)
                     .total(totalPedido)
                     .build();
             // guardamos el pedido
@@ -83,26 +83,26 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
     @Override
     @Transactional
-    public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception{
-        try{
+    public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception {
+        try {
             Page<Pedido> pedidosEncontrados = pedidoRepository.buscarPedidosAPreparar(pageable);
-            if(pedidosEncontrados == null){
+            if (pedidosEncontrados == null) {
                 throw new Exception("No hay pedidos para preparar");
-            }else{
+            } else {
                 return pedidosEncontrados;
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
     @Transactional
-    public Boolean cambiarEstadoPedido(Long id) throws Exception{
-        try{
-            Pedido pedido=pedidoRepository.buscarPorId(id);
+    public Boolean cambiarEstadoPedido(Long id) throws Exception {
+        try {
+            Pedido pedido = pedidoRepository.buscarPorId(id);
 
-            if(pedido == null) {
+            if (pedido == null) {
                 throw new Exception("el pedido que intenta editar no existe");
             }
 
@@ -110,10 +110,64 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
             return true;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
+    @Override
+    @Transactional
+    public List<Pedido> buscarPedidosEntreFecha(BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO) throws Exception {
+        try {
+            List<Pedido> pedidosEntreFecha = pedidoRepository.buscarPedidosEntreFecha(buscarPedidoEntreFechaDTO.getFechaInicio(), buscarPedidoEntreFechaDTO.getFechaFin());
+            return pedidosEntreFecha;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 
+    @Override
+    @Transactional
+    public List<MovimientoMonetarioDTO> buscarMovimientosMonetarios(BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO) throws Exception {
+        List<MovimientoMonetarioDTO> movimientosMonetarios = new ArrayList<>();
+
+        try {
+            List<Pedido> pedidos = pedidoRepository.findAll();
+
+            for (Pedido pedido : pedidos) {
+                MovimientoMonetarioDTO movimientoMonetario = new MovimientoMonetarioDTO();
+                movimientoMonetario.setNumeroPedido(pedido.getId().intValue());
+                movimientoMonetario.setTotal(pedido.getTotal());
+
+                // Calcula el Costo Total con la función calcularCostoIngredientesPorPedido
+                double costo = calcularCostoIngredientesPorPedido(pedido);
+                movimientoMonetario.setCosto(costo);
+
+                movimientosMonetarios.add(movimientoMonetario);
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+        return movimientosMonetarios;
+    }
+
+    public double calcularCostoIngredientesPorPedido(Pedido pedido) {
+        double costoTotal = 0.0;
+
+        List<DetallePedido> detallesPedido = pedido.getDetallePedido();
+        for (DetallePedido detallePedido : detallesPedido) {
+            Producto producto = detallePedido.getProducto();
+
+            for (ProductoIngrediente productoIngrediente : producto.getIngredientes()) {
+                Ingrediente ingrediente = productoIngrediente.getIngrediente();
+                int cantidadIngrediente = productoIngrediente.getCantidad();
+                double costoIngrediente = ingrediente.getCosto();
+
+                costoTotal += cantidadIngrediente * costoIngrediente;
+            }
+        }
+
+        return costoTotal;
+    }
 }

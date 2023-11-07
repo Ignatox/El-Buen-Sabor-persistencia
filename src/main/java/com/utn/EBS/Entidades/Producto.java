@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -58,8 +59,5 @@ public class Producto extends BaseEntidad {
     @JsonManagedReference(value = "producto-producto-ingrediente")
     @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductoIngrediente> ingredientes;
-
-
-
 
 }
