@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConfiguracionGeneral extends BaseEntidad{
-
+// todos putos
     @Column(name = "cantidad_cocineros")
     private int cantidadCocineros;
     @Column(name = "email_empresa")
