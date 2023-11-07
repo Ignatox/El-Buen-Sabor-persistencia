@@ -10,5 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NotaCredito extends BaseEntidad{
+    private double disminucion;
+    private String motivo;
+    private double total;
 
+    //No esta terminada
 }
