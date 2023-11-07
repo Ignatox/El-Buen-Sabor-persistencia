@@ -39,4 +39,9 @@ public class Factura extends BaseEntidad {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
     private Pedido pedido;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "factura_id", referencedColumnName = "id")
+    private NotaCredito notaCredito;                                // Para mi es mejor crear la nota de Credito directamente desde Factura
+                                                                    // Pq sino hay q hacer un DTO de notaCredito
 }
