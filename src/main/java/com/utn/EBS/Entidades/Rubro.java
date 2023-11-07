@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utn.EBS.Enumeraciones.TipoRubro;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,10 @@ public class Rubro extends  BaseEntidad{
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_rubro", nullable = false)
+    private TipoRubro tipoRubro;
 
     @JsonManagedReference(value = "rubro-producto")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubro" , orphanRemoval = true, fetch = FetchType.LAZY)

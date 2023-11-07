@@ -4,6 +4,7 @@ import com.utn.EBS.DTO.AgregarProductoDTO;
 import com.utn.EBS.DTO.BuscarRankingProductosDTO;
 import com.utn.EBS.DTO.ProductoPantallaPrincipalDTO;
 import com.utn.EBS.DTO.RankingProductoDTO;
+import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
