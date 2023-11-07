@@ -22,6 +22,8 @@ public class ConfiguracionGeneral extends BaseEntidad{
     private String emailEmpresa;
     @Column(name = "token_mp")
     private String tokenMercadoPago;
+    @Column(name = "token_mp")
+    private String tokenMercadoPago;
 
     //No tiene relacion con ninguna otra clase
 
