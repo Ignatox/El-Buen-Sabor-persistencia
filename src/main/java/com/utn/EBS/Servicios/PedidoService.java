@@ -13,5 +13,6 @@ public interface PedidoService extends BaseService<Pedido, Long>{
     public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception;
 
    public Boolean cambiarEstadoPedido(Long id) throws Exception;
+   public Page<Pedido> buscarPorFecha(Pageable pageable) throws Exception;
 
 }

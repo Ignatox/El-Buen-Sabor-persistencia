@@ -115,5 +115,18 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         }
     }
 
-
+    @Override
+    @Transactional
+    public Page<Pedido> buscarPorFecha(Pageable pageable) throws Exception{          //Si pinta corregir el nombre del metodo
+        try{
+            Page<Pedido> pedidosEncontrados = pedidoRepository.buscarPorFecha(pageable);
+            if(pedidosEncontrados == null){
+                throw new Exception("No se encuentran pedidos");
+            }else{
+                return pedidosEncontrados;
+            }
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }
