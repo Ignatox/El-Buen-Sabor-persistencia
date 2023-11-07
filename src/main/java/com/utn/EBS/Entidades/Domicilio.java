@@ -44,7 +44,7 @@ public class Domicilio extends BaseEntidad{
     // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
     // @JsonBackReference
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    private Persona persona;
 
 
     @OneToMany(orphanRemoval = true)                            //Relacion con Pedido

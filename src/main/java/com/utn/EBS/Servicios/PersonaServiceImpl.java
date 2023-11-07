@@ -1,11 +1,13 @@
 package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.ClienteDTO;
-import com.utn.EBS.Entidades.Cliente;
+import com.utn.EBS.DTO.EmpleadoDTO;
+import com.utn.EBS.Entidades.Persona;
 import com.utn.EBS.Entidades.Usuario;
 import com.utn.EBS.Entidades.Domicilio;
+import com.utn.EBS.Excepciones.EmpleadoExistenteException;
 import com.utn.EBS.Repositorios.BaseRepository;
-import com.utn.EBS.Repositorios.ClienteRepository;
+import com.utn.EBS.Repositorios.PersonaRepository;
 import com.utn.EBS.Repositorios.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +16,15 @@ import java.util.List;
 
 
 @Service
-public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long>
-implements ClienteService{
+public class PersonaServiceImpl extends BaseServiceImpl<Persona, Long>
+implements PersonaService {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private PersonaRepository personaRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public ClienteServiceImpl(BaseRepository<Cliente, Long> baseRepository) {
+    public PersonaServiceImpl(BaseRepository<Persona, Long> baseRepository) {
         super(baseRepository);
     }
 
@@ -30,16 +32,16 @@ implements ClienteService{
     @Transactional
     public ClienteDTO datosCliente(Long id) throws Exception{
         try{
-            Cliente cliente= clienteRepository.buscarPorId(id);
+            Persona persona = personaRepository.buscarPorId(id);
             ClienteDTO clienteDTO= new ClienteDTO();
 
-            clienteDTO.setIdCliente(cliente.getId());
-            clienteDTO.setNombre(cliente.getNombre());
-            clienteDTO.setApellido(cliente.getApellido());
-            clienteDTO.setEmail(cliente.getEmail());
-            clienteDTO.setTelefono(cliente.getTelefono());
-            clienteDTO.setDomicilio(cliente.getDomicilios());
-            clienteDTO.setContrasena(cliente.getUsuario().getPassword());
+            clienteDTO.setIdCliente(persona.getId());
+            clienteDTO.setNombre(persona.getNombre());
+            clienteDTO.setApellido(persona.getApellido());
+            clienteDTO.setEmail(persona.getEmail());
+            clienteDTO.setTelefono(persona.getTelefono());
+            clienteDTO.setDomicilio(persona.getDomicilios());
+            clienteDTO.setContrasena(persona.getUsuario().getPassword());
 
             return clienteDTO;
          }catch (Exception e){
@@ -52,23 +54,24 @@ implements ClienteService{
 
     @Override
     @Transactional
-    public Cliente modificardatos(ClienteDTO clienteDto) throws Exception{
+    public Persona modificardatos(ClienteDTO clienteDto) throws Exception{
         try{
-            Cliente cliente= clienteRepository.buscarPorId(clienteDto.getIdCliente());
+            Persona persona = personaRepository.buscarPorId(clienteDto.getIdCliente());
 
             if(clienteDto.getEmail() != null && !clienteDto.getEmail().isEmpty())
-            cliente.setEmail(clienteDto.getEmail());
+            persona.setEmail(clienteDto.getEmail());
 
             if(clienteDto.getTelefono() != null && !clienteDto.getTelefono().isEmpty())
-                cliente.setTelefono(clienteDto.getTelefono());
+                persona.setTelefono(clienteDto.getTelefono());
 
-            List<Domicilio> domiciliosClientes = cliente.getDomicilios();
+            List<Domicilio> domiciliosClientes = persona.getDomicilios();
             List<Domicilio> domiciliosDTO = clienteDto.getDomicilio();
             for(Domicilio domicilio : domiciliosDTO){
                 if(!domiciliosClientes.contains(domicilio)){
                     domiciliosClientes.add(domicilio);
                 }
             }
+
 
             Usuario usuarioCliente = usuarioRepository.buscarPorId(clienteDto.getIdCliente());
 
@@ -104,12 +107,44 @@ implements ClienteService{
                 throw new Exception("la contraseña no tiene los requisitos adecuados");
             }
 
-            clienteRepository.save(cliente);
-            return cliente;
+            personaRepository.save(persona);
+            return persona;
 
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
 
     }
+
+    //Metodo para registrarEmpleado y verificar anteriormente que no exista un empleado con ese mail
+
+    @Override
+    @Transactional
+    public Persona registrarEmpleado(EmpleadoDTO empleadoDTO) throws Exception {
+        try{
+            //Verifico si ya existe un empleado con el mail ingresado
+            Persona empleadoExistente = personaRepository.buscarPorEmail(empleadoDTO.getEmail());
+            if (empleadoExistente != null){
+                throw new EmpleadoExistenteException("Ya existe un empleado con el mismo mail");
+            }
+            Persona nuevoEmpleado = new Persona();
+            nuevoEmpleado.setNombre(empleadoDTO.getNombre());
+            nuevoEmpleado.setEmail(empleadoDTO.getEmail());
+            nuevoEmpleado.setApellido(empleadoDTO.getApellido());
+            nuevoEmpleado.setTelefono(empleadoDTO.getTelefono());
+            nuevoEmpleado.setDomicilios(empleadoDTO.getDomicilio());
+
+            Usuario nuevoUsuario = new Usuario();
+            nuevoUsuario.setNombre(nuevoEmpleado.getNombre());
+            nuevoUsuario.setPassword(empleadoDTO.getContrasena());
+            nuevoUsuario.setRol(empleadoDTO.getRol());
+
+            nuevoEmpleado.setUsuario(nuevoUsuario);
+            personaRepository.save(nuevoEmpleado);
+            return nuevoEmpleado;
+        } catch (Exception e){
+            throw new RuntimeException("error al registrar el empleado" + e.getMessage());
+        }
+    }
 }
+

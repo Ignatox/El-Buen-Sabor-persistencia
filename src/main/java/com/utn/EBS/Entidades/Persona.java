@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE cliente SET deleted = true WHERE id=?")
 //Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
 @Where(clause = "deleted=false")
-public class Cliente extends BaseEntidad{
+public class Persona extends BaseEntidad{
 
     @Column(name = "nombre", nullable = false)
     private String nombre;

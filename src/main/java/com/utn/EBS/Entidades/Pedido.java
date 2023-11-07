@@ -49,7 +49,7 @@ public class Pedido extends BaseEntidad {
     @JsonBackReference(value = "pedido-cliente")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    private Persona persona;
 
     @JsonManagedReference(value = "pedido-detalle-pedido")
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)            //Relacion con DetallePedido

@@ -3,6 +3,7 @@ package com.utn.EBS.Entidades;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utn.EBS.Enumeraciones.EstadoProducto;
+import com.utn.EBS.Enumeraciones.TipoProducto;
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
@@ -52,8 +53,8 @@ public class Producto extends BaseEntidad {
 
     private TipoProducto tipoProducto;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "rubro-producto")
+ //  @ManyToOne(fetch = FetchType.EAGER)
+  //  @JsonBackReference(value = "rubro-producto")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
