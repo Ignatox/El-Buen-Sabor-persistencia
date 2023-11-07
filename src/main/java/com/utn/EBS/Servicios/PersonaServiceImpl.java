@@ -5,6 +5,7 @@ import com.utn.EBS.DTO.EmpleadoDTO;
 import com.utn.EBS.Entidades.Persona;
 import com.utn.EBS.Entidades.Usuario;
 import com.utn.EBS.Entidades.Domicilio;
+import com.utn.EBS.Excepciones.ContraseñaInvalidaException;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.PersonaRepository;
@@ -127,6 +128,10 @@ implements PersonaService {
             if (empleadoExistente != null){
                 throw new EmpleadoExistenteException("Ya existe un empleado con el mismo mail");
             }
+
+            if (!validarContraseña(empleadoDTO.getContrasena())) {
+                throw new ContraseñaInvalidaException("La contraseña no cumple con los requisitos mínimos.");
+            }
             Persona nuevoEmpleado = new Persona();
             nuevoEmpleado.setNombre(empleadoDTO.getNombre());
             nuevoEmpleado.setEmail(empleadoDTO.getEmail());
@@ -145,6 +150,27 @@ implements PersonaService {
         } catch (Exception e){
             throw new RuntimeException("error al registrar el empleado" + e.getMessage());
         }
+    }
+    private boolean validarContraseña(String contraseña) {
+        if (contraseña.length() < 8) {
+            return false; // La contraseña no tiene al menos 8 caracteres
+        }
+
+        boolean contieneMayuscula = false;
+        boolean contieneMinuscula = false;
+        boolean contieneSimbolo = false;
+
+        for (char caracter : contraseña.toCharArray()) {
+            if (Character.isUpperCase(caracter)) {
+                contieneMayuscula = true;
+            } else if (Character.isLowerCase(caracter)) {
+                contieneMinuscula = true;
+            } else if ("!@#$%^&*".indexOf(caracter) >= 0) {
+                contieneSimbolo = true;
+            }
+        }
+
+        return contieneMayuscula && contieneMinuscula && contieneSimbolo;
     }
 }
 
