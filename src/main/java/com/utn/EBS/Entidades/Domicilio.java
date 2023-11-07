@@ -1,13 +1,12 @@
 package com.utn.EBS.Entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,7 +39,10 @@ public class Domicilio extends BaseEntidad{
     @Column(name = "localidad",nullable = false)
     private String localidad;
 
+    @JsonBackReference(value = "cliente-domicilio")
     @ManyToOne(fetch = FetchType.LAZY)
+    // DESPUES NOS FIJAMOS COMO FUNCIONA PERO ESTO RSSIRIVEW
+    // @JsonBackReference
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

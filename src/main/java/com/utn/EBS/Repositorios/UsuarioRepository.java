@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends BaseRepository<Usuario,Long> {
+
+    @Query("SELECT u FROM Usuario u WHERE u.id = :id")
+    Usuario buscarPorId(@Param("id") Long id);
     @Query("SELECT u FROM Usuario u WHERE u.nombre = :nombre")
     List<Usuario> buscarPornombre(@Param("nombre") String nombre);
 

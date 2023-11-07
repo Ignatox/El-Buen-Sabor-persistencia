@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Factura;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Repository
 public interface FacturaRepository extends BaseRepository <Factura, Long> {
+
+    @Query("SELECT f FROM Factura f WHERE f.id = :id")
+    Factura buscarPorId(@Param("id") Long id);
     @Query("SELECT f FROM Factura f WHERE f.numero = :numero")
     Factura buscarPorNumero(@Param("numero") int numero);
 

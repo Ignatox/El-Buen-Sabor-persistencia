@@ -1,5 +1,6 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +26,13 @@ public class DetallePedido extends BaseEntidad{
     @Column(name = "subtotal", nullable = false)
     private double subtotal;
 
-    /* RELACIÓN CON PRODUCTO*/
-    @ManyToOne()
+    @JsonBackReference(value = "pedido-detalle-pedido")
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
+
+    //@JsonBackReference(value = "producto-detalle-pedido")
+    @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
 }

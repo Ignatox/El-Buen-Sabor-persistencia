@@ -1,6 +1,8 @@
 package com.utn.EBS.Entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utn.EBS.Enumeraciones.UnidadMedida;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,16 +29,26 @@ import java.util.Date;
 @Where(clause = "deleted=false")
 
 public class Ingrediente extends BaseEntidad{
-    @Column(name = "denominacion", nullable = false)
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
-    private String denominacion;
-
-    @Column(name = "precio-compra", nullable = false)
+    @Column(name = "costo", nullable = false)
     private float costo;
-    @Column(name = "stok-actual", nullable = false)
+
+    @Column(name = "stock_actual", nullable = false)
     private int stockActual;
-    @Column(name = "stock-minimo", nullable = false)
+
+    @Column(name = "stock_minimo", nullable = false)
     private int stockMinimo;
-    @Column(name = "url-imagen")
-    private String urlImagen;
+
+    @Column(name = "foto")
+    private String foto;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "unidad_medida")
+    private UnidadMedida unidadMedida;
+
+    @JsonManagedReference(value = "ingrediente-producto-ingrediente")
+    @OneToMany(mappedBy = "ingrediente")
+    private List<ProductoIngrediente> productos;
 }

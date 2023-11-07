@@ -1,15 +1,18 @@
 package com.utn.EBS.Entidades;
 
-import com.utn.EBS.Enumeraciones.TipoProducto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utn.EBS.Enumeraciones.EstadoProducto;
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -26,39 +29,40 @@ import org.hibernate.annotations.*;
 public class Producto extends BaseEntidad {
 
     @Column(name = "tiempo_estimado_cocina", nullable = false)
-
     private int tiempoEstimadoCocina;
-    @Column(name = "denominacion", nullable = false)
 
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
-    private String denominacion;
-    @Column(name = "precio_venta", nullable = false)
+    @Column(name = "descripcion", nullable = false)
+    private String descripcion;
 
-    private double precioVenta;
-    @Column(name = "precio_compra", nullable = false)
+    @Column(name = "precio", nullable = false)
+    private double precio;
 
-    private double precioCompra;
-    @Column(name = "stock_actual", nullable = false)
-
-    private int stockAtual;
-    @Column(name = "stock_minimo", nullable = false)
-
-    private int stockMinimo;
-    @Column(name = "unidad_medida", nullable = false)
-
-    private String unidadmedida;
     @Column(name = "foto")
     private String foto;
-    @Column(name = "receta", nullable = false)
 
+    @Column(name = "receta", nullable = false)
     private String receta;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo", nullable = false)
+    @Column(name = "estado", nullable = false)
+    private EstadoProducto estadoProducto;
 
     private TipoProducto tipoProducto;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference(value = "rubro-producto")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
+
+    @JsonManagedReference(value = "producto-producto-ingrediente")
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ProductoIngrediente> ingredientes;
+
+
+
 
 }

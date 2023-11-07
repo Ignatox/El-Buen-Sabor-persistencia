@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @Repository
 public interface DetallePedidoRepository extends BaseRepository<DetallePedido, Long>{
+
+    @Query("SELECT d FROM DetallePedido d WHERE d.id = :id")
+    DetallePedido buscarPorId(@Param("id") Long id);
     @Query("SELECT d FROM DetallePedido d WHERE d.cantidad = :cantidad")
     List<DetallePedido> buscarPorCantidad(@Param("cantidad") int cantidad);
 

@@ -1,9 +1,8 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.EBS.Enumeraciones.FormaPago;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -32,9 +31,12 @@ public class Factura extends BaseEntidad {
 
     @Enumerated(EnumType.STRING)
     @Column (name = "forma_pago", nullable = false)
-
     private FormaPago formaPago;
 
     @Column (name = "total", nullable = false)
     private int total;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
+    private Pedido pedido;
 }

@@ -17,10 +17,10 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
         super(baseRepository);
     }
 
-    public List<Rubro> buscarPorDenominacion(String denominacion) throws Exception {
+    public List<Rubro> buscarPorNombre(String nombre) throws Exception {
         try{
-            List<Rubro> rubrosPorDenominacion = rubroRepository.buscarPorDenominacion(denominacion);
-            return rubrosPorDenominacion;
+            List<Rubro> rubrosPorNombre = rubroRepository.buscarPorNombre(nombre);
+            return rubrosPorNombre;
         } catch(Exception e){
             throw new Exception(e.getMessage());
         }

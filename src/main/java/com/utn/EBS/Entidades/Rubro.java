@@ -1,8 +1,7 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,26 +24,10 @@ import java.util.List;
 @Where(clause = "deleted=false")
 public class Rubro extends  BaseEntidad{
 
-    @Column(name = "denominacion_rubro", nullable = false)
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
-    private String denominacion;
-
-    /* RELACIÓN CON PRODUCTO*/
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name="rubro_id")
-    @Builder.Default
+    @JsonManagedReference(value = "rubro-producto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubro" , orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Producto> productos = new ArrayList<>();
-    /*METODOS PARA AGREGAR Y MOSTRAR PRODUCTOS DE LA LISTA*/
-    public void agregarProducto(Producto ped){
-        productos.add(ped);
-    }
-    public void mostrarProductos() {
-        System.out.println("Productos de " + Rubro.this);
-        for (Producto producto : productos) {
-            System.out.println("Tipo: " + producto.getTipoProducto() +", Tiempo Estimado de Cosina: " + producto.getTiempoEstimadoCocina());
-            System.out.println("Denominación: "+ producto.getDenominacion()+ ", Precio de Venta: "+producto.getPrecioVenta()+", Precio de Compra: "+producto.getPrecioCompra());
-            System.out.println("Stock Actual: "+ producto.getStockAtual()+", Stock Mínimo: "+ producto.getStockMinimo());
-            System.out.println("Unidad de Medida: "+ producto.getUnidadmedida()+", Receta: "+producto.getReceta());
-        }
-    }
 }

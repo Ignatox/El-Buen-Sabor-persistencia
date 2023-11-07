@@ -1,8 +1,6 @@
 package com.utn.EBS.Entidades;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -35,7 +33,9 @@ public class BaseEntidad implements Serializable {
     @UpdateTimestamp
     @Column(name = "fecha_modificacion")
     private Date fecha_modificacion;
+
     // Boolean para baja logica
+    @Column(columnDefinition = "boolean default false")
     private boolean deleted = Boolean.FALSE;
 
 

@@ -5,7 +5,10 @@ import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.IngredienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,9 +71,9 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
     }
 
     @Override
-    public List<Ingrediente> buscarPorDenominacion(String filtroDenom) throws Exception {
+    public List<Ingrediente> buscarPorNombre(String filtroNombre) throws Exception {
         try {
-            List<Ingrediente> ingredientes = ingredienteRepository.buscarPorDenominacion(filtroDenom);
+            List<Ingrediente> ingredientes = ingredienteRepository.buscarPorNombre(filtroNombre);
             return ingredientes;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

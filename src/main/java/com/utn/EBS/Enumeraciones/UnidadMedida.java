@@ -3,20 +3,18 @@ package com.utn.EBS.Enumeraciones;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 @JsonAppend
-public enum Rol {
-    Cajero("Cajero"),
-    Delivery("Delivery"),
-    Cliente("Cleinte"),
-    Administrador("Administrador");
+public enum UnidadMedida {
+    GRAMO("Gramo"),
+    LITROS("Litros"),
+    UNIDADES("Unidades");
 
     private String texto;
 
-    private Rol(String texto){
+    private UnidadMedida(String texto){
         this.texto=texto;
     }
 
     public String getTexto(){
         return texto;
     }
-
 }

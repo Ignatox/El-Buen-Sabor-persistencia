@@ -1,9 +1,10 @@
 package com.utn.EBS.Controladores;
+import com.utn.EBS.Entidades.Factura;
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Repositorios.IngredienteRepository;
+import com.utn.EBS.Servicios.FacturaServiceImpl;
 import com.utn.EBS.Servicios.IngredienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,9 +54,9 @@ public class IngredienteController extends BaseControllerImpl<Ingrediente, Ingre
         }
     }
     @GetMapping("/buscarPorDenominacion")
-    public ResponseEntity<?> buscarPorDenominacion(@RequestParam String filtroDenom){
+    public ResponseEntity<?> buscarPorNombre(@RequestParam String filtroNombre){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorDenominacion(filtroDenom));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorNombre(filtroNombre));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"" + e.getMessage() + "\"}");
         }

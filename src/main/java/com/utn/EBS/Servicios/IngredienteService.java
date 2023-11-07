@@ -6,5 +6,5 @@ import java.util.List;
 public interface IngredienteService extends BaseService<Ingrediente,Long>{
     List<Ingrediente> buscarPorStockOK() throws Exception;
     List<Ingrediente> buscarPorStockNoOK() throws Exception;
-    List<Ingrediente> buscarPorDenominacion(String filtroDenom) throws Exception;
+    List<Ingrediente> buscarPorNombre(String filtroNombre) throws Exception;
 }
