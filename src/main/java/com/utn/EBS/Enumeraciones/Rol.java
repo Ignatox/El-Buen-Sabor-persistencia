@@ -12,7 +12,7 @@ public enum Rol {
     private String texto;
 
     private Rol(String texto){
-        this.texto=texto;
+        this.texto = texto;
     }
 
     public String getTexto(){

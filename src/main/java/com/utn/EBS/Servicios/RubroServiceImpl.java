@@ -1,5 +1,6 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.AgregarRubroDTO;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.RubroRepository;
@@ -25,4 +26,20 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public Rubro agregarRubro(AgregarRubroDTO agregarRubroDTO) throws Exception {
+        try {
+            Rubro rubro = Rubro.builder()
+                    .nombre(agregarRubroDTO.getNombre())
+                    .estado(agregarRubroDTO.getEstado())
+                    .build();
+            //Faltaria ver como se agregan los productos al rubro
+                    rubroRepository.save(rubro);
+                    return rubro;
+        } catch (Exception e) {
+            throw  new Exception(e.getMessage());
+        }
+    }
+
 }
