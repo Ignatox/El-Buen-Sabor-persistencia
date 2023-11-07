@@ -14,5 +14,5 @@ public class NotaCredito extends BaseEntidad{
     private String motivo;
     private double total;
 
-    //No esta terminada
+    //No esta terminada, faltan el repo, service y controllador
 }
