@@ -1,5 +1,6 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.ClienteDomicilioDTO;
 import com.utn.EBS.DTO.DetallePedidoDto;
 import com.utn.EBS.DTO.ModificarClienteDTO;
 import com.utn.EBS.Entidades.*;
@@ -48,8 +49,19 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
 
             Optional<Cliente> cliente = clienteRepository.findById(clienteDTO.getIdCliente());
             if (cliente.isEmpty()) throw new Exception("no se encontro el cliente");
-            Cliente entityUpdate;
-            entityUpdate = baseRepository.save(clienteDTO);
+            Cliente entityUpdate = null;
+            entityUpdate.setApellido(clienteDTO.getApellido());
+            entityUpdate.setEmail(clienteDTO.getEmail());
+            entityUpdate.setNombre(clienteDTO.getNombre());
+            entityUpdate.setTelefono(clienteDTO.getTelefono());
+            entityUpdate.setFecha_modificacion(new Date());
+            entityUpdate.setId(clienteDTO.getIdCliente());
+            //List <ClienteDomicilioDTO> domidto;
+            //domidto = clienteDTO.getDomicilios();
+            //List <Domicilio> domi= null;
+            //domi.add(domidto);
+            //NO VOY A TOCAR DOMICILIO POR AHORA
+            clienteRepository.save(entityUpdate);
             return entityUpdate;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
