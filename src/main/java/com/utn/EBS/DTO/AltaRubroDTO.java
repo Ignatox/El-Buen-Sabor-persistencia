@@ -1,9 +1,14 @@
 package com.utn.EBS.DTO;
 
+import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Enumeraciones.EstadoRubro;
+import lombok.Data;
+
+@Data
 
 public class AltaRubroDTO {
-    String nombre;
-    EstadoRubro estadoRubro;
+    private String nombre;
+    public EstadoRubro estado;
+    private String NombreIngrediente;
     
 }

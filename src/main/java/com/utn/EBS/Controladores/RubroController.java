@@ -2,7 +2,8 @@ package com.utn.EBS.Controladores;
 
 import com.utn.EBS.DTO.*;
 import com.utn.EBS.DTO.AgregarRubroDTO;
-;
+import com.utn.EBS.DTO.AgregarRubroDTO;
+import com.utn.EBS.DTO.AltaRubroDTO;
 import com.utn.EBS.Entidades.Rubro;
 
 import com.utn.EBS.Servicios.RubroServiceImpl;
