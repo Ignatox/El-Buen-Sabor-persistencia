@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Data
 public class ModificarClienteDTO {
-    private Long idCliente;
+    Long idCliente;
     String nombre;
     String apellido;
     String telefono;

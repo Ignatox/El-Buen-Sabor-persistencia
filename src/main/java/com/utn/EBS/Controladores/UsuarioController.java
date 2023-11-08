@@ -13,22 +13,4 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "api/v1/usuarios")
 public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServiceImpl>{
-    @Autowired
-    UsuarioServiceImpl usuarioService;
-    @GetMapping("/mostrarclientes")
-    public ResponseEntity<?> mostrarClientes(){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioService.mostrarClientes());
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-    @PutMapping("/modificarCliente")
-    public ResponseEntity<?> modificarCliente(ModificarClienteDTO clienteDTO){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.modificarCliente(clienteDTO));
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente mas tarde.\"}");
-        }
-    }
 }

@@ -29,4 +29,10 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long>{
 
     @Query ("SELECT c FROM Cliente c WHERE c.email = :email")
     Cliente buscarPorEmail(@Param("email") String email);
+
+    @Query("SELECT cliente FROM Cliente cliente")
+    List<Cliente> mostrarClientes();
+
+    @Query("SELECT c FROM Cliente c WHERE c.id= :id")
+    Cliente modificarCliente(@Param("id") Long id);
 }

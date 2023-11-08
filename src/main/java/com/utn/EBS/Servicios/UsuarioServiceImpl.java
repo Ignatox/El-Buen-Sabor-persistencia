@@ -24,48 +24,10 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-    private ClienteRepository clienteRepository;
 
     public UsuarioServiceImpl(BaseRepository<Usuario, Long> baseRepository) {
         super(baseRepository);
     }
-    @Override
-    @Transactional
 
-    public List<Cliente> mostrarClientes() throws  Exception{
-        try {
-
-            List<Cliente> clientes = clienteRepository.findAll();
-            return clientes;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-@Override
-@Transactional
-    public Cliente modificarCliente(ModificarClienteDTO clienteDTO) throws Exception{
-        try {
-            // buscamos al cliente
-
-            Optional<Cliente> cliente = clienteRepository.findById(clienteDTO.getIdCliente());
-            if (cliente.isEmpty()) throw new Exception("no se encontro el cliente");
-            Cliente entityUpdate = null;
-            entityUpdate.setApellido(clienteDTO.getApellido());
-            entityUpdate.setEmail(clienteDTO.getEmail());
-            entityUpdate.setNombre(clienteDTO.getNombre());
-            entityUpdate.setTelefono(clienteDTO.getTelefono());
-            entityUpdate.setFecha_modificacion(new Date());
-            entityUpdate.setId(clienteDTO.getIdCliente());
-            //List <ClienteDomicilioDTO> domidto;
-            //domidto = clienteDTO.getDomicilios();
-            //List <Domicilio> domi= null;
-            //domi.add(domidto);
-            //NO VOY A TOCAR DOMICILIO POR AHORA
-            clienteRepository.save(entityUpdate);
-            return entityUpdate;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
 
 }
