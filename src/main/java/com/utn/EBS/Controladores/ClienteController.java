@@ -22,8 +22,8 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
         }
     }
 
-    @GetMapping("/modificarDatos")      //Esto creo q es un @PostMapping pero no se
-    public ResponseEntity<?> modificarDatosCliente(ClienteDTO clienteDTO){
+    @PostMapping("/modificarDatos")      //Esto creo q es un @PostMapping pero no se
+    public ResponseEntity<?> modificarDatosCliente(@RequestBody ClienteDTO clienteDTO){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.modificardatos(clienteDTO));
         } catch (Exception e) {

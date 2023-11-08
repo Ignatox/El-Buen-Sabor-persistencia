@@ -31,7 +31,7 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
             });
             return ingrediente.get();
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception(e.getMessage()+" tiro error");
         }
     }
 
@@ -44,7 +44,7 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
                 ingredienteRepository.save(ingredienteActualizado);
                 return ingredienteActualizado;
             } else
-                throw new Exception("Producto no encontrado.");
+                throw new Exception("Ingrediente no encontrado.");
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

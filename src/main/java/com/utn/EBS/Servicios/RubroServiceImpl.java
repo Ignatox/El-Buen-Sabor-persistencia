@@ -32,6 +32,7 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
         try {
             Rubro rubro = Rubro.builder()
                     .nombre(agregarRubroDTO.getNombre())
+                    .tipoRubro(agregarRubroDTO.getTipoRubro())
                     .estado(agregarRubroDTO.getEstado())
                     .build();
             //Faltaria ver como se agregan los productos al rubro
