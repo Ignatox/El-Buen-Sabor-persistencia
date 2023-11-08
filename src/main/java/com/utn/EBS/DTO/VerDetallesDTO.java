@@ -9,6 +9,7 @@ import lombok.Data;
 public class VerDetallesDTO {
    // Long id NroPedido;
     private String Fecha;
+    //private ... Fecha
     private EstadoPedido Estado;
     private String Cliente; //haciendo referencia al nombre y apellido
     private int Telefono;
@@ -16,5 +17,5 @@ public class VerDetallesDTO {
     private String Departamento;
     private TipoEnvio formaEntrega;
     private FormaPago TipoPago;
-    private int hora;
+    //private ... hora;
 }
