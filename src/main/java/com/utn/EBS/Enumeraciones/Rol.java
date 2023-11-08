@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonAppend;
 public enum Rol {
     Cajero("Cajero"),
     Delivery("Delivery"),
-    Cliente("Cleinte"),
+    Cliente("Cliente"),
     Administrador("Administrador");
 
     private String texto;

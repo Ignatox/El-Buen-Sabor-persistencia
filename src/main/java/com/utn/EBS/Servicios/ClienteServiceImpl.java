@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class ClienteServiceImpl extends BaseServiceImpl<Cliente, Long>
-implements ClienteService{
+implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -30,7 +30,7 @@ implements ClienteService{
     @Transactional
     public ClienteDTO datosCliente(Long id) throws Exception{
         try{
-            Cliente cliente= clienteRepository.buscarPorId(id);
+            Cliente cliente = clienteRepository.buscarPorId(id);
             ClienteDTO clienteDTO= new ClienteDTO();
 
             clienteDTO.setIdCliente(cliente.getId());
@@ -54,7 +54,7 @@ implements ClienteService{
     @Transactional
     public Cliente modificardatos(ClienteDTO clienteDto) throws Exception{
         try{
-            Cliente cliente= clienteRepository.buscarPorId(clienteDto.getIdCliente());
+            Cliente cliente = clienteRepository.buscarPorId(clienteDto.getIdCliente());
 
             if(clienteDto.getEmail() != null && !clienteDto.getEmail().isEmpty())
             cliente.setEmail(clienteDto.getEmail());
@@ -69,6 +69,7 @@ implements ClienteService{
                     domiciliosClientes.add(domicilio);
                 }
             }
+
 
             Usuario usuarioCliente = usuarioRepository.buscarPorId(clienteDto.getIdCliente());
 
@@ -112,4 +113,8 @@ implements ClienteService{
         }
 
     }
+
+
+
 }
+

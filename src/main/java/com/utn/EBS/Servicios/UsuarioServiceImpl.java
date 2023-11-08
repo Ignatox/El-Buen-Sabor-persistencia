@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implements UsuarioService{
+public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -16,3 +16,4 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
         super(baseRepository);
     }
 }
+

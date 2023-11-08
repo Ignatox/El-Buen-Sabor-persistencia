@@ -8,4 +8,7 @@ public interface ClienteService extends BaseService<Cliente, Long>{
     public ClienteDTO datosCliente(Long id) throws Exception;
 
     public Cliente modificardatos(ClienteDTO clienteDto) throws Exception;
+
+
+
 }

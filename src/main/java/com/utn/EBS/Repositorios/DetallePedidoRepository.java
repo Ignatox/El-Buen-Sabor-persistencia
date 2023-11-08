@@ -1,6 +1,5 @@
 package com.utn.EBS.Repositorios;
 
-import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
