@@ -1,5 +1,6 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.CambiarContraseñaDTO;
 import com.utn.EBS.DTO.EmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Entidades.Domicilio;
@@ -170,5 +171,7 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
 
         return contieneMayuscula && contieneMinuscula && contieneSimbolo;
     }
+
+
 
 }

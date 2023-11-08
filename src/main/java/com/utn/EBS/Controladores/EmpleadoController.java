@@ -1,9 +1,12 @@
 package com.utn.EBS.Controladores;
 
 
+import com.utn.EBS.DTO.CambiarContraseñaDTO;
 import com.utn.EBS.DTO.EmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
+import com.utn.EBS.Entidades.Usuario;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
+import com.utn.EBS.Repositorios.EmpleadoRepository;
 import com.utn.EBS.Servicios.EmpleadoService;
 import com.utn.EBS.Servicios.EmpleadoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
