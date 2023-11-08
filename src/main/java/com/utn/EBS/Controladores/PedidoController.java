@@ -97,5 +97,10 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+    @PutMapping("/PedidosCaja/{$id}")
+
+    public ResponseEntity<?> cambiarEstados(Long id, Pedido pedido){
+
+    }
 
 }

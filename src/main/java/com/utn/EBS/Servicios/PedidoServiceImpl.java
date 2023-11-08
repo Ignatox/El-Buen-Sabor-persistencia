@@ -8,6 +8,14 @@ import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
+
+import com.utn.EBS.DTO.DetallePedidoDTO;
+import com.utn.EBS.DTO.ProductoDTO;
+import com.utn.EBS.DTO.RegistrarPedidoDTO;
+import com.utn.EBS.DTO.PedidoCocinaDTO;
+import com.utn.EBS.Entidades.*;
+import com.utn.EBS.Enumeraciones.EstadoPedido;
+import com.utn.EBS.Enumeraciones.FormaPago;
 import com.utn.EBS.Repositorios.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +45,11 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     private ProductoRepository productoRepository;
     @Autowired
     private IngredienteRepository ingredienteRepository;
+
+    @Autowired
+    private DetallePedidoRepository detallePedidoRepository;
+    @Autowired
+    private FacturaRepository facturaRepository;
 
     public PedidoServiceImpl(BaseRepository<Pedido, Long> baseRepository) {
         super(baseRepository);
@@ -295,6 +308,41 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         }catch(Exception e){
             throw new Exception(e.getMessage());
         }
+    }
+
+    @Override
+    @Transactional
+    public Pedido cambiarEstadoCaja(Long id) throws Exception{
+        try{
+            Pedido ped=pedidoRepository.buscarPorId(id);
+            Factura fac= facturaRepository.buscarPorId(id);
+if (ped==null || ped.isDeleted()){
+    throw new Exception("El pedido no existe o fue eliminado");
+}
+
+            switch (ped.getEstado()) {
+                case A_CONFIRMAR:
+                    ped.setEstado(EstadoPedido.A_COCINA);
+                    break;
+                case A_COCINA:
+                    if (fac.getFormaPago() == FormaPago.EFECTIVO) {
+                        ped.setEstado(EstadoPedido.ENTREGADO);
+                    } else {
+                        ped.setEstado(EstadoPedido.EN_CAMINO);
+                    }
+                    break;
+                case EN_CAMINO:
+                    ped.setEstado(EstadoPedido.ENTREGADO);
+                    break;
+                case ENTREGADO:
+                    // No se hace nada, es el estado final del pedido
+                    break;
+            }
+
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        return null;
     }
 
 
