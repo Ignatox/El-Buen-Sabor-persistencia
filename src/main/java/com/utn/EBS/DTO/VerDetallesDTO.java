@@ -17,5 +17,5 @@ public class VerDetallesDTO {
     private String Departamento;
     private TipoEnvio formaEntrega;
     private FormaPago TipoPago;
-    //private ... hora;
+    private int hora;
 }
