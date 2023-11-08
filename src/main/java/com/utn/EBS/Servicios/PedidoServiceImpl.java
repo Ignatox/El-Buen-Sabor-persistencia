@@ -176,7 +176,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         try {
             Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
             if (cliente == null) {
-                return new ArrayList<>(); // throw new Exception("Cliente no encontrado.");
+                throw new Exception("Cliente no encontrado.");
             }
             List<Pedido> pedidosDelCliente = pedidoRepository.findByCliente(cliente);
 

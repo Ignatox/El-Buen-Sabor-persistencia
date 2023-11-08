@@ -66,9 +66,9 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @GetMapping("/historialPedidos")
-    public ResponseEntity<?> buscarPorCliente(Long id){
+    public ResponseEntity<?> buscarPorCliente(Long clienteId){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorCliente(id));
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorCliente(clienteId));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

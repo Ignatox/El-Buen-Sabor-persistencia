@@ -23,5 +23,5 @@ public interface PedidoService extends BaseService<Pedido, Long>{
 
    public List<MovimientoMonetarioDTO> buscarMovimientosMonetarios(BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO) throws Exception;
 
-   public List<Pedido> buscarPorCliente(Long id) throws Exception;
+   public List<Pedido> buscarPorCliente(Long clienteId) throws Exception;
 }
