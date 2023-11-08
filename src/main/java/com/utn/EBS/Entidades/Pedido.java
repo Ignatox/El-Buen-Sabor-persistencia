@@ -54,7 +54,7 @@ public class Pedido extends BaseEntidad {
 
     @JsonManagedReference(value = "pedido-detalle-pedido")
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)            //Relacion con DetallePedido
-    private List<DetallePedido> detallePedidos = new ArrayList<>();
+    private List<DetallePedido> detallePedido;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "pedido_id", referencedColumnName = "id")

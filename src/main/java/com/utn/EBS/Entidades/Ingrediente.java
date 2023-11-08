@@ -33,7 +33,7 @@ public class Ingrediente extends BaseEntidad{
     private String nombre;
 
     @Column(name = "costo", nullable = false)
-    private float costo;
+    private double costo;
 
     @Column(name = "stock_actual", nullable = false)
     private int stockActual;
