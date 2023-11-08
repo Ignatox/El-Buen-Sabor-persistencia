@@ -26,8 +26,8 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
         }
     }
 
-    @GetMapping("/modificarDatosEmpleado")
-    public ResponseEntity<?> modificarDatosEmpleado(ModificarEmpleadoDTO modificarEmpleadoDTO){
+    @PutMapping("/modificarDatosEmpleado")
+    public ResponseEntity<?> modificarDatosEmpleado(@RequestBody ModificarEmpleadoDTO modificarEmpleadoDTO){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.modificardatos(modificarEmpleadoDTO));
         } catch (Exception e) {
