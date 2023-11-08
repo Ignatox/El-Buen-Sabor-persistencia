@@ -38,9 +38,9 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
         try {
             return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubro(agregarRubroDTO));
     @PostMapping("/agregarRubroIngrediente")
-    public ResponseEntity<?> agregarRubroIng(@RequestBody AltaRubroDTO altaRubroDTO) {
+    public ResponseEntity<?> agregarRubroIng(@RequestBody Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubroIng(altaRubroDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubroIng(id));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
