@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class PedidoCocinaDTO {
-    Long idProducto;
+    Long idPedido;
     String fecha;
     EstadoPedido estado;
     List<ProductoDTO> productos;

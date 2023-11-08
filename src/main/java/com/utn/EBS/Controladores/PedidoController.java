@@ -1,5 +1,6 @@
 package com.utn.EBS.Controladores;
 
+import com.utn.EBS.DTO.PedidoCocinaDTO;
 import com.utn.EBS.DTO.RegistrarPedidoDTO;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Servicios.PedidoServiceImpl;
@@ -36,9 +37,9 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @PostMapping("/editarEstado")
-    public ResponseEntity<?> editarEstadoPedido(Long id){
+    public ResponseEntity<?> editarEstadoPedido(PedidoCocinaDTO pedidoCocinaDTO){
         try{
-           return ResponseEntity.status(HttpStatus.OK).body(pedidoService.cambiarEstadoPedido(id));
+           return ResponseEntity.status(HttpStatus.OK).body(pedidoService.cambiarEstadoPedido(pedidoCocinaDTO));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
