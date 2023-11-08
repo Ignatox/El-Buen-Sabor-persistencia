@@ -17,6 +17,9 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long>{
     Pedido buscarPorId(@Param("id") Long id);
 
     @Query("SELECT p FROM Pedido p WHERE p.estado = 'A_PREPARAR'")
-    List<Pedido> buscarPedidosAPreparar(Pageable pageable);
+    Page<Pedido> buscarPedidosAPreparar(Pageable pageable);
+    @Query("SELECT p FROM Pedido p ORDER BY p.fecha")
+    Page<Pedido> buscarPorFecha(Pageable pageable);
+    List<Pedido> buscarPedidosAPreparar();
 
 }

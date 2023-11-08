@@ -44,4 +44,12 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+    @GetMapping("/buscarPorFecha")
+    public ResponseEntity<?> buscarPorFecha(Pageable pageable){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorFecha(pageable));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }
