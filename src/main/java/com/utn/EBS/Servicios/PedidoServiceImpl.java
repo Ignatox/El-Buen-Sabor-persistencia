@@ -69,7 +69,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
             Pedido pedido = Pedido.builder()
                     .estado(EstadoPedido.INICIADO)
-                    .fecha(new Date().toString())
+                    .fecha(new Date())
                     .cliente(cliente.get())
                     .tipoEnvio(pedidoDTO.getTipoEnvio())
                     .horaEstimadaEntrega("08:00")

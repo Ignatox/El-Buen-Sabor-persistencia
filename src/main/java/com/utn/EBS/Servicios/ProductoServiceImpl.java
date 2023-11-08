@@ -1,12 +1,7 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.AgregarProductoDTO;
-import com.utn.EBS.DTO.ProductoIngredienteDTO;
-import com.utn.EBS.DTO.ProductoPantallaPrincipalDTO;
-import com.utn.EBS.Entidades.Ingrediente;
-import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Entidades.ProductoIngrediente;
-import com.utn.EBS.Entidades.Rubro;
+import com.utn.EBS.DTO.*;
+import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Repositorios.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -87,6 +82,19 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
                 listaProductos.add(productoDTO);
             }
             return listaProductos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<RankingProductoDTO> traerRankingProductos(BuscarRankingProductosDTO buscarRankingProductosDTO) throws Exception {
+        try {
+            List<RankingProductoDTO> rankingProductoDTOS = productoRepository.buscarRankingProductos(buscarRankingProductosDTO.getFechaDesde(), buscarRankingProductosDTO.getFechaHasta());
+            for (RankingProductoDTO dto: rankingProductoDTOS) {
+                System.out.print(dto.getNombreProducto());
+            }
+            return rankingProductoDTOS;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
