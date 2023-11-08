@@ -44,3 +44,7 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
 
     List<Pedido> findByCliente(Cliente cliente);
 }
+    @Query("SELECT p FROM Pedido p WHERE p.estado = 'EN_CAMINO'")
+    Page<Pedido> buscarPedidosAEntregar(Pageable pageable);
+
+}
