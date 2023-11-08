@@ -4,6 +4,12 @@ import com.utn.EBS.DTO.AgregarRubroDTO;
 import com.utn.EBS.DTO.AltaRubroDTO;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.BaseRepository;
+import com.utn.EBS.DTO.AltaRubroDTO;
+import com.utn.EBS.DTO.ClienteDTO;
+import com.utn.EBS.Entidades.*;
+import com.utn.EBS.Enumeraciones.EstadoRubro;
+import com.utn.EBS.Repositorios.BaseRepository;
+import com.utn.EBS.Repositorios.IngredienteRepository;
 import com.utn.EBS.Repositorios.RubroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import java.util.Optional;
 public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements RubroService{
     @Autowired
     private RubroRepository rubroRepository;
+    private IngredienteRepository ingredienteRepository;
 
 
     public RubroServiceImpl(BaseRepository<Rubro, Long> baseRepository) {
