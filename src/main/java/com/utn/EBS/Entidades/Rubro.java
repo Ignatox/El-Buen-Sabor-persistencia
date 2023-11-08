@@ -39,4 +39,8 @@ public class Rubro extends  BaseEntidad{
     @JsonManagedReference(value = "rubro-producto")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubro" , orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Producto> productos = new ArrayList<>();
+
+    @JsonManagedReference(value = "rubro-ingrediente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubro" , orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Ingrediente> ingredientes = new ArrayList<>();
 }
