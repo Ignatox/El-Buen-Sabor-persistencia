@@ -1,9 +1,12 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.IngredienteDTO;
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.IngredienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,6 +72,14 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
             throw new Exception(e.getMessage());
         }
     }
+
+//    Page<IngredienteDTO> buscarPorStockNoOK(Pageable pageable) throws Exception{
+//        try{
+//
+//        }catch (Exception e) {
+//            throw new Exception(e.getMessage());
+//        }
+//    }
 
     @Override
     public List<Ingrediente> buscarPorNombre(String filtroNombre) throws Exception {
