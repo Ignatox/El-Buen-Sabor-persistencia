@@ -1,7 +1,9 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.DetallePedidoDTO;
+import com.utn.EBS.DTO.DetallePedidoDto;
+import com.utn.EBS.DTO.ProductoDTO;
 import com.utn.EBS.DTO.RegistrarPedidoDTO;
+import com.utn.EBS.DTO.PedidoCocinaDTO;
 import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Pedido;
@@ -14,6 +16,7 @@ import com.utn.EBS.Repositorios.ProductoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -83,14 +86,47 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
     @Override
     @Transactional
-    public Page<Pedido> buscarPedidosAPrerarar(Pageable pageable) throws Exception{          //Si pinta corregir el nombre del metodo
+    public Page<PedidoCocinaDTO> buscarPedidosAPrerarar(Pageable pageable) throws Exception{
         try{
-            Page<Pedido> pedidosEncontrados = pedidoRepository.buscarPedidosAPreparar(pageable);
+            List<Pedido> pedidosEncontrados = pedidoRepository.buscarPedidosAPreparar(pageable);
             if(pedidosEncontrados == null){
                 throw new Exception("No hay pedidos para preparar");
             }else{
-                return pedidosEncontrados;
+               List <PedidoCocinaDTO> pedidosCocina = null;
+
+                for(Pedido pedido : pedidosEncontrados){
+                    List<DetallePedido> detallesPedido = pedido.getDetallePedidos();
+                    PedidoCocinaDTO pedidoCocina= new PedidoCocinaDTO();
+                    List<ProductoDTO> productos = new ArrayList<>();
+
+                    for(DetallePedido detalles : detallesPedido){
+                        ProductoDTO  productoCocina = new ProductoDTO();
+
+                        productoCocina.setIdProducto(detalles.getProducto().getId());
+                        productoCocina.setFoto(detalles.getProducto().getFoto());
+                        productoCocina.setCantidad(detalles.getCantidad());
+                        productoCocina.setNombre(detalles.getProducto().getNombre());
+                        productoCocina.setDescripcion(detalles.getProducto().getDescripcion());
+                        productoCocina.setIngredientes(detalles.getProducto().getIngredientes());
+                        productoCocina.setReceta(detalles.getProducto().getReceta());
+                        productoCocina.setTiempoEstimadoCocina(detalles.getProducto().getTiempoEstimadoCocina());
+
+                        productos.add(productoCocina);
+                    }
+
+                    pedidoCocina.setIdPedido(pedido.getId());
+                    pedidoCocina.setFecha(pedido.getFecha());
+                    pedidoCocina.setEstado(EstadoPedido.A_PREPARAR);
+                    pedidoCocina.setProductos(productos);
+
+                    pedidosCocina.add(pedidoCocina);
+                }
+
+                Page<PedidoCocinaDTO> pedidosAPreparar = new PageImpl<>(pedidosCocina, pageable, pedidosCocina.size());
+
+                return pedidosAPreparar;
             }
+
         }catch(Exception e){
             throw new Exception(e.getMessage());
         }
@@ -98,15 +134,18 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
     @Override
     @Transactional
-    public Boolean cambiarEstadoPedido(Long id) throws Exception{
+    public Boolean cambiarEstadoPedido(PedidoCocinaDTO pedidoCocina) throws Exception{
         try{
-            Pedido pedido=pedidoRepository.buscarPorId(id);
+            Pedido pedido=pedidoRepository.buscarPorId(pedidoCocina.getIdPedido());
 
             if(pedido == null) {
                 throw new Exception("el pedido que intenta editar no existe");
-            }
+            }else{
+                pedidoCocina.setEstado(EstadoPedido.INICIADO);
+                pedido.setEstado(EstadoPedido.INICIADO);
 
-            pedido.setEstado(EstadoPedido.INICIADO);
+                pedidoRepository.save(pedido);
+            }
 
             return true;
 
