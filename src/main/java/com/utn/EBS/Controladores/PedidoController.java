@@ -57,7 +57,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @GetMapping("/pedidoEntreFechas")
-    public ResponseEntity<?> buscarPedidosEntreFecha(BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO){
+    public ResponseEntity<?> buscarPedidosEntreFecha(@RequestBody BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPedidosEntreFecha(buscarPedidoEntreFechaDTO));
         }catch (Exception e) {
@@ -66,7 +66,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @GetMapping("/movimientoMonetario")
-    public ResponseEntity<?> buscarMovimientosMonetarios(BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO){
+    public ResponseEntity<?> buscarMovimientosMonetarios(@RequestBody BuscarPedidoEntreFechaDTO buscarPedidoEntreFechaDTO){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarMovimientosMonetarios(buscarPedidoEntreFechaDTO));
         }catch (Exception e) {
@@ -74,8 +74,8 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         }
     }
 
-    @GetMapping("/historialPedidos")
-    public ResponseEntity<?> buscarPorCliente(Long id){
+    @GetMapping("/{id}/historialPedidos")
+    public ResponseEntity<?> buscarPorCliente(@RequestParam("id") Long id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorCliente(id));
         }catch (Exception e) {
