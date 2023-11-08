@@ -31,7 +31,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @GetMapping("/buscarPedidosAPreparar")
-    public ResponseEntity<?> buscarPedidosAPreparar(Pageable pageable){
+    public ResponseEntity<?> buscarPedidosAPreparar(@RequestBody Pageable pageable){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPedidosAPrerarar(pageable));
         }catch (Exception e) {
@@ -40,7 +40,7 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @PostMapping("/editarEstado")
-    public ResponseEntity<?> editarEstadoPedido(PedidoCocinaDTO pedidoCocinaDTO){
+    public ResponseEntity<?> editarEstadoPedido(@RequestBody PedidoCocinaDTO pedidoCocinaDTO){
         try{
            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.cambiarEstadoPedido(pedidoCocinaDTO));
         }catch (Exception e) {
