@@ -2,6 +2,8 @@ package com.utn.EBS.Controladores;
 
 import com.utn.EBS.DTO.AgregarProductoDTO;
 import com.utn.EBS.DTO.AgregarRubroDTO;
+import com.utn.EBS.DTO.AgregarRubroDTO;
+import com.utn.EBS.DTO.AltaRubroDTO;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Servicios.RubroService;
 import com.utn.EBS.Servicios.RubroServiceImpl;
@@ -35,6 +37,10 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
     public ResponseEntity<?> agregarRubro(@RequestBody AgregarRubroDTO agregarRubroDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubro(agregarRubroDTO));
+    @PostMapping("/agregarRubroIngrediente")
+    public ResponseEntity<?> agregarRubroIng(@RequestBody AltaRubroDTO altaRubroDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubroIng(altaRubroDTO));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
