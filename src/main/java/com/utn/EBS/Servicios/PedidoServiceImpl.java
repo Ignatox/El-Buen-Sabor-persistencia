@@ -176,7 +176,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     public List<MovimientoMonetarioDTO> buscarMovimientosMonetarios (BuscarPedidoEntreFechaDTO
                                                                              buscarPedidoEntreFechaDTO) throws Exception {
         List<MovimientoMonetarioDTO> movimientosMonetarios = new ArrayList<>();
-
+    
         try {
             List<Pedido> pedidos = pedidoRepository.findAll();
 
@@ -261,6 +261,21 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
                 return pedidosEncontrados;
             }
         } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Page<Pedido> buscarPedidosAEntregar(Pageable pageable) throws Exception{
+        try{
+            Page<Pedido> pedidosAEntregar = pedidoRepository.buscarPedidosAEntregar(pageable);
+            if(pedidosAEntregar == null){
+                throw new Exception("Todavía no  hay pedidos para entregar");
+            }else{
+                return pedidosAEntregar;
+            }
+        }catch(Exception e){
             throw new Exception(e.getMessage());
         }
     }
