@@ -13,4 +13,5 @@ public interface RubroService extends BaseService<Rubro, Long>{
 
 public interface RubroService extends BaseService<Rubro, Long>{
     public AltaRubroDTO agregarRubroIng(Long id) throws Exception;
+    public AltaRubroDTO editarRubro(AltaRubroDTO altaRubroDTO) throws Exception;
 }
