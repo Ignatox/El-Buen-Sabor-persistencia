@@ -170,4 +170,21 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
 
         return costoTotal;
     }
+
+    @Override
+    public List<Pedido> buscarPorCliente(Long clienteId) throws Exception {
+        try {
+            Cliente cliente = clienteRepository.findById(clienteId).orElse(null);
+            if (cliente == null) {
+                return new ArrayList<>(); // throw new Exception("Cliente no encontrado.");
+            }
+            List<Pedido> pedidosDelCliente = pedidoRepository.findByCliente(cliente);
+
+            return pedidosDelCliente;
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }
