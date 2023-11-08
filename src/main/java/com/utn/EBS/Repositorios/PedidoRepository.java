@@ -47,4 +47,8 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
     @Query("SELECT p FROM Pedido p WHERE p.estado = 'EN_CAMINO'")
     Page<Pedido> buscarPedidosAEntregar(Pageable pageable);
 
+    @Query("SELECT p FROM Pedido p WHERE p.estado = 'A_CONFIRMAR'")
+    Page<Pedido> buscarPedidosAconfirmar(Pageable pageable);
+
+
 }

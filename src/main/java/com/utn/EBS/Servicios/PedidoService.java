@@ -32,4 +32,6 @@ public interface PedidoService extends BaseService<Pedido, Long>{
    public List<Pedido> buscarPorCliente(Long id) throws Exception;
     public Page<Pedido> buscarPedidosAEntregar(Pageable pageable) throws Exception;
 
+    public Page<Pedido> buscarPedidosAConfirmar(Pageable pageable) throws Exception;
+
 }

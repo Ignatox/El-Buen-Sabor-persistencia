@@ -89,4 +89,13 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         }
     }
 
+    @GetMapping("/PedidosCaja")
+    public ResponseEntity<?> buscarPedidosAConfirmar(Pageable pageable ){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPedidosAConfirmar(pageable));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 }

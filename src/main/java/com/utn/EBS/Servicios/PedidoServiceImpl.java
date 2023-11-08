@@ -281,4 +281,21 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public Page<Pedido> buscarPedidosAConfirmar(Pageable pageable) throws Exception{
+        try{
+            Page<Pedido> pedidosAconfirmar = pedidoRepository.buscarPedidosAconfirmar(pageable);
+            if(pedidosAconfirmar == null){
+                throw new Exception("No hay pedidos recientes");
+            }else{
+                return pedidosAconfirmar;
+            }
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
 }
