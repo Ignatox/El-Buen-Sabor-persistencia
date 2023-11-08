@@ -1,6 +1,6 @@
 package com.utn.EBS.Repositorios;
 
-import com.utn.EBS.Entidades.Persona;
+import com.utn.EBS.Entidades.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -10,24 +10,25 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PersonaRepository extends BaseRepository<Persona, Long>{
+public interface ClienteRepository extends BaseRepository<Cliente, Long>{
 
     @Query("SELECT c FROM Cliente c WHERE c.id = :id")
-    Persona buscarPorId(@Param("id") Long id);
+    Cliente buscarPorId(@Param("id") Long id);
 
     @Query ("SELECT c FROM Cliente c WHERE c.nombre = :nombre")
-    List<Persona> buscarPornombre(@Param("nombre") String nombre);
+    List<Cliente> buscarPornombre(@Param("nombre") String nombre);
+
 
     @Query("SELECT c FROM Cliente c WHERE c.nombre = :nombre AND c.apellido = :apellido")
-    List<Persona> buscarPornombreYApellido(@Param("nombre") String nombre, @Param("apellido") String apellido);
+    List<Cliente> buscarPornombreYApellido(@Param("nombre") String nombre, @Param("apellido") String apellido);
 
     @Query ("SELECT c FROM Cliente c WHERE c.nombre = :nombre")
-    Page<Persona> buscarPornombre(@Param("nombre") String nombre, Pageable pageable);
+    Page<Cliente> buscarPornombre(@Param("nombre") String nombre, Pageable pageable);
 
     @Query ("SELECT c FROM Cliente c WHERE c.nombre = :nombre AND c.apellido = :apellido")
-    Page<Persona> buscarPornombreYApellido(@Param("nombre") String nombre, @Param("apellido") String apellido, Pageable pageable);
+    Page<Cliente> buscarPornombreYApellido(@Param("nombre") String nombre, @Param("apellido") String apellido, Pageable pageable);
 
     @Query ("SELECT c FROM Cliente c WHERE c.email = :email")
-    Persona buscarPorEmail(@Param("email") String email);
+    Cliente buscarPorEmail(@Param("email") String email);
 
 }

@@ -2,13 +2,13 @@ package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.DetallePedidoDTO;
 import com.utn.EBS.DTO.RegistrarPedidoDTO;
-import com.utn.EBS.Entidades.Persona;
+import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
 import com.utn.EBS.Repositorios.BaseRepository;
-import com.utn.EBS.Repositorios.PersonaRepository;
+import com.utn.EBS.Repositorios.ClienteRepository;
 import com.utn.EBS.Repositorios.PedidoRepository;
 import com.utn.EBS.Repositorios.ProductoRepository;
 import jakarta.transaction.Transactional;
@@ -29,7 +29,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     @Autowired
     private PedidoRepository pedidoRepository;
     @Autowired
-    private PersonaRepository personaRepository;
+    private ClienteRepository clienteRepository;
     @Autowired
     private ProductoRepository productoRepository;
 
@@ -43,7 +43,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     public Pedido registrarPedido(RegistrarPedidoDTO pedidoDTO) throws Exception {
         try {
             // buscamos al cliente del pedido
-            Optional<Persona> cliente = personaRepository.findById(pedidoDTO.getIdCliente());
+            Optional<Cliente> cliente = clienteRepository.findById(pedidoDTO.getIdCliente());
             if (cliente.isEmpty()) throw new Exception("no se encontro el cliente");
 
             List<DetallePedido> detallesPedido = new ArrayList<DetallePedido>();
@@ -67,7 +67,7 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
             Pedido pedido = Pedido.builder()
                     .estado(EstadoPedido.INICIADO)
                     .fecha(new Date().toString())
-                    .persona(cliente.get())
+                    .cliente(cliente.get())
                     .tipoEnvio(pedidoDTO.getTipoEnvio())
                     .horaEstimadaEntrega("08:00")
                     .detallePedidos(detallesPedido)

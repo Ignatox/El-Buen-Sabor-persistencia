@@ -1,54 +1,52 @@
 package com.utn.EBS.Controladores;
 
-import com.utn.EBS.DTO.ClienteDTO;
+
 import com.utn.EBS.DTO.EmpleadoDTO;
-import com.utn.EBS.Entidades.Persona;
+import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
-import com.utn.EBS.Servicios.PersonaService;
-import com.utn.EBS.Servicios.PersonaServiceImpl;
+import com.utn.EBS.Servicios.EmpleadoService;
+import com.utn.EBS.Servicios.EmpleadoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
-@CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/persona")
+public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoServiceImpl>{
 
-public class PersonaController extends BaseControllerImpl<Persona, PersonaServiceImpl>{
-
-    @GetMapping("/verDatos")
-    public ResponseEntity<?> verDatosCliente(@RequestBody Long id){
+    @GetMapping("/verDatosEmpleado")
+    public ResponseEntity<?> verDatosEmpleado(@RequestBody Long id){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.datosCliente(id));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.datosEmpleado(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @GetMapping("/modificarDatos")
-    public ResponseEntity<?> modificarDatosCliente(ClienteDTO clienteDTO){
+    @GetMapping("/modificarDatosEmpleado")
+    public ResponseEntity<?> modificarDatosEmpleado(EmpleadoDTO empleadoDTO){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.modificardatos(clienteDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.modificardatos(empleadoDTO));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-  //  @GetMapping("/actualizarContraseña")
+    //  @GetMapping("/actualizarContraseña")
     //public ResponseEntity<?> actualizarContrasena(EmpleadoDTO empleadoDTO){
-      //  try {
-        //    return ResponseEntity.status(HttpStatus.OK).body(servicio.actualizarContrasena(empleadoDTO));
-        //} catch (Exception e) {
-          //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-       // }
-   // }
+    //  try {
+    //    return ResponseEntity.status(HttpStatus.OK).body(servicio.actualizarContrasena(empleadoDTO));
+    //} catch (Exception e) {
+    //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    // }
+    // }
 
     @Autowired
-    private PersonaService personaService;
+    private EmpleadoService empleadoService;
     @PostMapping("/registrarEmpleado")
     public ResponseEntity<?> registrarEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
         try {
-            Persona empleado = personaService.registrarEmpleado(empleadoDTO);
+            Empleado empleado = empleadoService.registrarEmpleado(empleadoDTO);
             return ResponseEntity.ok(empleado);
         } catch (EmpleadoExistenteException e) {
             // Maneja el caso de un empleado duplicado

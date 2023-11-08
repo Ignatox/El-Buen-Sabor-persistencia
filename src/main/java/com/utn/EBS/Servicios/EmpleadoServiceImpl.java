@@ -1,51 +1,49 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.ClienteDTO;
 import com.utn.EBS.DTO.EmpleadoDTO;
-import com.utn.EBS.Entidades.Persona;
-import com.utn.EBS.Entidades.Usuario;
+import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Entidades.Domicilio;
+import com.utn.EBS.Entidades.Usuario;
 import com.utn.EBS.Excepciones.ContraseñaInvalidaException;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
 import com.utn.EBS.Repositorios.BaseRepository;
-import com.utn.EBS.Repositorios.PersonaRepository;
+import com.utn.EBS.Repositorios.EmpleadoRepository;
 import com.utn.EBS.Repositorios.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-
 @Service
-public class PersonaServiceImpl extends BaseServiceImpl<Persona, Long>
-implements PersonaService {
+public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> implements EmpleadoService {
     @Autowired
-    private PersonaRepository personaRepository;
+    private EmpleadoRepository empleadoRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public PersonaServiceImpl(BaseRepository<Persona, Long> baseRepository) {
+    public EmpleadoServiceImpl(BaseRepository<Empleado, Long> baseRepository) {
         super(baseRepository);
     }
 
     @Override
     @Transactional
-    public ClienteDTO datosCliente(Long id) throws Exception{
+    public EmpleadoDTO datosEmpleado(Long id) throws Exception{
         try{
-            Persona persona = personaRepository.buscarPorId(id);
-            ClienteDTO clienteDTO= new ClienteDTO();
+            Empleado empleado = empleadoRepository.buscarPorId(id);
+            EmpleadoDTO empleadoDTO= new EmpleadoDTO();
 
-            clienteDTO.setIdCliente(persona.getId());
-            clienteDTO.setNombre(persona.getNombre());
-            clienteDTO.setApellido(persona.getApellido());
-            clienteDTO.setEmail(persona.getEmail());
-            clienteDTO.setTelefono(persona.getTelefono());
-            clienteDTO.setDomicilio(persona.getDomicilios());
-            clienteDTO.setContrasena(persona.getUsuario().getPassword());
+            empleadoDTO.setIdEmpleado(empleado.getId());
+            empleadoDTO.setNombre(empleado.getNombre());
+            empleadoDTO.setApellido(empleado.getApellido());
+            empleadoDTO.setEmail(empleado.getEmail());
+            empleadoDTO.setTelefono(empleado.getTelefono());
+            empleadoDTO.setDomicilio(empleado.getDomicilios());
+            empleadoDTO.setContrasena(empleado.getUsuario().getPassword());
 
-            return clienteDTO;
-         }catch (Exception e){
+            return empleadoDTO;
+        }catch (Exception e){
             throw new Exception(e.getMessage());
         }
 
@@ -55,26 +53,26 @@ implements PersonaService {
 
     @Override
     @Transactional
-    public Persona modificardatos(ClienteDTO clienteDto) throws Exception{
+    public Empleado modificardatos(EmpleadoDTO empleadoDTO) throws Exception{
         try{
-            Persona persona = personaRepository.buscarPorId(clienteDto.getIdCliente());
+            Empleado empleado = empleadoRepository.buscarPorId(empleadoDTO.getIdEmpleado());
 
-            if(clienteDto.getEmail() != null && !clienteDto.getEmail().isEmpty())
-            persona.setEmail(clienteDto.getEmail());
+            if(empleadoDTO.getEmail() != null && !empleadoDTO.getEmail().isEmpty())
+                empleado.setEmail(empleadoDTO.getEmail());
 
-            if(clienteDto.getTelefono() != null && !clienteDto.getTelefono().isEmpty())
-                persona.setTelefono(clienteDto.getTelefono());
+            if(empleadoDTO.getTelefono() != null && !empleadoDTO.getTelefono().isEmpty())
+                empleado.setTelefono(empleadoDTO.getTelefono());
 
-            List<Domicilio> domiciliosClientes = persona.getDomicilios();
-            List<Domicilio> domiciliosDTO = clienteDto.getDomicilio();
+            List<Domicilio> domiciliosEmpleados = empleado.getDomicilios();
+            List<Domicilio> domiciliosDTO = empleadoDTO.getDomicilio();
             for(Domicilio domicilio : domiciliosDTO){
-                if(!domiciliosClientes.contains(domicilio)){
-                    domiciliosClientes.add(domicilio);
+                if(!domiciliosEmpleados.contains(domicilio)){
+                    domiciliosEmpleados.add(domicilio);
                 }
             }
 
 
-            Usuario usuarioCliente = usuarioRepository.buscarPorId(clienteDto.getIdCliente());
+            Usuario usuarioEmpleado = usuarioRepository.buscarPorId(empleadoDTO.getIdEmpleado());
 
             //DATOS PARA LA VERIFICACION DE CONTRASEÑA
             final int MAX=8;
@@ -87,8 +85,8 @@ implements PersonaService {
             int digitCounter = 0;
             int specialCounter = 0;
 
-            for (int i = 0; i < usuarioCliente.getPassword().length(); i++) {
-                char c = usuarioCliente.getPassword().charAt(i);
+            for (int i = 0; i < usuarioEmpleado.getPassword().length(); i++) {
+                char c = usuarioEmpleado.getPassword().charAt(i);
                 if (Character.isUpperCase(c))
                     uppercaseCounter++;
                 else if (Character.isLowerCase(c))
@@ -101,15 +99,15 @@ implements PersonaService {
                 }
             }
 
-            if (clienteDto.getContrasena().length() >= MAX && uppercaseCounter >= MIN_Uppercase && lowercaseCounter >= MIN_Lowercase && digitCounter >= NUM_Digits && specialCounter >= Special) {
-                usuarioCliente.setPassword(clienteDto.getContrasena());
+            if (empleadoDTO.getContrasena().length() >= MAX && uppercaseCounter >= MIN_Uppercase && lowercaseCounter >= MIN_Lowercase && digitCounter >= NUM_Digits && specialCounter >= Special) {
+                usuarioEmpleado.setPassword(empleadoDTO.getContrasena());
 
             } else {
                 throw new Exception("la contraseña no tiene los requisitos adecuados");
             }
 
-            personaRepository.save(persona);
-            return persona;
+            empleadoRepository.save(empleado);
+            return empleado;
 
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -121,10 +119,10 @@ implements PersonaService {
 
     @Override
     @Transactional
-    public Persona registrarEmpleado(EmpleadoDTO empleadoDTO) throws Exception {
+    public Empleado registrarEmpleado(EmpleadoDTO empleadoDTO) throws Exception {
         try{
             //Verifico si ya existe un empleado con el mail ingresado
-            Persona empleadoExistente = personaRepository.buscarPorEmail(empleadoDTO.getEmail());
+            Empleado empleadoExistente = empleadoRepository.buscarPorEmail(empleadoDTO.getEmail());
             if (empleadoExistente != null){
                 throw new EmpleadoExistenteException("Ya existe un empleado con el mismo mail");
             }
@@ -132,7 +130,7 @@ implements PersonaService {
             if (!validarContraseña(empleadoDTO.getContrasena())) {
                 throw new ContraseñaInvalidaException("La contraseña no cumple con los requisitos mínimos.");
             }
-            Persona nuevoEmpleado = new Persona();
+            Empleado nuevoEmpleado = new Empleado();
             nuevoEmpleado.setNombre(empleadoDTO.getNombre());
             nuevoEmpleado.setEmail(empleadoDTO.getEmail());
             nuevoEmpleado.setApellido(empleadoDTO.getApellido());
@@ -145,7 +143,7 @@ implements PersonaService {
             nuevoUsuario.setRol(empleadoDTO.getRol());
 
             nuevoEmpleado.setUsuario(nuevoUsuario);
-            personaRepository.save(nuevoEmpleado);
+            empleadoRepository.save(nuevoEmpleado);
             return nuevoEmpleado;
         } catch (Exception e){
             throw new RuntimeException("error al registrar el empleado" + e.getMessage());
@@ -172,5 +170,5 @@ implements PersonaService {
 
         return contieneMayuscula && contieneMinuscula && contieneSimbolo;
     }
-}
 
+}
