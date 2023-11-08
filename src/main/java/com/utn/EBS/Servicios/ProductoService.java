@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ProductoService extends BaseService<Producto, Long>{
-List<Producto> buscarPorNombre( String nombre)throws Exception;
+    List<Producto> buscarPorNombre( String nombre)throws Exception;
 
     Page<Producto> buscarPorNombre(String nombre, Pageable pageable) throws Exception;
 
