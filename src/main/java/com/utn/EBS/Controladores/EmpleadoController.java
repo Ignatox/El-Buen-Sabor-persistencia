@@ -1,21 +1,20 @@
 package com.utn.EBS.Controladores;
 
 
-import com.utn.EBS.DTO.CambiarContraseñaDTO;
-import com.utn.EBS.DTO.EmpleadoDTO;
+import com.utn.EBS.DTO.ModificarEmpleadoDTO;
+import com.utn.EBS.DTO.RegistrarEmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
-import com.utn.EBS.Entidades.Usuario;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
-import com.utn.EBS.Repositorios.EmpleadoRepository;
 import com.utn.EBS.Servicios.EmpleadoService;
 import com.utn.EBS.Servicios.EmpleadoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "api/v1/empleado")
 public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoServiceImpl>{
 
     @GetMapping("/verDatosEmpleado")
@@ -28,9 +27,9 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
     }
 
     @GetMapping("/modificarDatosEmpleado")
-    public ResponseEntity<?> modificarDatosEmpleado(EmpleadoDTO empleadoDTO){
+    public ResponseEntity<?> modificarDatosEmpleado(ModificarEmpleadoDTO modificarEmpleadoDTO){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.modificardatos(empleadoDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.modificardatos(modificarEmpleadoDTO));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -47,9 +46,9 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
     @Autowired
     private EmpleadoService empleadoService;
     @PostMapping("/registrarEmpleado")
-    public ResponseEntity<?> registrarEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
+    public ResponseEntity<?> registrarEmpleado(@RequestBody RegistrarEmpleadoDTO registrarEmpleadoDTO) {
         try {
-            Empleado empleado = empleadoService.registrarEmpleado(empleadoDTO);
+            Empleado empleado = empleadoService.registrarEmpleado(registrarEmpleadoDTO);
             return ResponseEntity.ok(empleado);
         } catch (EmpleadoExistenteException e) {
             // Maneja el caso de un empleado duplicado

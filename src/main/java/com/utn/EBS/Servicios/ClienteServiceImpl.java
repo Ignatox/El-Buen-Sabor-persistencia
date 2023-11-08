@@ -1,12 +1,9 @@
 package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.ClienteDTO;
-import com.utn.EBS.DTO.EmpleadoDTO;
 import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.Usuario;
 import com.utn.EBS.Entidades.Domicilio;
-import com.utn.EBS.Excepciones.ContraseñaInvalidaException;
-import com.utn.EBS.Excepciones.EmpleadoExistenteException;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.ClienteRepository;
 import com.utn.EBS.Repositorios.UsuarioRepository;

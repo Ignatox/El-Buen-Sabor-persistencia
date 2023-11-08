@@ -1,15 +1,14 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.ClienteDTO;
-import com.utn.EBS.DTO.EmpleadoDTO;
-import com.utn.EBS.Entidades.Cliente;
+import com.utn.EBS.DTO.ModificarEmpleadoDTO;
+import com.utn.EBS.DTO.RegistrarEmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
 
 public interface EmpleadoService extends BaseService<Empleado, Long>{
-    public EmpleadoDTO datosEmpleado(Long id) throws Exception;
+    public RegistrarEmpleadoDTO datosEmpleado(Long id) throws Exception;
 
-    public Empleado modificardatos(EmpleadoDTO empleadoDto) throws Exception;
+    public Empleado modificardatos(ModificarEmpleadoDTO modificarEmpleadoDTO) throws Exception;
 
     // public Empleado actualizarContrasena(EmpleadoDTO empleadoDto) throws Exception;
-    public Empleado registrarEmpleado(EmpleadoDTO empleadoDTO) throws Exception;
+    public Empleado registrarEmpleado(RegistrarEmpleadoDTO registrarEmpleadoDTO) throws Exception;
 }

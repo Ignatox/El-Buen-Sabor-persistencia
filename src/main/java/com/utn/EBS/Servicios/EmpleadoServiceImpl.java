@@ -1,7 +1,7 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.CambiarContraseñaDTO;
-import com.utn.EBS.DTO.EmpleadoDTO;
+import com.utn.EBS.DTO.ModificarEmpleadoDTO;
+import com.utn.EBS.DTO.RegistrarEmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Entidades.Domicilio;
 import com.utn.EBS.Entidades.Usuario;
@@ -30,20 +30,19 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
 
     @Override
     @Transactional
-    public EmpleadoDTO datosEmpleado(Long id) throws Exception{
+    public RegistrarEmpleadoDTO datosEmpleado(Long id) throws Exception{
         try{
             Empleado empleado = empleadoRepository.buscarPorId(id);
-            EmpleadoDTO empleadoDTO= new EmpleadoDTO();
+            RegistrarEmpleadoDTO registrarEmpleadoDTO = new RegistrarEmpleadoDTO();
 
-            empleadoDTO.setIdEmpleado(empleado.getId());
-            empleadoDTO.setNombre(empleado.getNombre());
-            empleadoDTO.setApellido(empleado.getApellido());
-            empleadoDTO.setEmail(empleado.getEmail());
-            empleadoDTO.setTelefono(empleado.getTelefono());
-            empleadoDTO.setDomicilio(empleado.getDomicilios());
-            empleadoDTO.setContrasena(empleado.getUsuario().getPassword());
+            registrarEmpleadoDTO.setNombre(empleado.getNombre());
+            registrarEmpleadoDTO.setApellido(empleado.getApellido());
+            registrarEmpleadoDTO.setEmail(empleado.getEmail());
+            registrarEmpleadoDTO.setTelefono(empleado.getTelefono());
+            registrarEmpleadoDTO.setDomicilio(empleado.getDomicilios());
+            registrarEmpleadoDTO.setContrasena(empleado.getUsuario().getPassword());
 
-            return empleadoDTO;
+            return registrarEmpleadoDTO;
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -54,18 +53,18 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
 
     @Override
     @Transactional
-    public Empleado modificardatos(EmpleadoDTO empleadoDTO) throws Exception{
+    public Empleado modificardatos(ModificarEmpleadoDTO modificarEmpleadoDTO) throws Exception{
         try{
-            Empleado empleado = empleadoRepository.buscarPorId(empleadoDTO.getIdEmpleado());
+            Empleado empleado = empleadoRepository.buscarPorId(modificarEmpleadoDTO.getIdEmpleado());
 
-            if(empleadoDTO.getEmail() != null && !empleadoDTO.getEmail().isEmpty())
-                empleado.setEmail(empleadoDTO.getEmail());
+            if(modificarEmpleadoDTO.getEmail() != null && !modificarEmpleadoDTO.getEmail().isEmpty())
+                empleado.setEmail(modificarEmpleadoDTO.getEmail());
 
-            if(empleadoDTO.getTelefono() != null && !empleadoDTO.getTelefono().isEmpty())
-                empleado.setTelefono(empleadoDTO.getTelefono());
+            if(modificarEmpleadoDTO.getTelefono() != null && !modificarEmpleadoDTO.getTelefono().isEmpty())
+                empleado.setTelefono(modificarEmpleadoDTO.getTelefono());
 
             List<Domicilio> domiciliosEmpleados = empleado.getDomicilios();
-            List<Domicilio> domiciliosDTO = empleadoDTO.getDomicilio();
+            List<Domicilio> domiciliosDTO = modificarEmpleadoDTO.getDomicilio();
             for(Domicilio domicilio : domiciliosDTO){
                 if(!domiciliosEmpleados.contains(domicilio)){
                     domiciliosEmpleados.add(domicilio);
@@ -73,7 +72,7 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
             }
 
 
-            Usuario usuarioEmpleado = usuarioRepository.buscarPorId(empleadoDTO.getIdEmpleado());
+            Usuario usuarioEmpleado = usuarioRepository.buscarPorId(modificarEmpleadoDTO.getIdEmpleado());
 
             //DATOS PARA LA VERIFICACION DE CONTRASEÑA
             final int MAX=8;
@@ -100,8 +99,8 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
                 }
             }
 
-            if (empleadoDTO.getContrasena().length() >= MAX && uppercaseCounter >= MIN_Uppercase && lowercaseCounter >= MIN_Lowercase && digitCounter >= NUM_Digits && specialCounter >= Special) {
-                usuarioEmpleado.setPassword(empleadoDTO.getContrasena());
+            if (modificarEmpleadoDTO.getContrasena().length() >= MAX && uppercaseCounter >= MIN_Uppercase && lowercaseCounter >= MIN_Lowercase && digitCounter >= NUM_Digits && specialCounter >= Special) {
+                usuarioEmpleado.setPassword(modificarEmpleadoDTO.getContrasena());
 
             } else {
                 throw new Exception("la contraseña no tiene los requisitos adecuados");
@@ -120,28 +119,28 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
 
     @Override
     @Transactional
-    public Empleado registrarEmpleado(EmpleadoDTO empleadoDTO) throws Exception {
+    public Empleado registrarEmpleado(RegistrarEmpleadoDTO registrarEmpleadoDTO) throws Exception {
         try{
             //Verifico si ya existe un empleado con el mail ingresado
-            Empleado empleadoExistente = empleadoRepository.buscarPorEmail(empleadoDTO.getEmail());
+            Empleado empleadoExistente = empleadoRepository.buscarPorEmail(registrarEmpleadoDTO.getEmail());
             if (empleadoExistente != null){
                 throw new EmpleadoExistenteException("Ya existe un empleado con el mismo mail");
             }
 
-            if (!validarContraseña(empleadoDTO.getContrasena())) {
+            if (!validarContraseña(registrarEmpleadoDTO.getContrasena())) {
                 throw new ContraseñaInvalidaException("La contraseña no cumple con los requisitos mínimos.");
             }
             Empleado nuevoEmpleado = new Empleado();
-            nuevoEmpleado.setNombre(empleadoDTO.getNombre());
-            nuevoEmpleado.setEmail(empleadoDTO.getEmail());
-            nuevoEmpleado.setApellido(empleadoDTO.getApellido());
-            nuevoEmpleado.setTelefono(empleadoDTO.getTelefono());
-            nuevoEmpleado.setDomicilios(empleadoDTO.getDomicilio());
+            nuevoEmpleado.setNombre(registrarEmpleadoDTO.getNombre());
+            nuevoEmpleado.setEmail(registrarEmpleadoDTO.getEmail());
+            nuevoEmpleado.setApellido(registrarEmpleadoDTO.getApellido());
+            nuevoEmpleado.setTelefono(registrarEmpleadoDTO.getTelefono());
+            nuevoEmpleado.setDomicilios(registrarEmpleadoDTO.getDomicilio());
 
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setNombre(nuevoEmpleado.getNombre());
-            nuevoUsuario.setPassword(empleadoDTO.getContrasena());
-            nuevoUsuario.setRol(empleadoDTO.getRol());
+            nuevoUsuario.setPassword(registrarEmpleadoDTO.getContrasena());
+            nuevoUsuario.setRol(registrarEmpleadoDTO.getRol());
 
             nuevoEmpleado.setUsuario(nuevoUsuario);
             empleadoRepository.save(nuevoEmpleado);
