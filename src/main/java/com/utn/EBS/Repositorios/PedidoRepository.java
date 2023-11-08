@@ -29,14 +29,18 @@ public interface PedidoRepository extends BaseRepository<Pedido, Long> {
     Page<Pedido> buscarPedidosAPreparar(Pageable pageable);
     @Query("SELECT p FROM Pedido p ORDER BY p.fecha")
     Page<Pedido> buscarPorFecha(Pageable pageable);
+
+    @Query("SELECT p FROM Pedido p ORDER BY p.fecha")
+    List<Pedido> buscarPorFecha();
+
+    @Query("SELECT p FROM Pedido p WHERE p.estado = 'A_PREPARAR'")
     List<Pedido> buscarPedidosAPreparar();
-    @Query("SELECT p FROM Pedido p WHERE p.fecha > :fechaDesde AND p.fecha < :fechaHasta")
-    List<Pedido> buscarEntreFechas(@Param("fechaDesde") Date fechaDesde, @Param("fechaHasta") Date fechaHasta);
 
     @Query("SELECT p FROM Pedido p WHERE p.fecha BETWEEN :fechaInicio AND :fechaFin")
     List<Pedido> buscarPedidosEntreFecha(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
-    @Query("SELECT p FROM Pedido p Where p.cliente = :id")
-    List<Pedido> buscarPorCliente(@Param("id") Long id);  //ESTA MALLLLLLLLL
+    //@Query("SELECT p FROM Pedido p Where p.cliente = :id")
+    //List<Pedido> buscarPorCliente(@Param("id") Long id);  //ESTA MALLLLLLLLL
+
     List<Pedido> findByCliente(Cliente cliente);
 }

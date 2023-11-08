@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -51,9 +50,6 @@ public class Producto extends BaseEntidad {
     @Column(name = "estado", nullable = false)
     private EstadoProducto estadoProducto;
 
-    private TipoProducto tipoProducto;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference(value = "rubro-producto")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_id")
