@@ -46,6 +46,11 @@ public class Domicilio extends BaseEntidad{
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @JsonBackReference(value = "empleado-domicilio")
+    @ManyToOne(fetch = FetchType.LAZY)
+    // @JsonBackReference
+    @JoinColumn(name = "empleado_id")
+    private Empleado empleado;
 
     @OneToMany(orphanRemoval = true)                            //Relacion con Pedido
     @JoinColumn(name = "domicilio_id")
