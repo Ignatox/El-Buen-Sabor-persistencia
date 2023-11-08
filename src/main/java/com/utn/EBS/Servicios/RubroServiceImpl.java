@@ -1,9 +1,11 @@
 package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.AgregarRubroDTO;
+import com.utn.EBS.DTO.AltaRubroDTO;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.RubroRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
