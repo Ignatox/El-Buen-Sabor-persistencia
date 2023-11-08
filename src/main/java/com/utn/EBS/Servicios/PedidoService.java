@@ -34,4 +34,5 @@ public interface PedidoService extends BaseService<Pedido, Long>{
 
     public Page<Pedido> buscarPedidosAConfirmar(Pageable pageable) throws Exception;
 
+    public Pedido cambiarEstadoCaja(Long id) throws Exception;
 }
