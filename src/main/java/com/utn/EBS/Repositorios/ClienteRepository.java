@@ -1,6 +1,7 @@
 package com.utn.EBS.Repositorios;
 
 import com.utn.EBS.Entidades.Cliente;
+import com.utn.EBS.Entidades.Domicilio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -35,4 +36,5 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long>{
 
     @Query("SELECT c FROM Cliente c WHERE c.id= :id")
     Cliente modificarCliente(@Param("id") Long id);
+
 }

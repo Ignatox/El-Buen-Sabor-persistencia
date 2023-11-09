@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 public class ClienteController extends BaseControllerImpl<Cliente, ClienteServiceImpl>{
     @Autowired
-    ClienteServiceImpl usuarioService;
+    ClienteServiceImpl service;
     @GetMapping("/mostrarclientes")
     public ResponseEntity<?> mostrarClientes(){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioService.mostrarClientes());
+            return ResponseEntity.status(HttpStatus.OK).body(service.mostrarClientes());
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -27,7 +27,7 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
     @PutMapping("/modificarCliente")
     public ResponseEntity<?> modificarCliente(ModificarClienteDTO clienteDTO){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioService.modificarCliente(clienteDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(service.modificarCliente(clienteDTO));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

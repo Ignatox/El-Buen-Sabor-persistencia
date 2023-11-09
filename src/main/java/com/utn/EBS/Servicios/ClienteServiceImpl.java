@@ -49,11 +49,7 @@ implements ClienteService{
             entityUpdate.setTelefono(clienteDTO.getTelefono());
             entityUpdate.setFecha_modificacion(new Date());
             entityUpdate.setId(clienteDTO.getIdCliente());
-            //List <ClienteDomicilioDTO> domidto;
-            //domidto = clienteDTO.getDomicilios();
-            //List <Domicilio> domi= null;
-            //domi.add(domidto);
-            //NO VOY A TOCAR DOMICILIO POR AHORA
+            //los domicilios se editarán a parte
             clienteRepository.save(entityUpdate);
             return entityUpdate;
         } catch (Exception e) {

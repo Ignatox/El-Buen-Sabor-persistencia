@@ -15,6 +15,4 @@ public class ModificarClienteDTO {
     String apellido;
     String telefono;
     String email;
-    List<ClienteDomicilioDTO> domicilios;
-
 }

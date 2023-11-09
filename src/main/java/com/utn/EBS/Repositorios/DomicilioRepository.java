@@ -26,5 +26,11 @@ public interface DomicilioRepository extends BaseRepository <Domicilio, Long> {
 
     @Query("SELECT d FROM Domicilio d WHERE d.localidad = :localidad")
     Page<Domicilio> buscarPorLocalidad(@Param("localidad") String localidad, Pageable pageable);
+
+    @Query("SELECT cliente FROM Cliente cliente")
+    List<Domicilio> mostrarDomiciliosCliente(@Param("id") Long id);
+
+    @Query("SELECT c FROM Cliente c WHERE c.id= :id")
+    Domicilio modificarDomicilioCliente(@Param("id") Long id);
 }
 
