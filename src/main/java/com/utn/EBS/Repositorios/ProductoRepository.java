@@ -1,5 +1,6 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.DTO.ProductoPantallaPrincipalDTO;
 import com.utn.EBS.DTO.RankingProductoDTO;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
@@ -24,6 +25,9 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
 
     @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
     Page<Producto> buscarPorNombre(@Param("nombre") String nombre, Pageable pageable);
+
+    @Query("SELECT new com.utn.EBS.DTO.ProductoPantallaPrincipalDTO(p.id, p.tiempoEstimadoCocina, p.nombre, p.descripcion, p.foto, p.precio) FROM Producto p WHERE p.rubro.id = :idRubro")
+    List<ProductoPantallaPrincipalDTO> buscarPorRubroDTO(@Param("idRubro") Long idRubro);
 
     @Query("SELECT new com.utn.EBS.DTO.RankingProductoDTO(dp.producto.nombre, dp.producto.rubro.tipoRubro, SUM(dp.cantidad)) FROM DetallePedido dp " +
             "WHERE dp.pedido.fecha BETWEEN :fechaDesde AND :fechaHasta " +

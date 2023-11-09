@@ -65,23 +65,19 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     }
 
     @Override
-    public List<ProductoPantallaPrincipalDTO> traerProductosPaginaPrincipal() throws Exception {
+    public List<RubroPantallaPrincipalDTO> traerProductosPaginaPrincipal() throws Exception {
         try {
-            List<Producto> productos = productoRepository.findAll();
-            List<ProductoPantallaPrincipalDTO> listaProductos = new ArrayList<>();
-
-            for (Producto producto : productos) {
-                ProductoPantallaPrincipalDTO productoDTO = ProductoPantallaPrincipalDTO.builder()
-                        .nombre(producto.getNombre())
-                        .descripcion(producto.getDescripcion())
-                        .foto(producto.getFoto())
-                        .precio(producto.getPrecio())
-                        .tiempoEstimadoCocina(producto.getTiempoEstimadoCocina())
-                        .rubro(producto.getRubro().getNombre())
+            List<Rubro> rubros = rubroRepository.findAll();
+            List<RubroPantallaPrincipalDTO> listaRubrosProductos = new ArrayList<>();
+            for (Rubro rubro : rubros) {
+                List<ProductoPantallaPrincipalDTO> productosRubroEnviar = productoRepository.buscarPorRubroDTO(rubro.getId());
+                RubroPantallaPrincipalDTO rubroEnviar = RubroPantallaPrincipalDTO.builder()
+                        .nombreRubro(rubro.getNombre())
+                        .productos(productosRubroEnviar)
                         .build();
-                listaProductos.add(productoDTO);
+                listaRubrosProductos.add(rubroEnviar);
             }
-            return listaProductos;
+            return listaRubrosProductos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

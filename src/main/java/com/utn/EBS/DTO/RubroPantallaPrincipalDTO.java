@@ -1,11 +1,13 @@
 package com.utn.EBS.DTO;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class PantallaPrincipalDTO {
-    String nombreCategoria;
+@Builder
+public class RubroPantallaPrincipalDTO {
     List<ProductoPantallaPrincipalDTO> productos;
+    private String nombreRubro;
 }
