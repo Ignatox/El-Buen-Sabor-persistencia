@@ -1,14 +1,16 @@
 package com.utn.EBS.Repositorios;
 
+import com.utn.EBS.DTO.RankingProductoDTO;
 import com.utn.EBS.Entidades.Pedido;
 import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Enumeraciones.TipoProducto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -17,16 +19,14 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
     @Query("SELECT p FROM Producto p WHERE p.id = :id")
     Producto buscarPorId(@Param("id") Long id);
 
-    @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
-    List<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion);
+    @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
+    List<Producto> buscarPorNombre(@Param("nombre") String nombre);
 
-    @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
-    List<Producto>  buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto);
+    @Query("SELECT p FROM Producto p WHERE p.nombre = :nombre")
+    Page<Producto> buscarPorNombre(@Param("nombre") String nombre, Pageable pageable);
 
-    @Query("SELECT p FROM Producto p WHERE p.denominacion = :denominacion")
-    Page<Producto> buscarPorDenominacion(@Param("denominacion") String denominacion, Pageable pageable);
-
-    @Query("SELECT p FROM Producto p WHERE p.tipoProducto = :tipoProducto")
-    Page<Producto> buscarPorTipoProducto(@Param("tipoProducto") TipoProducto tipoProducto, Pageable pageable);
-
+    @Query("SELECT new com.utn.EBS.DTO.RankingProductoDTO(dp.producto.nombre, dp.producto.rubro.tipoRubro, SUM(dp.cantidad)) FROM DetallePedido dp " +
+            "WHERE dp.pedido.fecha BETWEEN :fechaDesde AND :fechaHasta " +
+            "GROUP BY dp.producto.nombre")
+    List<RankingProductoDTO> buscarRankingProductos(@Param("fechaDesde") Date fechaDesde, @Param("fechaHasta") Date fechaHasta);
 }

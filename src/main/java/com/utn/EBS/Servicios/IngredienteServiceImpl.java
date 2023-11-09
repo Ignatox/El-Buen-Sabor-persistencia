@@ -1,9 +1,12 @@
 package com.utn.EBS.Servicios;
 
+import com.utn.EBS.DTO.IngredienteDTO;
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.IngredienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +34,7 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
             });
             return ingrediente.get();
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception(e.getMessage()+" tiro error");
         }
     }
 
@@ -44,7 +47,7 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
                 ingredienteRepository.save(ingredienteActualizado);
                 return ingredienteActualizado;
             } else
-                throw new Exception("Producto no encontrado.");
+                throw new Exception("Ingrediente no encontrado.");
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -70,10 +73,18 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
         }
     }
 
+//    Page<IngredienteDTO> buscarPorStockNoOK(Pageable pageable) throws Exception{
+//        try{
+//
+//        }catch (Exception e) {
+//            throw new Exception(e.getMessage());
+//        }
+//    }
+
     @Override
-    public List<Ingrediente> buscarPorDenominacion(String filtroDenom) throws Exception {
+    public List<Ingrediente> buscarPorNombre(String filtroNombre) throws Exception {
         try {
-            List<Ingrediente> ingredientes = ingredienteRepository.buscarPorDenominacion(filtroDenom);
+            List<Ingrediente> ingredientes = ingredienteRepository.buscarPorNombre(filtroNombre);
             return ingredientes;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

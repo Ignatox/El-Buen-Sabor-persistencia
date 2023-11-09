@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implements UsuarioService{
+public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -31,3 +31,4 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implement
 
 
 }
+

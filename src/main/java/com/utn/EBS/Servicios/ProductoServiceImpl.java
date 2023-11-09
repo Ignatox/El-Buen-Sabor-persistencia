@@ -1,12 +1,7 @@
 package com.utn.EBS.Servicios;
 
-import com.utn.EBS.DTO.AgregarProductoDTO;
-import com.utn.EBS.DTO.ProductoIngredienteDTO;
-import com.utn.EBS.Entidades.Ingrediente;
-import com.utn.EBS.Entidades.Producto;
-import com.utn.EBS.Entidades.ProductoIngrediente;
-import com.utn.EBS.Enumeraciones.TipoProducto;
-import com.utn.EBS.Entidades.Rubro;
+import com.utn.EBS.DTO.*;
+import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Repositorios.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -17,12 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService {
     @Autowired
-    private ProductoRepository productoRepository;
+    ProductoRepository productoRepository;
     @Autowired
     RubroRepository rubroRepository;
     @Autowired
@@ -30,61 +24,30 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     @Autowired
     ProductoIngredienteRepository productoIngredienteRepository;
 
+    public ProductoServiceImpl(BaseRepository<Producto, Long> baseRepository) {
+        super(baseRepository);
+    }
+
     @Override
     @Transactional
     public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {
         try {
-            /* Bueno va a ser horrible este metodo pero q funcione al menos
-            // Buscamos el rubro
             Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
                     .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
 
             Producto producto = Producto.builder()
-                    .tipoProducto(agregarProductoDTO.getTipoProducto())
-                    .foto("foto")
-                    .denominacion(agregarProductoDTO.getDenominacion())
-                    .precioCompra(agregarProductoDTO.getPrecioCompra())
-                    .precioVenta(agregarProductoDTO.getPrecioVenta())
+                    .foto(agregarProductoDTO.getFoto())
+                    .nombre(agregarProductoDTO.getNombre())
+                    .descripcion(agregarProductoDTO.getDescripcion())
+                    .precio(agregarProductoDTO.getPrecio())
                     .receta(agregarProductoDTO.getReceta())
-                    .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
-                    .rubro(rubro)
-                    .build();
-
-            // Buscamos los ingredientes y creamos las relaciones
-            List<ProductoIngredienteDTO> ingredientes = agregarProductoDTO.getIngredienteDTOS();
-            List<ProductoIngrediente> productoIngredientes = new ArrayList<>();
-
-            for (ProductoIngredienteDTO productoIngredienteDTO: ingredientes) {
-                Ingrediente ingredienteRequerido = ingredienteRepository.findById(productoIngredienteDTO.getIngredienteId())
-                        .orElseThrow(() -> new EntityNotFoundException("No se encontro uno de los ingredientes."));
-                ProductoIngrediente productoIngrediente = ProductoIngrediente.builder()
-                        .ingrediente(ingredienteRequerido)
-                        .producto(producto)
-                        .cantidad(productoIngredienteDTO.getCantidad())
-                        .build();
-                productoIngredientes.add(productoIngrediente);
-            }
-            //productoIngredienteRepository.saveAll(productoIngredientes);
-            producto.setIngredientes(productoIngredientes);
-
-            return productoRepository.save(producto);
-            */
-            Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
-                    .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
-
-            Producto producto = Producto.builder()
-                    .tipoProducto(agregarProductoDTO.getTipoProducto())
-                    .foto("foto")
-                    .denominacion(agregarProductoDTO.getDenominacion())
-                    .precioCompra(agregarProductoDTO.getPrecioCompra())
-                    .precioVenta(agregarProductoDTO.getPrecioVenta())
-                    .receta(agregarProductoDTO.getReceta())
+                    .estadoProducto(agregarProductoDTO.getEstado())
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
                     .rubro(rubro)
                     .build();
             productoRepository.save(producto);
             List<ProductoIngredienteDTO> ingredientes = agregarProductoDTO.getIngredienteDTOS();
-            for (ProductoIngredienteDTO productoIngredienteDTO: ingredientes) {
+            for (ProductoIngredienteDTO productoIngredienteDTO : ingredientes) {
                 Ingrediente ingredienteRequerido = ingredienteRepository.findById(productoIngredienteDTO.getIngredienteId())
                         .orElseThrow(() -> new EntityNotFoundException("No se encontro uno de los ingredientes."));
                 ProductoIngrediente productoIngrediente = ProductoIngrediente.builder()
@@ -101,55 +64,58 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
         }
     }
 
-    public ProductoServiceImpl(BaseRepository<Producto, Long> baseRepository) {
-        super(baseRepository);
-    }
-
-@Override
-    public List<Producto> buscarPorDenominacion( String denominacion)throws Exception{
-    try {
-        List<Producto> productos = productoRepository.buscarPorDenominacion(denominacion);
-        return productos;
-    }catch (Exception e){
-        throw new Exception(e.getMessage());
-    }
-}
     @Override
-    public List<Producto> buscarPorTipoProducto(TipoProducto tipoProducto)throws Exception{
+    public List<ProductoPantallaPrincipalDTO> traerProductosPaginaPrincipal() throws Exception {
         try {
-            List<Producto> productos = productoRepository.buscarPorTipoProducto(tipoProducto);
-            return productos;
-        }catch (Exception e) {
-            throw new Exception(e.getMessage());
+            List<Producto> productos = productoRepository.findAll();
+            List<ProductoPantallaPrincipalDTO> listaProductos = new ArrayList<>();
+
+            for (Producto producto : productos) {
+                ProductoPantallaPrincipalDTO productoDTO = ProductoPantallaPrincipalDTO.builder()
+                        .nombre(producto.getNombre())
+                        .descripcion(producto.getDescripcion())
+                        .foto(producto.getFoto())
+                        .precio(producto.getPrecio())
+                        .tiempoEstimadoCocina(producto.getTiempoEstimadoCocina())
+                        .rubro(producto.getRubro().getNombre())
+                        .build();
+                listaProductos.add(productoDTO);
             }
-        }
-
-    // Estos metodos son de ingrediente, no de producto
-  //@Override
-  //  public List<Producto> ProductosAReponer() throws Exception {
-   //     try {
-   //         List<Producto> productosRep = productoRepository.reponerProducto();
-   //         return productosRep;
-   //     } catch (Exception e) {
-    //        throw new Exception(e.getMessage());
-    //    }
-   // }
-
-    @Override
-    public Page<Producto> buscarPorDenominacion(String denominacion, Pageable pageable)throws Exception{
-        try {
-            Page<Producto> productos = productoRepository.buscarPorDenominacion(denominacion, pageable);
-            return productos;
-        }catch (Exception e){
+            return listaProductos;
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
+
     @Override
-    public Page<Producto> buscarPorTipoProducto(TipoProducto tipoProducto, Pageable pageable)throws Exception{
+    public List<RankingProductoDTO> traerRankingProductos(BuscarRankingProductosDTO buscarRankingProductosDTO) throws Exception {
         try {
-            Page<Producto> productos = productoRepository.buscarPorTipoProducto(tipoProducto, pageable);
+            List<RankingProductoDTO> rankingProductoDTOS = productoRepository.buscarRankingProductos(buscarRankingProductosDTO.getFechaDesde(), buscarRankingProductosDTO.getFechaHasta());
+            for (RankingProductoDTO dto: rankingProductoDTOS) {
+                System.out.print(dto.getNombreProducto());
+            }
+            return rankingProductoDTOS;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Producto> buscarPorNombre(String nombre) throws Exception {
+        try {
+            List<Producto> productos = productoRepository.buscarPorNombre(nombre);
             return productos;
-        }catch (Exception e){
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public Page<Producto> buscarPorNombre(String nombre, Pageable pageable) throws Exception {
+        try {
+            Page<Producto> productos = productoRepository.buscarPorNombre(nombre, pageable);
+            return productos;
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }

@@ -1,8 +1,8 @@
 package com.utn.EBS.Repositorios;
 
-import com.utn.EBS.Entidades.DetallePedido;
 import com.utn.EBS.Entidades.Ingrediente;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,6 +21,9 @@ public interface IngredienteRepository extends BaseRepository <Ingrediente, Long
     @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual < stockMinimo")
     List<Ingrediente> buscarPorStockNoOK();
 
-    @Query(value = "SELECT i FROM Ingrediente i WHERE i.denominacion LIKE '%?filtroDenom%' ")
-    List<Ingrediente> buscarPorDenominacion(@Param("filtroDenom") String filtroDenom);
+    @Query(value = "SELECT i FROM Ingrediente i WHERE stockActual < stockMinimo")
+    Page<Ingrediente> buscarPorStockNoOK(Pageable pageable);
+
+    @Query(value = "SELECT i FROM Ingrediente i WHERE i.nombre LIKE '%?filtroNombre%' ")
+    List<Ingrediente> buscarPorNombre(@Param("filtroNombre") String filtroNombre);
 }

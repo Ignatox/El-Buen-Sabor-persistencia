@@ -6,13 +6,13 @@ import com.fasterxml.jackson.databind.annotation.JsonAppend;
 public enum Rol {
     Cajero("Cajero"),
     Delivery("Delivery"),
-    Cliente("Cleinte"),
+    Cliente("Cliente"),
     Administrador("Administrador");
 
     private String texto;
 
     private Rol(String texto){
-        this.texto=texto;
+        this.texto = texto;
     }
 
     public String getTexto(){

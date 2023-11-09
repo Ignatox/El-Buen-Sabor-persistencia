@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface UsuarioService extends BaseService<Usuario, Long>{
 
-
 }

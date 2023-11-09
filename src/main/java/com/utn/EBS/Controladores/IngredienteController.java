@@ -24,7 +24,7 @@ public class IngredienteController extends BaseControllerImpl<Ingrediente, Ingre
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ingredienteService.registrarCompraIngrediente(id,costoCompra));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error, intente denuevo");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\""+e.getMessage()+"\"}");
         }
     }
 
@@ -33,7 +33,7 @@ public class IngredienteController extends BaseControllerImpl<Ingrediente, Ingre
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ingredienteService.actualizarStockIngrediente(id,cantComprada));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error, intente denuevo");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\""+e.getMessage()+"\"}");
 
         }
     }
@@ -54,9 +54,9 @@ public class IngredienteController extends BaseControllerImpl<Ingrediente, Ingre
         }
     }
     @GetMapping("/buscarPorDenominacion")
-    public ResponseEntity<?> buscarPorDenominacion(@RequestParam String filtroDenom){
+    public ResponseEntity<?> buscarPorNombre(@RequestParam String filtroNombre){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorDenominacion(filtroDenom));
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPorNombre(filtroNombre));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"" + e.getMessage() + "\"}");
         }

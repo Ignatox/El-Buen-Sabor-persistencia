@@ -19,6 +19,7 @@ public interface ClienteRepository extends BaseRepository<Cliente, Long>{
     @Query ("SELECT c FROM Cliente c WHERE c.nombre = :nombre")
     List<Cliente> buscarPornombre(@Param("nombre") String nombre);
 
+
     @Query("SELECT c FROM Cliente c WHERE c.nombre = :nombre AND c.apellido = :apellido")
     List<Cliente> buscarPornombreYApellido(@Param("nombre") String nombre, @Param("apellido") String apellido);
 

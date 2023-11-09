@@ -1,5 +1,6 @@
 package com.utn.EBS.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.EBS.Enumeraciones.FormaPago;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,9 +31,17 @@ public class Factura extends BaseEntidad {
 
     @Enumerated(EnumType.STRING)
     @Column (name = "forma_pago", nullable = false)
-
     private FormaPago formaPago;
 
     @Column (name = "total", nullable = false)
     private int total;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "factura")
+    private Pedido pedido;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "factura_id", referencedColumnName = "id")
+    private NotaCredito notaCredito;                                // Para mi es mejor crear la nota de Credito directamente desde Factura
+                                                                    // Pq sino hay q hacer un DTO de notaCredito
 }

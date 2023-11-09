@@ -1,18 +1,13 @@
 package com.utn.EBS.Entidades;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.utn.EBS.Enumeraciones.TipoProducto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
-
-import java.awt.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -27,11 +22,14 @@ import java.util.List;
 
 
 public class ProductoIngrediente extends BaseEntidad{
-    @ManyToOne
+
+    @JsonBackReference(value = "producto-producto-ingrediente")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
-    @ManyToOne
+    @JsonBackReference(value = "ingrediente-producto-ingrediente")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
     private Ingrediente ingrediente;
 
