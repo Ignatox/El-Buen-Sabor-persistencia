@@ -1,7 +1,6 @@
 package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.ClienteDomicilioDTO;
-import com.utn.EBS.DTO.DetallePedidoDto;
 import com.utn.EBS.DTO.ModificarClienteDTO;
 import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
