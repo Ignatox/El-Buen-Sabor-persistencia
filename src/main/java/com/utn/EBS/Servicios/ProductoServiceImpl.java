@@ -30,7 +30,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
 
     @Override
     @Transactional
-    public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {
+    public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {  //Puede que lo tenga q modificar para relacionarlo con el front
         try {
             Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
                     .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
