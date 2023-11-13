@@ -2,14 +2,19 @@ package com.utn.EBS.DTO;
 
 import com.utn.EBS.Entidades.Ingrediente;
 import com.utn.EBS.Enumeraciones.EstadoRubro;
+import lombok.Builder;
 import lombok.Data;
 
-@Data
+import java.util.List;
 
+@Data
+@Builder
 public class AltaRubroDTO {
     private Long idRubro;
     private String nombre;
     public EstadoRubro estado;
     private String NombreIngrediente;
+    //lista de ingredientes relacionada al rubro
+    private List<Ingrediente> ingredientes;
     
 }
