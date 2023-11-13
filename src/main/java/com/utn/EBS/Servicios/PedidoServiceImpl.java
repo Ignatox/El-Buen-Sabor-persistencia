@@ -9,12 +9,12 @@ import com.utn.EBS.Entidades.Producto;
 import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
 
-import com.utn.EBS.DTO.DetallePedidoDTO;
+
 import com.utn.EBS.DTO.ProductoDTO;
 import com.utn.EBS.DTO.RegistrarPedidoDTO;
 import com.utn.EBS.DTO.PedidoCocinaDTO;
-import com.utn.EBS.Entidades.*;
-import com.utn.EBS.Enumeraciones.EstadoPedido;
+
+
 import com.utn.EBS.Enumeraciones.FormaPago;
 import com.utn.EBS.Repositorios.*;
 import jakarta.transaction.Transactional;
@@ -316,15 +316,15 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         try{
             Pedido ped=pedidoRepository.buscarPorId(id);
             Factura fac= facturaRepository.buscarPorId(id);
-if (ped==null || ped.isDeleted()){
-    throw new Exception("El pedido no existe o fue eliminado");
-}
+        if (ped==null || ped.isDeleted()){
+            throw new Exception("El pedido no existe o fue eliminado");
+        }
 
             switch (ped.getEstado()) {
                 case A_CONFIRMAR:
-                    ped.setEstado(EstadoPedido.A_COCINA);
+                    ped.setEstado(EstadoPedido.INICIADO);
                     break;
-                case A_COCINA:
+                case INICIADO:
                     if (fac.getFormaPago() == FormaPago.EFECTIVO) {
                         ped.setEstado(EstadoPedido.ENTREGADO);
                     } else {

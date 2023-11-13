@@ -75,32 +75,38 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
     }
 
     @GetMapping("/{id}/historialPedidos")
-    public ResponseEntity<?> buscarPorCliente(@RequestParam("id") Long id){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorCliente(id));
-        }catch (Exception e) {
-
-    @GetMapping("/EntregarPedidos")
-    public ResponseEntity<?> buscarPedidosAEntregar(Pageable pageable ){
+    public ResponseEntity<?> buscarPorCliente(@RequestParam("id") Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPedidosAEntregar(pageable));
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorCliente(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
+    @GetMapping("/EntregarPedidos") //delivery
+    public ResponseEntity<?> buscarPedidosAEntregar(Pageable pageable){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPedidosAEntregar(pageable));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/PedidosCaja")
-    public ResponseEntity<?> buscarPedidosAConfirmar(Pageable pageable ){
+    public ResponseEntity<?> buscarPedidosAConfirmar( Pageable pageable){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.buscarPedidosAConfirmar(pageable));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-    @PutMapping("/PedidosCaja/{$id}")
-
-    public ResponseEntity<?> cambiarEstados(Long id, Pedido pedido){
-
+    @PostMapping("/PedidosCaja/{$id}")
+   public ResponseEntity<?> cambiarEstadoCaja(@RequestBody Long id){
+    try{
+        return  ResponseEntity.status(HttpStatus.OK).body(servicio.cambiarEstadoCaja(id));
+    }catch (Exception e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
     }
 
 }

@@ -32,16 +32,18 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
         }
     }
 
-    @Autowired
-    RubroServiceImpl rubroService;
     @PostMapping("/agregarRubro")
     public ResponseEntity<?> agregarRubro(@RequestBody AgregarRubroDTO agregarRubroDTO) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubro(agregarRubroDTO));
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(rubroServiceImpl.agregarRubro(agregarRubroDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Intente despues.\"}");
+        }
+    }
     @PostMapping("/agregarRubroIngrediente")
     public ResponseEntity<?> agregarRubroIng(@RequestBody Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(rubroService.agregarRubroIng(id));
+            return ResponseEntity.status(HttpStatus.OK).body(rubroServiceImpl.agregarRubroIng(id));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -52,7 +54,7 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
     public ResponseEntity<?> editarRubro(AltaRubroDTO altaRubroDTO){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.editarRubro(altaRubroDTO));
-        } catch (Exception e) {
+        }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
