@@ -48,14 +48,21 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
             throw new Exception(e.getMessage());
         }
     }
-
+    @Transactional
     public Rubro agregarRubroIng(AltaRubroDTO altaRubroDTO) throws Exception {
+        //voy a tener que arreglar los parametros dependiendo cual metodo use
         try {
             Rubro rubro = Rubro.builder()
                     .nombre(altaRubroDTO.getNombre())
                     .estado(altaRubroDTO.getEstado())
                     .build();
-            //agregar los ingredientes al rubro
+            // Obtener los ingredientes desde el DTO
+            List<Ingrediente> ingredientes = altaRubroDTO.getIngredientes();
+
+            // Asignar los ingredientes al rubro
+            rubro.setIngredientes(ingredientes);
+
+            // Guardar el rubro con sus respectivos ingredientes
             rubroRepository.save(rubro);
             return rubro;
         } catch (Exception e) {
@@ -64,24 +71,25 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
     }
 
 
-    @Transactional
 
-    public AltaRubroDTO agregarRubroIng(Long id) throws Exception {
-        try {
-            Ingrediente ingrediente = ingredienteRepository.buscarPorId(id);
-            Rubro rubro = rubroRepository.buscarPorId(id);
-            AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
+    //@Transactional
 
-            altaRubroDTO.setNombre(rubro.getNombre());
-            altaRubroDTO.setEstado(EstadoRubro.ACTIVO);
-            altaRubroDTO.setNombreIngrediente(ingrediente.getNombre());
+   // public AltaRubroDTO agregarRubroIng(Long id) throws Exception {
+     //   try {
+       //     Ingrediente ingrediente = ingredienteRepository.buscarPorId(id);
+         //   Rubro rubro = rubroRepository.buscarPorId(id);
+           // AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
 
-            return altaRubroDTO;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+            //altaRubroDTO.setNombre(rubro.getNombre());
+            //altaRubroDTO.setEstado(EstadoRubro.ACTIVO);
+            //altaRubroDTO.setNombreIngrediente(ingrediente.getNombre());
 
-    }
+            //return altaRubroDTO;
+       // } catch (Exception e) {
+         //   throw new Exception(e.getMessage());
+      //  }
+
+    //}
 
 
 
