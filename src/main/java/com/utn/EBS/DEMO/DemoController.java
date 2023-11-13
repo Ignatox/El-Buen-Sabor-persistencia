@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/demo")
-public class DemoController {  //El DemoController en teoria simula al usuarioController, seguir con esto
+public class DemoController {  //El DemoController en teoria simula al UsuarioController, seguir con esto
 
     @PostMapping(value = "demoUser")
     public String welcome()
