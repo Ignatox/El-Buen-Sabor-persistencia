@@ -28,6 +28,7 @@ public class ProductoController extends BaseControllerImpl<Producto, ProductoSer
         }
     }
 
+    //Habria que hacer un update de producto, o sino usar el base.
     @GetMapping(path = "/paginaPrincipal")
     public ResponseEntity<?> traerProductosPaginaPrincipal() {
         try {
