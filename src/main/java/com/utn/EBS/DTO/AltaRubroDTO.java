@@ -13,8 +13,11 @@ public class AltaRubroDTO {
     private Long idRubro;
     private String nombre;
     public EstadoRubro estado;
-    private String NombreIngrediente;
+    //private String NombreIngrediente;
+    private List<Ingrediente> IngredienteRel;
     //lista de ingredientes relacionada al rubro
-    private List<Ingrediente> ingredientes;
+    //private List<NombreIngredienteDTO> NombreIngrediente;
+
+
     
 }

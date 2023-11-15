@@ -90,4 +90,5 @@ public class IngredienteServiceImpl extends BaseServiceImpl<Ingrediente, Long> i
             throw new Exception(e.getMessage());
         }
     }
+
 }

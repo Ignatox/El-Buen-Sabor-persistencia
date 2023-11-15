@@ -9,6 +9,7 @@ import com.utn.EBS.DTO.AltaRubroDTO;
 
 public interface RubroService extends BaseService<Rubro, Long>{
     public Rubro agregarRubro(AgregarRubroDTO agregarRubroDTO) throws Exception;
-    public AltaRubroDTO agregarRubroIng(Long id) throws Exception;
-    public AltaRubroDTO editarRubro(AltaRubroDTO altaRubroDTO) throws Exception;
+    public Rubro agregarRubroIng(AltaRubroDTO altaRubroDTO) throws Exception;
+    public Rubro editarRubro(AltaRubroDTO altaRubroDTO) throws Exception;
+    public AltaRubroDTO CrearNuevoRubro(Long id) throws Exception;
 }

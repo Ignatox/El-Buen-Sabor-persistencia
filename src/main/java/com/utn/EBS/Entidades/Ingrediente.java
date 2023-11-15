@@ -51,4 +51,9 @@ public class Ingrediente extends BaseEntidad{
     @JsonManagedReference(value = "ingrediente-producto-ingrediente")
     @OneToMany(mappedBy = "ingrediente")
     private List<ProductoIngrediente> productos;
+
+    @JsonManagedReference(value="ingrediente-rubro")
+    @ManyToOne
+    @JoinColumn(name = "rubro_id")
+    private  Rubro rubro;
 }
