@@ -6,7 +6,6 @@ import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Entidades.*;
 import com.utn.EBS.Enumeraciones.EstadoRubro;
-import com.utn.EBS.Repositorios.IngredienteRepository;
 import com.utn.EBS.Repositorios.RubroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import java.util.List;
 public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements RubroService{
     @Autowired
     private RubroRepository rubroRepository;
-    private IngredienteRepository ingredienteRepository;
+
 
     public RubroServiceImpl(BaseRepository<Rubro, Long> baseRepository) {
         super(baseRepository);
@@ -48,19 +47,39 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
             throw new Exception(e.getMessage());
         }
     }
+    @Override
+    @Transactional
+    public AltaRubroDTO CrearNuevoRubro(Long id) throws Exception{
+        try{
+            Rubro rubro = rubroRepository.buscarPorId(id);
+            AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
+
+            altaRubroDTO.setNombre(rubro.getNombre());
+            altaRubroDTO.setEstado(rubro.getEstado());
+            altaRubroDTO.setIngredienteRel(altaRubroDTO.getIngredienteRel());
+
+            return altaRubroDTO;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+
+    }
     @Transactional
     public Rubro agregarRubroIng(AltaRubroDTO altaRubroDTO) throws Exception {
-        //voy a tener que arreglar los parametros dependiendo cual metodo use
         try {
+
             Rubro rubro = Rubro.builder()
                     .nombre(altaRubroDTO.getNombre())
                     .estado(altaRubroDTO.getEstado())
+                    .ingredientes(altaRubroDTO.getIngredienteRel())
                     .build();
             // Obtener los ingredientes desde el DTO
-            List<Ingrediente> ingredientes = altaRubroDTO.getIngredientes();
+           // List<Ingrediente> ingredientes = altaRubroDTO.getNombreIngrediente();
 
             // Asignar los ingredientes al rubro
-            rubro.setIngredientes(ingredientes);
+            //rubro.setIngredientes(ingredientes);
 
             // Guardar el rubro con sus respectivos ingredientes
             rubroRepository.save(rubro);
@@ -94,27 +113,28 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
 
 
     @Transactional
-    public AltaRubroDTO editarRubro(AltaRubroDTO altaRubroDTO) throws Exception{
-        try{
+    public Rubro editarRubro(AltaRubroDTO altaRubroDTO) throws Exception {
+        try {
 
-            Rubro rubroModificado=rubroRepository.buscarPorId(altaRubroDTO.getIdRubro());
-            if(altaRubroDTO.getNombre() != null && !altaRubroDTO.getNombre().isEmpty())
+            Rubro rubroModificado = rubroRepository.buscarPorId(altaRubroDTO.getIdRubro());
+            if (altaRubroDTO.getNombre() != null && !altaRubroDTO.getNombre().isEmpty())
                 altaRubroDTO.setNombre(altaRubroDTO.getNombre());
 
-            if(altaRubroDTO.getEstado() != null)
+            if (altaRubroDTO.getEstado() != null)
                 altaRubroDTO.setEstado(EstadoRubro.MODIFICADO);
 
-            if(altaRubroDTO.getNombreIngrediente() != null && !altaRubroDTO.getNombreIngrediente().isEmpty())
-                altaRubroDTO.setNombreIngrediente(altaRubroDTO.getNombreIngrediente());
+            //if(altaRubroDTO.getNombreIngrediente() != null && !altaRubroDTO.getNombreIngrediente().isEmpty())
+             //  altaRubroDTO.setNombreIngrediente(altaRubroDTO.getNombreIngrediente());
+
+
 
             rubroRepository.save(rubroModificado);
-            return altaRubroDTO;
+            return rubroModificado;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
 
+
     }
-
-
-}
+    }
