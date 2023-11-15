@@ -47,34 +47,34 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
             throw new Exception(e.getMessage());
         }
     }
-    @Override
-    @Transactional
-    public AltaRubroDTO CrearNuevoRubro(Long id) throws Exception{
-        try{
-            Rubro rubro = rubroRepository.buscarPorId(id);
-            AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
+//    @Override
+  //  @Transactional
+    //public AltaRubroDTO CrearNuevoRubro(Long id) throws Exception{
+      //  try{
+        //    Rubro rubro = rubroRepository.buscarPorId(id);
+          //  AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
 
-            altaRubroDTO.setNombre(rubro.getNombre());
-            altaRubroDTO.setEstado(rubro.getEstado());
-            altaRubroDTO.setIngredienteRel(altaRubroDTO.getIngredienteRel());
+            //altaRubroDTO.setNombre(rubro.getNombre());
+            //altaRubroDTO.setEstado(rubro.getEstado());
+            //altaRubroDTO.setIngredienteRel(altaRubroDTO.getIngredienteRel());
 
-            return altaRubroDTO;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
+         //   return altaRubroDTO;
+      //  }catch (Exception e){
+        //    throw new Exception(e.getMessage());
+       // }
 
 
 
-    }
-    @Transactional
-    public Rubro agregarRubroIng(AltaRubroDTO altaRubroDTO) throws Exception {
-        try {
 
-            Rubro rubro = Rubro.builder()
-                    .nombre(altaRubroDTO.getNombre())
-                    .estado(altaRubroDTO.getEstado())
-                    .ingredientes(altaRubroDTO.getIngredienteRel())
-                    .build();
+   // @Transactional
+//    public Rubro agregarRubroIng(AltaRubroDTO altaRubroDTO) throws Exception {
+  //      try {
+
+//            Rubro rubro = Rubro.builder()
+  //                  .nombre(altaRubroDTO.getNombre())
+    //                .estado(altaRubroDTO.getEstado())
+      //              .ingredientes(altaRubroDTO.getIngredienteRel())
+        //            .build();
             // Obtener los ingredientes desde el DTO
            // List<Ingrediente> ingredientes = altaRubroDTO.getNombreIngrediente();
 
@@ -82,12 +82,12 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
             //rubro.setIngredientes(ingredientes);
 
             // Guardar el rubro con sus respectivos ingredientes
-            rubroRepository.save(rubro);
-            return rubro;
-        } catch (Exception e) {
-            throw  new Exception(e.getMessage());
-        }
-    }
+ //           rubroRepository.save(rubro);
+   //         return rubro;
+     //   } catch (Exception e) {
+      //      throw  new Exception(e.getMessage());
+       // }
+  //  }
 
 
 
@@ -112,29 +112,29 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
 
 
 
-    @Transactional
-    public Rubro editarRubro(AltaRubroDTO altaRubroDTO) throws Exception {
-        try {
+    //@Transactional
+    //public Rubro editarRubro(AltaRubroDTO altaRubroDTO) throws Exception {
+       // try {
 
-            Rubro rubroModificado = rubroRepository.buscarPorId(altaRubroDTO.getIdRubro());
-            if (altaRubroDTO.getNombre() != null && !altaRubroDTO.getNombre().isEmpty())
-                altaRubroDTO.setNombre(altaRubroDTO.getNombre());
+            //Rubro rubroModificado = rubroRepository.buscarPorId(altaRubroDTO.getIdRubro());
+           // if (altaRubroDTO.getNombre() != null && !altaRubroDTO.getNombre().isEmpty())
+                //altaRubroDTO.setNombre(altaRubroDTO.getNombre());
 
-            if (altaRubroDTO.getEstado() != null)
-                altaRubroDTO.setEstado(EstadoRubro.MODIFICADO);
+           // if (altaRubroDTO.getEstado() != null)
+                //altaRubroDTO.setEstado(EstadoRubro.MODIFICADO);
 
             //if(altaRubroDTO.getNombreIngrediente() != null && !altaRubroDTO.getNombreIngrediente().isEmpty())
              //  altaRubroDTO.setNombreIngrediente(altaRubroDTO.getNombreIngrediente());
 
 
 
-            rubroRepository.save(rubroModificado);
-            return rubroModificado;
+           // rubroRepository.save(rubroModificado);
+          //  return rubroModificado;
 
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        //} catch (Exception e) {
+           // throw new Exception(e.getMessage());
+      //  }
 
 
     }
-    }
+
