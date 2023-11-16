@@ -21,9 +21,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="producto")
-//Usamos la siguiente etiqueta para hacer un update de sql al atributo "DELETED" a TRUE
+//Usamos la siguiente etiqueta para hacer un update de sql al atributo "DELETED" a TRUE, esto va a hacer que no aparezca en la pag
 @SQLDelete(sql = "UPDATE producto SET deleted = true WHERE id=?")
-//Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
+//Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted = true
 @Where(clause = "deleted=false")
 
 
@@ -49,7 +49,7 @@ public class Producto extends BaseEntidad {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
-    private EstadoProducto estadoProducto;
+    private EstadoProducto estado;
 
     @JsonBackReference(value = "rubro-producto")
     @ManyToOne(fetch = FetchType.LAZY)

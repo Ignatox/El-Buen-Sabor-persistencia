@@ -41,7 +41,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
                     .descripcion(agregarProductoDTO.getDescripcion())
                     .precio(agregarProductoDTO.getPrecio())
                     .receta(agregarProductoDTO.getReceta())
-                    .estadoProducto(agregarProductoDTO.getEstado())
+                    .estado(agregarProductoDTO.getEstado())
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
                     .rubro(rubro)
                     .build();
@@ -115,4 +115,6 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
+
+
 }

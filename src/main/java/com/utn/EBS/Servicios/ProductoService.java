@@ -17,4 +17,6 @@ public interface ProductoService extends BaseService<Producto, Long>{
     public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception;
     public List<RubroPantallaPrincipalDTO> traerProductosPaginaPrincipal() throws Exception;
     public List<RankingProductoDTO> traerRankingProductos(BuscarRankingProductosDTO buscarRankingProductosDTO) throws Exception;
+
+
 }
