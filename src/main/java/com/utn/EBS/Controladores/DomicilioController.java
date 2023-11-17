@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/domilicios")
+@RequestMapping(path = "api/v1/domicilios")
 public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioServiceImpl>{
     @Autowired
     DomicilioServiceImpl service;
