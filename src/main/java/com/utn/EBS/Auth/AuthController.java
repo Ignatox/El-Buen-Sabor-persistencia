@@ -1,5 +1,6 @@
 package com.utn.EBS.Auth;
 
+import com.utn.EBS.DTO.CrearUsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,18 @@ public class AuthController {
     @PostMapping(value = "registerCliente")
     public ResponseEntity<?> registerCliente(@RequestBody RegisterClienteRequest request)
     {
-        return ResponseEntity.ok(authService.registerCliente(request));
+        try {
+            return ResponseEntity.ok(authService.registerCliente(request));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
+
+    @PostMapping(value = "crearUsuario")
+    public ResponseEntity<?> crearUsuario(@RequestBody CrearUsuarioDTO crearUsuarioDTO)
+    {
+        return ResponseEntity.ok(authService.crearUsuario(crearUsuarioDTO));
+    }
+
 }
 

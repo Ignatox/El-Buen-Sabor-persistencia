@@ -1,6 +1,7 @@
 package com.utn.EBS.Auth;
 
 
+import com.utn.EBS.DTO.CrearUsuarioDTO;
 import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Entidades.Usuario;
@@ -78,6 +79,20 @@ public class AuthService {
                 .token(jwtService.getToken(user))
                 .build();
 
+    }
+
+    public AuthResponse crearUsuario(CrearUsuarioDTO crearUsuarioDTO) {
+
+        Usuario user = Usuario.builder()
+                .username(crearUsuarioDTO.getUsername())
+                .password(passwordEncoder.encode(crearUsuarioDTO.getPassword()))
+                .role(RolUsuario.ADMINISTRADOR)
+                .build();
+        usuarioRepository.save(user);
+
+        return AuthResponse.builder()
+                .token(jwtService.getToken(user))
+                .build();
     }
 
 //    public AuthResponse registerEmpleado(RegisterEmpleadoRequest request) {
