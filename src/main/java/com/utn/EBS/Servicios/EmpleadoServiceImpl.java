@@ -131,16 +131,14 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
                 throw new ContraseñaInvalidaException("La contraseña no cumple con los requisitos mínimos.");
             }
             Empleado nuevoEmpleado = new Empleado();
-            nuevoEmpleado.setNombre(registrarEmpleadoDTO.getNombre());
             nuevoEmpleado.setEmail(registrarEmpleadoDTO.getEmail());
             nuevoEmpleado.setApellido(registrarEmpleadoDTO.getApellido());
             nuevoEmpleado.setTelefono(registrarEmpleadoDTO.getTelefono());
             nuevoEmpleado.setDomicilios(registrarEmpleadoDTO.getDomicilio());
 
             Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.setNombre(nuevoEmpleado.getNombre());
             nuevoUsuario.setPassword(registrarEmpleadoDTO.getContrasena());
-            nuevoUsuario.setRol(registrarEmpleadoDTO.getRol());
+            nuevoUsuario.setRole(registrarEmpleadoDTO.getRol());
 
             nuevoEmpleado.setUsuario(nuevoUsuario);
             empleadoRepository.save(nuevoEmpleado);

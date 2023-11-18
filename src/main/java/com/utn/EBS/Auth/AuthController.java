@@ -26,10 +26,10 @@ public class AuthController {
         return ResponseEntity.ok(authService.registerCliente(request));
     }
 
-    @PostMapping(value = "registerEmpleado")
-    public ResponseEntity<AuthResponse> registerEmpleado(@RequestBody RegisterEmpleadoRequest request)
-    {
-        return ResponseEntity.ok(authService.registerEmpleado(request));
-    }
+//    @PostMapping(value = "registerEmpleado")
+//    public ResponseEntity<AuthResponse> registerEmpleado(@RequestBody RegisterEmpleadoRequest request)
+//    {
+//        return ResponseEntity.ok(authService.registerEmpleado(request));
+//    }
 }
 

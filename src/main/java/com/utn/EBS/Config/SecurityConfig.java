@@ -2,6 +2,8 @@ package com.utn.EBS.Config;
 
 
 
+import com.utn.EBS.Enumeraciones.Rol;
+import com.utn.EBS.Enumeraciones.RolUsuario;
 import com.utn.EBS.JWT.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -33,7 +35,8 @@ public class SecurityConfig {
                                 authRequest
                                         //Autenticacion
                                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
+                                        //.requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/ingredientes", "POST")).hasAuthority(RolUsuario.CLIENTE.toString())
                                         //Matchea con todos los registros publicos, todos los que quieran ingresar a la pag
 
 

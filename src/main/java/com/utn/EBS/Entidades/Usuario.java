@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="usuario", uniqueConstraints ={@UniqueConstraint(columnNames = {"nombre"})}) // IMPORTANTE: Es un constraint para que no se repitan los usernames en la base de datos
+@Table(name="usuario", uniqueConstraints ={@UniqueConstraint(columnNames = {"username"})}) // IMPORTANTE: Es un constraint para que no se repitan los usernames en la base de datos
 //Usamos la siguiente etiqueta para hacer un update de sql al atributo "DELETED" a TRUE
 @SQLDelete(sql = "UPDATE usuario SET deleted = true WHERE id=?")
 //Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
@@ -44,48 +44,45 @@ public class Usuario extends  BaseEntidad implements UserDetails {
     *
     */
 
-    @Column(name="nombre", nullable = false)
-    private String nombre;
-
     @Column(name="username", nullable = false)
     private String username;
 
-    @Column(name="contraseña", nullable = false)
+    @Column(name="password", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="rol", nullable = false)
-    private RolUsuario rol;
+    @Column(name="role", nullable = false)
+    private RolUsuario role;
 
     //Puede q haya q cambiar los return de cada funcion
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return List.of(new SimpleGrantedAuthority(rol.name())); //puede q no se name
+        return List.of(new SimpleGrantedAuthority(role.name())); //puede q no se name
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

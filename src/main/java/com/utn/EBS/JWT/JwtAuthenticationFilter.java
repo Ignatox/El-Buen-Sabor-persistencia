@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String token = getTokenFromRequest(request);
-        final String username;
+        String username;
 
         if (token==null)
         {
@@ -39,11 +39,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         username=jwtService.getUsernameFromToken(token);
+        System.out.println(username);
 
         if (username!=null && SecurityContextHolder.getContext().getAuthentication()==null)
         {
             UserDetails userDetails=userDetailsService.loadUserByUsername(username);
-
+            System.out.println(userDetails.getAuthorities());
             if (jwtService.isTokenValid(token, userDetails))
             {
                 UsernamePasswordAuthenticationToken authToken= new UsernamePasswordAuthenticationToken(
@@ -54,6 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println(authToken);
             }
 
         }
@@ -63,7 +65,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String getTokenFromRequest(HttpServletRequest request) {
         final String authHeader=request.getHeader(HttpHeaders.AUTHORIZATION);
-
+        System.out.println(authHeader);
         if(StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) //necesario
         {
             return authHeader.substring(7);
