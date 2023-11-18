@@ -1,4 +1,6 @@
-package com.utn.EBS.Config;  //Paquete de Filtros
+package com.utn.EBS.Config;
+
+
 
 import com.utn.EBS.JWT.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -13,37 +15,36 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-
-@Configuration
+@Configuration //Indica que esta clase es de configuracion, configura los objetos que necesita para el login y registerCliente
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authProvider;
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        return httpSecurity
-                .csrf(csfr -> csfr.disable()) //Se deshabilita para que no pida el token generico
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
+    {
+        return http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest ->
-                        authRequest
-                            //Autenticacion
-                                .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                                //Matchea con todos los registros publicos, todos los que quieran ingresar a la pag
-                                //En teoria no se usa esta ruta, sino las otras para el login
+                                authRequest
+                                        //Autenticacion
+                                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
+                                        //Matchea con todos los registros publicos, todos los que quieran ingresar a la pag
 
-                            //Consola H2:
-                                .requestMatchers(PathRequest.toH2Console()).permitAll()
-                                //Permite que ingrese cualquiera a la base de datos, por las dudas ver esto
 
-                                .requestMatchers("/api/v1/demoAdmin/**").hasAuthority("ADMIN")
-                                .requestMatchers("/api/v1/demoUser/**").hasAuthority("USER")
-                                //Aca irian los roles de cada uno de los usuarios de la pagina, CAMBIAR
+                                        //Consola H2:
+                                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+
+                                        //Autorizacion de acceso a la url:
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/demoAdmin/**")).hasAuthority("EMPLEADO")
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/demoUser/**")).hasAuthority("CLIENTE")
+
+
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)) //H2
                 .sessionManagement(sessionManager->
@@ -53,6 +54,8 @@ public class SecurityConfig {
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+
+
     }
 
 

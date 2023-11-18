@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 import com.utn.EBS.Enumeraciones.Rol;
+import com.utn.EBS.Enumeraciones.RolUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,12 +47,15 @@ public class Usuario extends  BaseEntidad implements UserDetails {
     @Column(name="nombre", nullable = false)
     private String nombre;
 
+    @Column(name="username", nullable = false)
+    private String username;
+
     @Column(name="contraseña", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(name="rol", nullable = false)
-    private Rol rol;
+    private RolUsuario rol;
 
     //Puede q haya q cambiar los return de cada funcion
     @Override

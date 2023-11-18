@@ -8,20 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")  //Se puede cambiar la ruta de autorizacion por otra si quieren  //Ver si hay q poner api/v1
+@RequestMapping("/auth")
 @RequiredArgsConstructor        //Obliga al constructor a pedir todos los argumentos
 public class AuthController {
 
     private final AuthService authService;
-    @PostMapping(value = "/login") //no puedo mandar un body con get //Ojo con la barra
+
+    @PostMapping(value = "/login") //no puedo mandar un body con get
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request)
     {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    @PostMapping(value = "registrar")
-    public ResponseEntity<AuthResponse> registrar(@RequestBody RegistrarRequest request)
+    @PostMapping(value = "registerCliente")
+    public ResponseEntity<AuthResponse> registerCliente(@RequestBody RegisterClienteRequest request)
     {
-        return ResponseEntity.ok(authService.registrar(request));
+        return ResponseEntity.ok(authService.registerCliente(request));
+    }
+
+    @PostMapping(value = "registerEmpleado")
+    public ResponseEntity<AuthResponse> registerEmpleado(@RequestBody RegisterEmpleadoRequest request)
+    {
+        return ResponseEntity.ok(authService.registerEmpleado(request));
     }
 }
+

@@ -19,6 +19,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE cliente SET deleted = true WHERE id=?")
 //Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
 @Where(clause = "deleted=false")
+@Builder
 public class Cliente extends BaseEntidad{
 
     @Column(name = "nombre", nullable = false)

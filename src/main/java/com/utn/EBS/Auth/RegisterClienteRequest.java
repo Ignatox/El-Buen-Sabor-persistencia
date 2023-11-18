@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrarRequest { //Es como un DTO
-    //Datos para registrar usuario
+public class RegisterClienteRequest {
+    String nombre;
+    String password;
+    String apellido;
+    String username;
+    String telefono;
+    String email;
+    //List<Domicilio> domicilios;
 }

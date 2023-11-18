@@ -28,6 +28,6 @@ public interface UsuarioRepository extends BaseRepository<Usuario,Long> {
     @Query("SELECT u FROM Usuario u WHERE u.rol = :rol")
     Page<Usuario> buscarPorRol(@Param("rol") String rol, Pageable pageable);
 
-    Optional<Usuario> BuscarPorNombreUsuario(String nombre); // es casi lo mismo que buscarPornombre
+    Optional<Usuario> findByUsername(String username); // es casi lo mismo que buscarPornombre
 
 }

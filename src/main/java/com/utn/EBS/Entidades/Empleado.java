@@ -1,6 +1,7 @@
 package com.utn.EBS.Entidades;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.utn.EBS.Enumeraciones.RolEmpleado;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -18,7 +19,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE Empleado SET deleted = true WHERE id=?")
 //Siempre que busquemos entidades, no van a hacer incluidas las que tengan su atributo deleted= true
 @Where(clause = "deleted=false")
-
+@Builder
 public class Empleado extends BaseEntidad{
 
         @Column(name = "nombre", nullable = false)
@@ -37,6 +38,8 @@ public class Empleado extends BaseEntidad{
         @OneToMany(mappedBy = "empleado",cascade = CascadeType.PERSIST)
         private List<Domicilio> domicilios = new ArrayList<Domicilio>();
 
+        @Column(name = "Rol", nullable = false)
+        private RolEmpleado rolEmpleado;
 
         //Relacion one to one con usuario (foreign key usuario)
         @OneToOne(cascade = CascadeType.ALL)

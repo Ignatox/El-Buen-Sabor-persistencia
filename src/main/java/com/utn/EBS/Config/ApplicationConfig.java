@@ -1,5 +1,6 @@
 package com.utn.EBS.Config;
 
+
 import com.utn.EBS.Repositorios.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +24,10 @@ import java.util.Arrays;
 public class ApplicationConfig {
 
     private final UsuarioRepository usuarioRepository;
+
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception
+    {
         return config.getAuthenticationManager();
     }
 
@@ -44,11 +47,11 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailService() {
-        return username -> usuarioRepository.BuscarPorNombreUsuario(username)
-                .orElseThrow(()-> new UsernameNotFoundException("Usuario No Encontrado"));
+        return username -> usuarioRepository.findByUsername(username)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
     }
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {                                 //El BEAN de CORS que dijo el profesor que agregaramos en la leccion
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("*"));
@@ -58,3 +61,4 @@ public class ApplicationConfig {
         return source;
     }
 }
+
