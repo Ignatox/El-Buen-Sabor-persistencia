@@ -5,6 +5,7 @@ import com.utn.EBS.DTO.RegistrarEmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Entidades.Domicilio;
 import com.utn.EBS.Entidades.Usuario;
+import com.utn.EBS.Enumeraciones.RolUsuario;
 import com.utn.EBS.Excepciones.ContraseñaInvalidaException;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
 import com.utn.EBS.Repositorios.BaseRepository;
@@ -137,6 +138,7 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setUsername(registrarEmpleadoDTO.getUsername());
             nuevoUsuario.setPassword(registrarEmpleadoDTO.getPassword());
+            nuevoUsuario.setRole(RolUsuario.EMPLEADO);
             nuevoUsuario.setRole(registrarEmpleadoDTO.getRol());
 
             nuevoEmpleado.setUsuario(nuevoUsuario);
