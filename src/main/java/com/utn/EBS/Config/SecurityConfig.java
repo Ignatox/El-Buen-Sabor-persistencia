@@ -38,18 +38,10 @@ public class SecurityConfig {
                                         //.requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/usuarios/crearUsuario")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/empleado/registrarEmpleado")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
-                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/ingredientes", "POST")).hasAuthority(RolUsuario.CLIENTE.toString())
-                                        //Matchea con todos los registros publicos, todos los que quieran ingresar a la pag
-
-
-                                        //Consola H2:
+                                        //.requestMatchers(new AntPathRequestMatcher("/api/v1/ingredientes", "POST")).hasAuthority(RolUsuario.CLIENTE.toString())
+                                        //Consola H2
                                         .requestMatchers(PathRequest.toH2Console()).permitAll()
-
-                                        //Autorizacion de acceso a la url:
-                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/demoAdmin/**")).hasAuthority("EMPLEADO")
-                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/demoUser/**")).hasAuthority("CLIENTE")
-
-
+                                        .anyRequest().permitAll()
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)) //H2
                 .sessionManagement(sessionManager->
