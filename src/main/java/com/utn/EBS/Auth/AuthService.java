@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,17 +35,16 @@ public class AuthService {
     @Autowired
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse login(LoginRequest request) {
-        System.out.println("Autenticado");
+    public AuthResponse login(LoginRequest request) throws Exception {
         UserDetails user = usuarioRepository.findByUsername(request.getUsername()).orElseThrow();
         System.out.println("Si existe");
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())); //springsecurity
-
+            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())); //springsecurity
+            System.out.println(auth.isAuthenticated());
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Exception(e.getMessage());
         }
-        System.out.println("Autenticado22");
         String token=jwtService.getToken(user);
 
         return AuthResponse.builder()
@@ -73,11 +73,6 @@ public class AuthService {
 
         cliente.setUsuario(user);
         clienteRepository.save(cliente);
-
-        /*
-        user.setCliente(cliente);
-*/
-        usuarioRepository.save(user);
 
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))

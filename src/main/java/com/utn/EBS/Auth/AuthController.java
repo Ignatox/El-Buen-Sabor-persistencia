@@ -1,6 +1,7 @@
 package com.utn.EBS.Auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,21 +16,20 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping(value = "/login") //no puedo mandar un body con get
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request)
+    public ResponseEntity<?> login(@RequestBody LoginRequest request)
     {
-        return ResponseEntity.ok(authService.login(request));
+        try {
+            return ResponseEntity.ok(authService.login(request));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("No pudo autenticarse");
+        }
+
     }
 
     @PostMapping(value = "registerCliente")
-    public ResponseEntity<AuthResponse> registerCliente(@RequestBody RegisterClienteRequest request)
+    public ResponseEntity<?> registerCliente(@RequestBody RegisterClienteRequest request)
     {
         return ResponseEntity.ok(authService.registerCliente(request));
     }
-
-//    @PostMapping(value = "registerEmpleado")
-//    public ResponseEntity<AuthResponse> registerEmpleado(@RequestBody RegisterEmpleadoRequest request)
-//    {
-//        return ResponseEntity.ok(authService.registerEmpleado(request));
-//    }
 }
 
