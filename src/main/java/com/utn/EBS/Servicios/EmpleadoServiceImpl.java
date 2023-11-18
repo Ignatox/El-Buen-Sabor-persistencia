@@ -40,15 +40,12 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
             registrarEmpleadoDTO.setEmail(empleado.getEmail());
             registrarEmpleadoDTO.setTelefono(empleado.getTelefono());
             registrarEmpleadoDTO.setDomicilio(empleado.getDomicilios());
-            registrarEmpleadoDTO.setContrasena(empleado.getUsuario().getPassword());
+            registrarEmpleadoDTO.setPassword(empleado.getUsuario().getPassword());
 
             return registrarEmpleadoDTO;
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
-
-
-
     }
 
     @Override
@@ -127,17 +124,19 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
                 throw new EmpleadoExistenteException("Ya existe un empleado con el mismo mail");
             }
 
-            if (!validarContraseña(registrarEmpleadoDTO.getContrasena())) {
+            if (!validarContraseña(registrarEmpleadoDTO.getPassword())) {
                 throw new ContraseñaInvalidaException("La contraseña no cumple con los requisitos mínimos.");
             }
             Empleado nuevoEmpleado = new Empleado();
             nuevoEmpleado.setEmail(registrarEmpleadoDTO.getEmail());
+            nuevoEmpleado.setNombre(registrarEmpleadoDTO.getNombre());
             nuevoEmpleado.setApellido(registrarEmpleadoDTO.getApellido());
             nuevoEmpleado.setTelefono(registrarEmpleadoDTO.getTelefono());
             nuevoEmpleado.setDomicilios(registrarEmpleadoDTO.getDomicilio());
 
             Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.setPassword(registrarEmpleadoDTO.getContrasena());
+            nuevoUsuario.setUsername(registrarEmpleadoDTO.getUsername());
+            nuevoUsuario.setPassword(registrarEmpleadoDTO.getPassword());
             nuevoUsuario.setRole(registrarEmpleadoDTO.getRol());
 
             nuevoEmpleado.setUsuario(nuevoUsuario);

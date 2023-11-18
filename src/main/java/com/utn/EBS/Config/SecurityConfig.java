@@ -36,6 +36,8 @@ public class SecurityConfig {
                                         //Autenticacion
                                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                                         //.requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/usuarios/crearUsuario")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/empleado/registrarEmpleado")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/ingredientes", "POST")).hasAuthority(RolUsuario.CLIENTE.toString())
                                         //Matchea con todos los registros publicos, todos los que quieran ingresar a la pag
 

@@ -18,7 +18,8 @@ public class RegistrarEmpleadoDTO {
     String telefono;
     String email;
     List<Domicilio> domicilio;
-    String contrasena;
+    String username;
+    String password;
     RolUsuario rol;
 
 

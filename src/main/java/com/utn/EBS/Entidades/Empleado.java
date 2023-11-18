@@ -38,8 +38,8 @@ public class Empleado extends BaseEntidad{
         @OneToMany(mappedBy = "empleado",cascade = CascadeType.PERSIST)
         private List<Domicilio> domicilios = new ArrayList<Domicilio>();
 
-        @Column(name = "Rol", nullable = false)
-        private RolEmpleado rolEmpleado;
+//        @Column(name = "Rol", nullable = false)
+//        private RolEmpleado rolEmpleado;
 
         //Relacion one to one con usuario (foreign key usuario)
         @OneToOne(cascade = CascadeType.ALL)
