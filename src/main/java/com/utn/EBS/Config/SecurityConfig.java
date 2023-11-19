@@ -35,7 +35,7 @@ public class SecurityConfig {
                                 authRequest
                                         //Autenticacion
                                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                                        //.requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/usuarios/crearUsuario")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/empleado/registrarEmpleado")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
