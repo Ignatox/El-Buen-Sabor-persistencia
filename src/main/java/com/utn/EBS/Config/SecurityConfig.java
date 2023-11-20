@@ -42,6 +42,9 @@ public class SecurityConfig {
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/pedidos/crearPedido")).hasAuthority(RolUsuario.CLIENTE.toString())
                                         //.requestMatchers(new AntPathRequestMatcher("/api/v1/ingredientes", "POST")).hasAuthority(RolUsuario.CLIENTE.toString())
                                         //Consola H2
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/clientes/modificarCliente")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/clientes/mostrarclientes")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
+
                                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                                         .anyRequest().permitAll()
                 )
