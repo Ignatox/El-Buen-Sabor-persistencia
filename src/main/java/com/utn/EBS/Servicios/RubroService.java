@@ -2,7 +2,6 @@ package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.AgregarRubroDTO;
 import com.utn.EBS.Entidades.Rubro;
-import com.utn.EBS.DTO.AltaRubroDTO;
 
 
 
