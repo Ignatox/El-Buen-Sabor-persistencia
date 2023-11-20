@@ -41,34 +41,15 @@ public class RubroController extends BaseControllerImpl<Rubro, RubroServiceImpl>
         }
     }
 
-  //  @PostMapping("/agregarRubroIngrediente")
-    //public ResponseEntity<?> agregarRubroIng(@RequestBody AltaRubroDTO altaRubroDTO) {
-      //  try {
-        //    Rubro rubro = rubroServiceImpl.agregarRubroIng(altaRubroDTO);
-          //  return ResponseEntity.status(HttpStatus.OK).body(rubroServiceImpl.agregarRubroIng(altaRubroDTO));
-        //} catch (Exception e) {
-          //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        //}
-    //}
+    @PutMapping("/modificarRubro/{id}")
+    public ResponseEntity<?> editarRubro(@PathVariable Long id,@RequestBody AgregarRubroDTO agregarRubroDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.editarRubro(id,agregarRubroDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
-
-   // @PutMapping("/modificarRubrosIng")
-    //public ResponseEntity<?> editarRubroIng(AltaRubroDTO altaRubroDTO) {
-      //  try {
-        //    return ResponseEntity.status(HttpStatus.OK).body(servicio.editarRubro(altaRubroDTO));
-        //} catch (Exception e) {
-          //  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        //}
-    //}
-
-//@GetMapping("/NuevosRubros")
-  //  public ResponseEntity<?>verNuevoRubro(@RequestBody Long id){
-    //    try{
-    //return ResponseEntity.status(HttpStatus.OK).body(servicio.CrearNuevoRubro(id));
-      //  } catch (Exception e) {
-        //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    //}
-//}
 
 
 

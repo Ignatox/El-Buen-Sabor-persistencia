@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class AgregarRubroDTO {
+    Long idRubro;
     String nombre;
     TipoRubro tipoRubro;
     EstadoRubro estado;

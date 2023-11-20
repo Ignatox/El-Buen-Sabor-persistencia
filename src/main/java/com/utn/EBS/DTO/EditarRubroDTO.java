@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class AltaRubroDTO {
+public class EditarRubroDTO {
     private Long idRubro;
     private String nombre;
     public EstadoRubro estado;
