@@ -1,8 +1,6 @@
 package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.AgregarRubroDTO;
-import com.utn.EBS.DTO.EditarRubroDTO;
-import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.BaseRepository;
 import com.utn.EBS.Repositorios.RubroRepository;
