@@ -56,7 +56,7 @@ implements ClienteService {
             Long id = clienteDTO.getIdCliente();
             Cliente cliente = clienteRepository.buscarPorId(id);
            // Cliente entityUpdate = new Cliente();
-            cliente.setFecha_modificacion(new Date());
+           //  cliente.setFecha_modificacion(new Date());
             if (clienteDTO.getNombre() !=null && !clienteDTO.getNombre().isEmpty() )
                 cliente.setNombre(clienteDTO.getNombre());
             if (clienteDTO.getApellido() != null && !clienteDTO.getApellido().isEmpty())
@@ -65,11 +65,11 @@ implements ClienteService {
                 cliente.setEmail(clienteDTO.getEmail());
             if (clienteDTO.getTelefono() !=null && !clienteDTO.getTelefono().isEmpty() )
                 cliente.setTelefono(clienteDTO.getTelefono());
-            Usuario usuarioNuevo = new Usuario();
-            if (clienteDTO.getUsuario() !=null && !clienteDTO.getUsuario().isEmpty() ) {
-                usuarioNuevo.setNombre(clienteDTO.getUsuario());
-                cliente.setUsuario(usuarioNuevo);
-            }
+           // Usuario usuarioNuevo = new Usuario();
+            //if (clienteDTO.getUsuario() !=null && !clienteDTO.getUsuario().isEmpty() ) {
+             //  usuarioNuevo.setUsername(clienteDTO.getUsuario());
+              // cliente.setUsuario(usuarioNuevo);
+            //}
             //los domicilios se editarán a parte
             clienteRepository.save(cliente);
             return cliente;
