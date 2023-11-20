@@ -138,7 +138,7 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setUsername(registrarEmpleadoDTO.getUsername());
             nuevoUsuario.setPassword(registrarEmpleadoDTO.getPassword());
-            nuevoUsuario.setRole(RolUsuario.EMPLEADO);
+            //nuevoUsuario.setRole(RolUsuario.EMPLEADO);
             nuevoUsuario.setRole(registrarEmpleadoDTO.getRol());
 
             nuevoEmpleado.setUsuario(nuevoUsuario);
