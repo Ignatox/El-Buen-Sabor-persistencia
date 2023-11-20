@@ -1,17 +1,16 @@
 package com.utn.EBS.Servicios;
 
 import com.utn.EBS.DTO.AgregarRubroDTO;
-import com.utn.EBS.DTO.AltaRubroDTO;
+import com.utn.EBS.DTO.EditarRubroDTO;
+import com.utn.EBS.Entidades.Cliente;
 import com.utn.EBS.Entidades.Rubro;
 import com.utn.EBS.Repositorios.BaseRepository;
-import com.utn.EBS.Entidades.*;
-import com.utn.EBS.Enumeraciones.EstadoRubro;
 import com.utn.EBS.Repositorios.RubroRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements RubroService{
@@ -47,93 +46,23 @@ public class RubroServiceImpl extends BaseServiceImpl<Rubro, Long> implements Ru
             throw new Exception(e.getMessage());
         }
     }
-//    @Override
-  //  @Transactional
-    //public AltaRubroDTO CrearNuevoRubro(Long id) throws Exception{
-      //  try{
-        //    Rubro rubro = rubroRepository.buscarPorId(id);
-          //  AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
+    @Override
+    public Rubro editarRubro(Long id,AgregarRubroDTO agregarRubroDTO) throws Exception{
+        try{
+            Optional<Rubro> rubroAct = rubroRepository.findById(id);
 
-            //altaRubroDTO.setNombre(rubro.getNombre());
-            //altaRubroDTO.setEstado(rubro.getEstado());
-            //altaRubroDTO.setIngredienteRel(altaRubroDTO.getIngredienteRel());
+                   Rubro rubro= rubroAct.get();
+                   rubro.setNombre(agregarRubroDTO.getNombre());
+                   rubro.setTipoRubro(agregarRubroDTO.getTipoRubro());
+                   rubro.setEstado(agregarRubroDTO.getEstado());
 
-         //   return altaRubroDTO;
-      //  }catch (Exception e){
-        //    throw new Exception(e.getMessage());
-       // }
+           rubroRepository.save(rubro);
+           return rubro;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
-
-
-
-   // @Transactional
-//    public Rubro agregarRubroIng(AltaRubroDTO altaRubroDTO) throws Exception {
-  //      try {
-
-//            Rubro rubro = Rubro.builder()
-  //                  .nombre(altaRubroDTO.getNombre())
-    //                .estado(altaRubroDTO.getEstado())
-      //              .ingredientes(altaRubroDTO.getIngredienteRel())
-        //            .build();
-            // Obtener los ingredientes desde el DTO
-           // List<Ingrediente> ingredientes = altaRubroDTO.getNombreIngrediente();
-
-            // Asignar los ingredientes al rubro
-            //rubro.setIngredientes(ingredientes);
-
-            // Guardar el rubro con sus respectivos ingredientes
- //           rubroRepository.save(rubro);
-   //         return rubro;
-     //   } catch (Exception e) {
-      //      throw  new Exception(e.getMessage());
-       // }
-  //  }
-
-
-
-    //@Transactional
-
-   // public AltaRubroDTO agregarRubroIng(Long id) throws Exception {
-     //   try {
-       //     Ingrediente ingrediente = ingredienteRepository.buscarPorId(id);
-         //   Rubro rubro = rubroRepository.buscarPorId(id);
-           // AltaRubroDTO altaRubroDTO = new AltaRubroDTO();
-
-            //altaRubroDTO.setNombre(rubro.getNombre());
-            //altaRubroDTO.setEstado(EstadoRubro.ACTIVO);
-            //altaRubroDTO.setNombreIngrediente(ingrediente.getNombre());
-
-            //return altaRubroDTO;
-       // } catch (Exception e) {
-         //   throw new Exception(e.getMessage());
-      //  }
-
-    //}
-
-
-
-    //@Transactional
-    //public Rubro editarRubro(AltaRubroDTO altaRubroDTO) throws Exception {
-       // try {
-
-            //Rubro rubroModificado = rubroRepository.buscarPorId(altaRubroDTO.getIdRubro());
-           // if (altaRubroDTO.getNombre() != null && !altaRubroDTO.getNombre().isEmpty())
-                //altaRubroDTO.setNombre(altaRubroDTO.getNombre());
-
-           // if (altaRubroDTO.getEstado() != null)
-                //altaRubroDTO.setEstado(EstadoRubro.MODIFICADO);
-
-            //if(altaRubroDTO.getNombreIngrediente() != null && !altaRubroDTO.getNombreIngrediente().isEmpty())
-             //  altaRubroDTO.setNombreIngrediente(altaRubroDTO.getNombreIngrediente());
-
-
-
-           // rubroRepository.save(rubroModificado);
-          //  return rubroModificado;
-
-        //} catch (Exception e) {
-           // throw new Exception(e.getMessage());
-      //  }
 
 
     }
