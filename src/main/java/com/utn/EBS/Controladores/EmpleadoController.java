@@ -45,7 +45,7 @@ public class EmpleadoController extends BaseControllerImpl<Empleado, EmpleadoSer
 
     @Autowired
     private EmpleadoService empleadoService;
-    @PostMapping("/registrarEmpleado")
+    @PostMapping("/registrarEmpleado") //Puede que haya q eliminar este metodo
     public ResponseEntity<?> registrarEmpleado(@RequestBody RegistrarEmpleadoDTO registrarEmpleadoDTO) {
         try {
             Empleado empleado = empleadoService.registrarEmpleado(registrarEmpleadoDTO);

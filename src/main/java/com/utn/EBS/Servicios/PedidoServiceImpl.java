@@ -16,6 +16,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,9 +48,12 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
     public Pedido registrarPedido(RegistrarPedidoDTO pedidoDTO) throws Exception {
         try {
             // buscamos al cliente del pedido
-            Optional<Cliente> cliente = clienteRepository.findById(pedidoDTO.getIdCliente());
-            if (cliente.isEmpty()) throw new Exception("no se encontro el cliente");
+            UserDetails usuario = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            System.out.println(usuario.getUsername());
 
+            Cliente cliente = clienteRepository.findByUsername(usuario.getUsername());
+            //if (cliente.isEmpty()) throw new Exception("no se encontro el cliente");
+            System.out.println(cliente.getNombre());
             List<DetallePedido> detallesPedido = new ArrayList<DetallePedido>();
             // creamos la lista con todos los DetallePedido
             // y calculamos el total tambien
@@ -70,7 +75,8 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
             Pedido pedido = Pedido.builder()
                     .estado(EstadoPedido.INICIADO)
                     .fecha(new Date())
-                    .cliente(cliente.get())
+                    .tipoPago(pedidoDTO.getTipoPago())
+                    .cliente(cliente)
                     .tipoEnvio(pedidoDTO.getTipoEnvio())
                     .horaEstimadaEntrega("08:00")
                     .detallePedido(detallesPedido)

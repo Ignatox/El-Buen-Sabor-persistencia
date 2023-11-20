@@ -2,6 +2,7 @@ package com.utn.EBS.DTO;
 
 import com.utn.EBS.Entidades.Domicilio;
 import com.utn.EBS.Enumeraciones.Rol;
+import com.utn.EBS.Enumeraciones.RolUsuario;
 import lombok.Data;
 
 import java.util.List;
@@ -17,8 +18,9 @@ public class RegistrarEmpleadoDTO {
     String telefono;
     String email;
     List<Domicilio> domicilio;
-    String contrasena;
-    Rol rol;
+    String username;
+    String password;
+    RolUsuario rol;
 
 
 

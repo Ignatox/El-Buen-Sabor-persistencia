@@ -3,6 +3,7 @@ package com.utn.EBS.Entidades;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.utn.EBS.Enumeraciones.EstadoPedido;
+import com.utn.EBS.Enumeraciones.FormaPago;
 import com.utn.EBS.Enumeraciones.TipoEnvio;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,10 @@ public class Pedido extends BaseEntidad {
     @Column(name = "tipo_envio_pedido", nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoEnvio tipoEnvio;
+
+    @Column(name = "tipo_pago_pedido", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private FormaPago tipoPago;
 
     @JsonBackReference(value = "pedido-cliente")
     @ManyToOne(fetch = FetchType.LAZY)

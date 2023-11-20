@@ -30,7 +30,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
 
     @Override
     @Transactional
-    public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {
+    public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {  //Puede que lo tenga q modificar para relacionarlo con el front
         try {
             Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
                     .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
@@ -41,7 +41,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
                     .descripcion(agregarProductoDTO.getDescripcion())
                     .precio(agregarProductoDTO.getPrecio())
                     .receta(agregarProductoDTO.getReceta())
-                    .estadoProducto(agregarProductoDTO.getEstado())
+                    .estado(agregarProductoDTO.getEstado())
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
                     .rubro(rubro)
                     .build();
@@ -65,23 +65,19 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     }
 
     @Override
-    public List<ProductoPantallaPrincipalDTO> traerProductosPaginaPrincipal() throws Exception {
+    public List<RubroPantallaPrincipalDTO> traerProductosPaginaPrincipal() throws Exception {
         try {
-            List<Producto> productos = productoRepository.findAll();
-            List<ProductoPantallaPrincipalDTO> listaProductos = new ArrayList<>();
-
-            for (Producto producto : productos) {
-                ProductoPantallaPrincipalDTO productoDTO = ProductoPantallaPrincipalDTO.builder()
-                        .nombre(producto.getNombre())
-                        .descripcion(producto.getDescripcion())
-                        .foto(producto.getFoto())
-                        .precio(producto.getPrecio())
-                        .tiempoEstimadoCocina(producto.getTiempoEstimadoCocina())
-                        .rubro(producto.getRubro().getNombre())
+            List<Rubro> rubros = rubroRepository.findAll();
+            List<RubroPantallaPrincipalDTO> listaRubrosProductos = new ArrayList<>();
+            for (Rubro rubro : rubros) {
+                List<ProductoPantallaPrincipalDTO> productosRubroEnviar = productoRepository.buscarPorRubroDTO(rubro.getId());
+                RubroPantallaPrincipalDTO rubroEnviar = RubroPantallaPrincipalDTO.builder()
+                        .nombreRubro(rubro.getNombre())
+                        .productos(productosRubroEnviar)
                         .build();
-                listaProductos.add(productoDTO);
+                listaRubrosProductos.add(rubroEnviar);
             }
-            return listaProductos;
+            return listaRubrosProductos;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -119,4 +115,6 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
+
+
 }
