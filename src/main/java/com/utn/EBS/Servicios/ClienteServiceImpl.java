@@ -34,6 +34,7 @@ implements ClienteService {
     public ClienteServiceImpl(BaseRepository<Cliente, Long> baseRepository) {
         super(baseRepository);
     }
+
     @Override
     @Transactional
 
@@ -46,24 +47,32 @@ implements ClienteService {
             throw new Exception(e.getMessage());
         }
     }
+
     @Override
     @Transactional
     public Cliente modificarCliente(ModificarClienteDTO clienteDTO) throws Exception{
         try {
             // buscamos al cliente
-
-            Optional<Cliente> cliente = clienteRepository.findById(clienteDTO.getIdCliente());
-            if (cliente.isEmpty()) throw new Exception("no se encontro el cliente");
-            Cliente entityUpdate = new Cliente();
-            entityUpdate.setApellido(clienteDTO.getApellido());
-            entityUpdate.setEmail(clienteDTO.getEmail());
-            entityUpdate.setNombre(clienteDTO.getNombre());
-            entityUpdate.setTelefono(clienteDTO.getTelefono());
-            entityUpdate.setFecha_modificacion(new Date());
-            entityUpdate.setId(clienteDTO.getIdCliente());
+            Long id = clienteDTO.getIdCliente();
+            Cliente cliente = clienteRepository.buscarPorId(id);
+           // Cliente entityUpdate = new Cliente();
+            cliente.setFecha_modificacion(new Date());
+            if (clienteDTO.getNombre() !=null && !clienteDTO.getNombre().isEmpty() )
+                cliente.setNombre(clienteDTO.getNombre());
+            if (clienteDTO.getApellido() != null && !clienteDTO.getApellido().isEmpty())
+                cliente.setApellido(clienteDTO.getApellido());
+            if (clienteDTO.getEmail() !=null && !clienteDTO.getEmail().isEmpty())
+                cliente.setEmail(clienteDTO.getEmail());
+            if (clienteDTO.getTelefono() !=null && !clienteDTO.getTelefono().isEmpty() )
+                cliente.setTelefono(clienteDTO.getTelefono());
+            Usuario usuarioNuevo = new Usuario();
+            if (clienteDTO.getUsuario() !=null && !clienteDTO.getUsuario().isEmpty() ) {
+                usuarioNuevo.setNombre(clienteDTO.getUsuario());
+                cliente.setUsuario(usuarioNuevo);
+            }
             //los domicilios se editarán a parte
-            clienteRepository.save(entityUpdate);
-            return entityUpdate;
+            clienteRepository.save(cliente);
+            return cliente;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
