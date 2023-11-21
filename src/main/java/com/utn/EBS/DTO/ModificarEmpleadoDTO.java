@@ -14,6 +14,5 @@ public class ModificarEmpleadoDTO {
     String apellido;
     String telefono;
     String email;
-    String password;
     RolUsuario rol;
 }

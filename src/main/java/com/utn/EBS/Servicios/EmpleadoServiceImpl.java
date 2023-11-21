@@ -55,7 +55,7 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
 
     @Override
     @Transactional
-    //Este seria el modificardatos de EMPLEADO (no puede modificar ni ver su contrasena)
+    //Este seria el modificardatos de EMPLEADO por el administrador (no puede modificar ni ver su contrasena)
     public Empleado modificardatos(ModificarEmpleadoDTO modificarEmpleadoDTO) throws Exception{
         try{
             Empleado empleadoexistente = empleadoRepository.buscarPorEmail(modificarEmpleadoDTO.getEmail());
