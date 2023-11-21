@@ -5,7 +5,6 @@ import com.utn.EBS.DTO.RegistrarEmpleadoDTO;
 import com.utn.EBS.Entidades.Empleado;
 import com.utn.EBS.Entidades.Domicilio;
 import com.utn.EBS.Entidades.Usuario;
-import com.utn.EBS.Enumeraciones.RolUsuario;
 import com.utn.EBS.Excepciones.ContraseñaInvalidaException;
 import com.utn.EBS.Excepciones.EmpleadoExistenteException;
 import com.utn.EBS.Repositorios.BaseRepository;
@@ -13,6 +12,7 @@ import com.utn.EBS.Repositorios.EmpleadoRepository;
 import com.utn.EBS.Repositorios.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +25,12 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public EmpleadoServiceImpl(BaseRepository<Empleado, Long> baseRepository) {
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    public EmpleadoServiceImpl(BaseRepository<Empleado, Long> baseRepository, PasswordEncoder passwordEncoder) {
         super(baseRepository);
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -115,8 +119,11 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
 
     //Metodo para registrarEmpleado y verificar anteriormente que no exista un empleado con ese mail
 
+
+
     @Override
     @Transactional
+
     public Empleado registrarEmpleado(RegistrarEmpleadoDTO registrarEmpleadoDTO) throws Exception {
         try{
             //Verifico si ya existe un empleado con el mail ingresado
@@ -128,22 +135,36 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
             if (!validarContraseña(registrarEmpleadoDTO.getPassword())) {
                 throw new ContraseñaInvalidaException("La contraseña no cumple con los requisitos mínimos.");
             }
-            Empleado nuevoEmpleado = new Empleado();
-            nuevoEmpleado.setEmail(registrarEmpleadoDTO.getEmail());
-            nuevoEmpleado.setNombre(registrarEmpleadoDTO.getNombre());
-            nuevoEmpleado.setApellido(registrarEmpleadoDTO.getApellido());
-            nuevoEmpleado.setTelefono(registrarEmpleadoDTO.getTelefono());
-            nuevoEmpleado.setDomicilios(registrarEmpleadoDTO.getDomicilio());
 
-            Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.setUsername(registrarEmpleadoDTO.getUsername());
-            nuevoUsuario.setPassword(registrarEmpleadoDTO.getPassword());
-            nuevoUsuario.setRole(RolUsuario.EMPLEADO);
-            nuevoUsuario.setRole(registrarEmpleadoDTO.getRol());
+            Empleado empleado = Empleado.builder()                 //Relacion 1 a 1 con usuario, puede q no vaya
+             .nombre(registrarEmpleadoDTO.getNombre())
+               .apellido(registrarEmpleadoDTO.getApellido())
+               .telefono(registrarEmpleadoDTO.getTelefono())
+               .email(registrarEmpleadoDTO.getEmail())
+               .domicilios(registrarEmpleadoDTO.getDomicilio())
+                .build();
+           // Empleado nuevoEmpleado = new Empleado();
+           // nuevoEmpleado.setEmail(registrarEmpleadoDTO.getEmail());
+           // nuevoEmpleado.setNombre(registrarEmpleadoDTO.getNombre());
+           // nuevoEmpleado.setApellido(registrarEmpleadoDTO.getApellido());
+          //  nuevoEmpleado.setTelefono(registrarEmpleadoDTO.getTelefono());
+          //  nuevoEmpleado.setDomicilios(registrarEmpleadoDTO.getDomicilio());
 
-            nuevoEmpleado.setUsuario(nuevoUsuario);
-            empleadoRepository.save(nuevoEmpleado);
-            return nuevoEmpleado;
+
+            Usuario nuevoUsuario = Usuario.builder()
+                    .username(registrarEmpleadoDTO.getUsername())
+                            .role(registrarEmpleadoDTO.getRol())
+                                    .password(passwordEncoder.encode(registrarEmpleadoDTO.getPassword()))
+                                            .build();
+
+           // Usuario nuevoUsuario = new Usuario();
+          //  nuevoUsuario.setUsername(registrarEmpleadoDTO.getUsername());
+           // nuevoUsuario.setPassword(passwordEncoder.encode(registrarEmpleadoDTO.getPassword()))
+           // nuevoUsuario.setRole(registrarEmpleadoDTO.getRol());
+
+            empleado.setUsuario(nuevoUsuario);
+            empleadoRepository.save(empleado);
+            return empleado;
         } catch (Exception e){
             throw new RuntimeException("error al registrar el empleado" + e.getMessage());
         }
