@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 public class ModificarEmpleadoDTO {
-    Long IdEmpleado;
+    Long id;
     String nombre;
     String apellido;
     String telefono;
