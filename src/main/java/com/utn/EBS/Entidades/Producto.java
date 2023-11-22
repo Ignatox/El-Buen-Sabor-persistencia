@@ -51,7 +51,7 @@ public class Producto extends BaseEntidad {
     @Column(name = "estado", nullable = false)
     private EstadoProducto estado;
 
-    @JsonBackReference(value = "rubro-producto")
+    @JsonBackReference(value = "rubro-producto")  //Por alguna razon esta referencia afecta a la creacion de ingrediente
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;

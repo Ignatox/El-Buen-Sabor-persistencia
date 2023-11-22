@@ -32,8 +32,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     @Transactional
     public Producto agregarProducto(AgregarProductoDTO agregarProductoDTO) throws Exception {  //Puede que lo tenga q modificar para relacionarlo con el front
         try {
-            Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
-                    .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
+
 
             Producto producto = Producto.builder()
                     .foto(agregarProductoDTO.getFoto())
@@ -43,8 +42,14 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
                     .receta(agregarProductoDTO.getReceta())
                     .estado(agregarProductoDTO.getEstado())
                     .tiempoEstimadoCocina(agregarProductoDTO.getTiempoEstimadoCocina())
-                    .rubro(rubro)
+                    //.rubro(rubro)
                     .build();
+
+            Rubro rubro = rubroRepository.findById(agregarProductoDTO.getIdRubro())
+                    .orElseThrow(() -> new EntityNotFoundException("Rubro no encontrado con ID: " + agregarProductoDTO.getIdRubro()));
+
+            producto.setRubro(rubro);
+
             productoRepository.save(producto);
             List<ProductoIngredienteDTO> ingredientes = agregarProductoDTO.getIngredienteDTOS();
             for (ProductoIngredienteDTO productoIngredienteDTO : ingredientes) {
