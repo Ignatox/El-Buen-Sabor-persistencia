@@ -50,11 +50,11 @@ implements ClienteService {
 
     @Override
     @Transactional
-    public Cliente modificarCliente(ModificarClienteDTO clienteDTO, Cliente cliente) throws Exception{
+    public Cliente modificarCliente(ModificarClienteDTO clienteDTO) throws Exception{
         try {
             // buscamos al cliente
             Long id = clienteDTO.getIdCliente();
-           // Cliente cliente = clienteRepository.buscarPorId(id);
+            Cliente cliente = clienteRepository.buscarPorId(id);
            // Cliente entityUpdate = new Cliente();
            //  cliente.setFecha_modificacion(new Date());
            if (clienteDTO.getNombre() !=null && !clienteDTO.getNombre().isEmpty() )
