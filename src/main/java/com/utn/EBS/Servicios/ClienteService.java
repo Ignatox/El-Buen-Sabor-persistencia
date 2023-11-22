@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ClienteService extends BaseService<Cliente, Long>{
     public List<Cliente> mostrarClientes() throws Exception;
-    public Cliente modificarCliente(ModificarClienteDTO clienteDTO) throws Exception;
+    public Cliente modificarCliente(ModificarClienteDTO clienteDTO, Cliente clienteoficial) throws Exception;
 
     public ClienteDTO datosCliente(Long id) throws Exception;
 

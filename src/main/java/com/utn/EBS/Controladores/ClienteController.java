@@ -28,9 +28,9 @@ public class ClienteController extends BaseControllerImpl<Cliente, ClienteServic
         }
     }
     @PutMapping("/modificarCliente")
-    public ResponseEntity<?> modificarCliente(ModificarClienteDTO clienteDTO){
+    public ResponseEntity<?> modificarCliente(ModificarClienteDTO clienteDTO, Cliente cliente){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.modificarCliente(clienteDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(service.modificarCliente(clienteDTO, cliente));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
