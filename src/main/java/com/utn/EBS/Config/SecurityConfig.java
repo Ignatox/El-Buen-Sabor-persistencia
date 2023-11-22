@@ -41,12 +41,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->
                                 authRequest
                                         //Autenticacion
-                                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
+
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/usuarios/crearUsuario")).permitAll()
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/empleado/registrarEmpleado")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/pedidos/crearPedido")).hasAuthority(RolUsuario.CLIENTE.toString())
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/rubros/agregarRubro")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
+                                      // .requestMatchers(new AntPathRequestMatcher("/api/v1/rubros/modificarRubro/{id}")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
+                                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/api/v1/**")).permitAll()
                                         //.requestMatchers(new AntPathRequestMatcher("/api/v1/ingredientes", "POST")).hasAuthority(RolUsuario.CLIENTE.toString())
                                         //Consola H2
                                         .requestMatchers(new AntPathRequestMatcher("/api/v1/clientes/modificarCliente")).hasAuthority(RolUsuario.ADMINISTRADOR.toString())
