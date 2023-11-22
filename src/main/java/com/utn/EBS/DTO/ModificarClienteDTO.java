@@ -17,5 +17,5 @@ public class ModificarClienteDTO {
     String telefono;
     String email;
   //  String usuario;
-    Rol rol = Rol.Cliente;
+    //Rol rol = Rol.Cliente;
 }

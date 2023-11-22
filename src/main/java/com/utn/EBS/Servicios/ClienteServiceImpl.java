@@ -57,13 +57,13 @@ implements ClienteService {
             Cliente cliente = clienteRepository.buscarPorId(id);
            // Cliente entityUpdate = new Cliente();
            //  cliente.setFecha_modificacion(new Date());
-            if (clienteDTO.getNombre() !=null && !clienteDTO.getNombre().isEmpty() )
+           // if (clienteDTO.getNombre() !=null && !clienteDTO.getNombre().isEmpty() )
                 cliente.setNombre(clienteDTO.getNombre());
-            if (clienteDTO.getApellido() != null && !clienteDTO.getApellido().isEmpty())
+           // if (clienteDTO.getApellido() != null && !clienteDTO.getApellido().isEmpty())
                 cliente.setApellido(clienteDTO.getApellido());
-            if (clienteDTO.getEmail() !=null && !clienteDTO.getEmail().isEmpty())
+           //if (clienteDTO.getEmail() !=null && !clienteDTO.getEmail().isEmpty())
                 cliente.setEmail(clienteDTO.getEmail());
-            if (clienteDTO.getTelefono() !=null && !clienteDTO.getTelefono().isEmpty() )
+            //if (clienteDTO.getTelefono() !=null && !clienteDTO.getTelefono().isEmpty() )
                 cliente.setTelefono(clienteDTO.getTelefono());
            // Usuario usuarioNuevo = new Usuario();
             //if (clienteDTO.getUsuario() !=null && !clienteDTO.getUsuario().isEmpty() ) {
