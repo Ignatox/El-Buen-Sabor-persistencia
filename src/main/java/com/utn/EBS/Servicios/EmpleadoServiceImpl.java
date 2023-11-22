@@ -77,6 +77,9 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
                 empleado.setNombre(modificarEmpleadoDTO.getNombre());}
             if(modificarEmpleadoDTO.getApellido() != null && !modificarEmpleadoDTO.getApellido().isEmpty()){
                 empleado.setApellido(modificarEmpleadoDTO.getApellido());}
+            if(modificarEmpleadoDTO.getUsername() !=null && !modificarEmpleadoDTO.getUsername().isEmpty()){
+                usuario.setUsername(modificarEmpleadoDTO.getUsername());
+            }
             if(modificarEmpleadoDTO.getRol() != null ){
                 usuario.setRole(modificarEmpleadoDTO.getRol());}
 
