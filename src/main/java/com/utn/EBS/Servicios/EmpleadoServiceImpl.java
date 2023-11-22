@@ -80,8 +80,8 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
           //  if(modificarEmpleadoDTO.getUsername() !=null && !modificarEmpleadoDTO.getUsername().isEmpty()){
              //   usuario.setUsername(modificarEmpleadoDTO.getUsername());
            // }
-            if(modificarEmpleadoDTO.getRol() != null ){
-                usuario.setRole(modificarEmpleadoDTO.getRol());}
+          //  if(modificarEmpleadoDTO.getRol() != null ){
+            //    usuario.setRole(modificarEmpleadoDTO.getRol());}
 
 
             empleadoRepository.save(empleado);
