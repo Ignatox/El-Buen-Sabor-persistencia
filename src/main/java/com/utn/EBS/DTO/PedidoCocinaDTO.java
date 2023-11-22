@@ -11,6 +11,6 @@ public class PedidoCocinaDTO {
     Long idPedido;
     Date fecha;
     EstadoPedido estado;
-    List<ProductoDTO> productos;
+    String productos;
 
 }
