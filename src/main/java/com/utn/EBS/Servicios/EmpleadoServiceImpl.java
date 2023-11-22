@@ -59,13 +59,13 @@ public class EmpleadoServiceImpl extends BaseServiceImpl<Empleado, Long> impleme
     public Empleado modificardatos(ModificarEmpleadoDTO modificarEmpleadoDTO) throws Exception{
         try{
             //Empleado empleadoexistente = empleadoRepository.buscarPorEmail(modificarEmpleadoDTO.getEmail());
-            Empleado empleado = empleadoRepository.buscarPorId(modificarEmpleadoDTO.getIdEmpleado());
+            Empleado empleado = empleadoRepository.buscarPorId(modificarEmpleadoDTO.getId());
 
             Usuario usuario = empleado.getUsuario();
             Empleado empleadoexistente = empleadoRepository.buscarPorEmail(modificarEmpleadoDTO.getEmail());
 
             //Si el empleado que encontre, no es el mismo al empleado que me pasaron por DTO, indico que ya existe un empleado con ese mail
-            if (!(empleadoexistente.getId() == modificarEmpleadoDTO.getIdEmpleado())){
+            if (!(empleadoexistente.getId() == modificarEmpleadoDTO.getId())){
                 throw new EmpleadoExistenteException("Ya existe un empleado con el mismo mail");
             }
 
