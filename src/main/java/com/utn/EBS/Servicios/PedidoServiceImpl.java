@@ -116,11 +116,11 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
                 for (Pedido pedido : pedidosEncontrados) {
                     List<DetallePedido> detallesPedido = pedido.getDetallePedido();
                     PedidoCocinaDTO pedidoCocina = new PedidoCocinaDTO();
-                    List<ProductoDTO> productos = new ArrayList<>();
+                    String productos = new String();
 
-                    for (DetallePedido detalles : detallesPedido) {
-                        ProductoDTO productoCocina = new ProductoDTO();
-
+                  for (DetallePedido detalles : detallesPedido) {
+                       // ProductoDTO productoCocina = new ProductoDTO();
+/*
                         productoCocina.setIdProducto(detalles.getProducto().getId());
                         productoCocina.setFoto(detalles.getProducto().getFoto());
                         productoCocina.setCantidad(detalles.getCantidad());
@@ -128,9 +128,11 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
                         productoCocina.setDescripcion(detalles.getProducto().getDescripcion());
                         productoCocina.setIngredientes(detalles.getProducto().getIngredientes());
                         productoCocina.setReceta(detalles.getProducto().getReceta());
-                        productoCocina.setTiempoEstimadoCocina(detalles.getProducto().getTiempoEstimadoCocina());
+                        productoCocina.setTiempoEstimadoCocina(detalles.getProducto().getTiempoEstimadoCocina());*/
 
-                        productos.add(productoCocina);
+                        productos = productos + detalles.getProducto().getNombre();
+
+
                     }
 
                     pedidoCocina.setIdPedido(pedido.getId());

@@ -14,5 +14,6 @@ public class ModificarEmpleadoDTO {
     String apellido;
     String telefono;
     String email;
+   //String username; no lo aplicamos para el admin
     RolUsuario rol;
 }
