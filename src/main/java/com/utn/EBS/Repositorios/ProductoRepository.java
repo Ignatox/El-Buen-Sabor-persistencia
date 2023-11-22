@@ -33,4 +33,7 @@ public interface ProductoRepository  extends BaseRepository <Producto, Long>{
             "WHERE dp.pedido.fecha BETWEEN :fechaDesde AND :fechaHasta " +
             "GROUP BY dp.producto.nombre")
     List<RankingProductoDTO> buscarRankingProductos(@Param("fechaDesde") Date fechaDesde, @Param("fechaHasta") Date fechaHasta);
+
+    @Query("SELECT p.rubro.id FROM Producto p")
+    Producto buscarTodo();
 }

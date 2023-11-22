@@ -115,4 +115,14 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public Producto buscarTodo() throws Exception {
+        try {
+            Producto productos = productoRepository.buscarTodo();
+            return productos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

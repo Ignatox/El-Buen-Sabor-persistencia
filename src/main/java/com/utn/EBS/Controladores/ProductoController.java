@@ -85,4 +85,13 @@ public ResponseEntity<?> buscarPorNombre(@RequestParam String nombre){
 //            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
 //        }
 //    }
+
+    @GetMapping(path = "/buscarTodo")
+    public ResponseEntity<?> buscarTodo() {
+        try {
+            return  ResponseEntity.status(HttpStatus.OK).body(productoService.buscarTodo());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+        }
+    }
 }
