@@ -88,21 +88,6 @@ public class PedidoController extends BaseControllerImpl<Pedido, PedidoServiceIm
         try{
             return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPedidosAEntregar(pageable));
         }catch (Exception e) {
-
-    @GetMapping("/EntregarPedidos")
-    public ResponseEntity<?> buscarPedidosAEntregar(Pageable pageable ){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPorCliente(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/EntregarPedidos") //delivery
-    public ResponseEntity<?> buscarPedidosAEntregar(Pageable pageable){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(pedidoService.buscarPedidosAEntregar(pageable));
-        }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
